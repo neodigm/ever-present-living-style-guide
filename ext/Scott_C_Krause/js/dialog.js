@@ -9,7 +9,7 @@ var sRepo_url_demo = "http://neodigm.github.io/ever-present-living-style-guide-s
 
 
 function aJLoad( sPanel ){
-	//    Load HTML content from the configured repo
+	//    Load HTML content into dialog from the configured repo
 
 	switch ( sPanel ){
 		case "oc_nav_content_left" :
@@ -161,7 +161,13 @@ $( document ).bind("ajaxComplete", function(){
 		oBackGroundEvent.audioAlert();
 		
 		var sFilNam = e.target.pathname; //    This contains the extension path
-		aJTab( sRepo_url + "/" + sFilNam.substring(sFilNam.lastIndexOf( "/" ) + 1) );
+		sFilNam = sFilNam.substring(sFilNam.lastIndexOf( "/" ) + 1);
+		if( sFilNam.substring(0, 2) === "--"){
+alert("do reveal | "+ sFilNam);
+		}else{
+			aJTab( sRepo_url + "/" + sFilNam );
+		}
+		
 	});
 
 	TweenLite.to( $(".n5-card__default"), 0, {height: "256px"});
