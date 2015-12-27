@@ -1,0 +1,42 @@
+{
+	"manifest_version": 2,
+	"name": "Ever Present Living Style Guide",
+	"version": "0.1.0",
+	"description": "Putting your Living Style Guide in the browser makes it easily available to the whole team. A Living Style Guide saves time, facilitates communication, documents the visual language for both designers and developers.",
+	"author": "Scott C. Krause",
+	"browser_action": {
+		"default_icon": "scott_c_krause/img/globe.png",
+		"default_title": "Ever Present Living Style Guide",
+		"default_popup": "scott_c_krause/oscillation-overthruster.html"
+	},
+	"background": {
+		"scripts": ["scott_c_krause/js/jquery-2.1.4.min.js", "background.js"],
+		"persistent": true
+	},
+	"permissions": [
+		"tabs",
+		"activeTab",
+		"notifications",
+		"bookmarks",
+		"unlimitedStorage",
+		"contextMenus",
+		"clipboardRead",
+		"clipboardWrite",
+
+		"https://*/*", "http://*/*", "*://*/*"
+	],
+	"web_accessible_resources": [
+	"scott_c_krause/fn/*.ttf",
+    "js/jquery-2.1.4.min.js",
+    "js/vendor/modernizr.js",
+    "js/foundation.min.js",
+    "css/foundation.css"
+	],
+	"content_scripts": [{
+	    "matches":    ["*://*/*"],
+	    "js":         ["scott_c_krause/js/ever_present_living_style_guide.js", "scott_c_krause/js/modernizr-custom.js", "scott_c_krause/js/jquery-2.1.4.min.js",
+	                   "scott_c_krause/js/foundation.min.js"],
+	    "run_at":     "document_end"
+	}],
+	"content_security_policy": "script-src 'unsafe-eval' https://cdnjs.cloudflare.com https://*.codepen.io https://code.jquery.com; object-src; child-src http://*.codepen.io 'self';"
+} 

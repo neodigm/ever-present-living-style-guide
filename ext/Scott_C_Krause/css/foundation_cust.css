@@ -1,0 +1,21 @@
+.title-bar {
+background: #38141b;
+background: -moz-linear-gradient(left,  #38141b 1%, #a9737e 99%);
+background: -webkit-linear-gradient(left,  #38141b 1%,#a9737e 99%);
+background: linear-gradient(to right,  #38141b 1%,#a9737e 99%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#38141b', endColorstr='#a9737e',GradientType=1 );
+color: #FFF;
+padding: 0.5rem;
+}
+.button { background: #461922; }
+.button:hover, .button:focus { background: #461922; }
+.button.expanded { min-width: 176px; }
+.dropdown.menu .has-submenu.is-down-arrow > a::after { color: #D4B9BE !important; }
+a { color: #A9737E; outline: none !important; }
+a:hover, a:focus { color: #C5A1A9; }
+.menu > li:hover { background-color: #F0E7E9 !important; }
+
+.dropdown.menu .has-submenu.is-right-arrow > a::after { border-color: transparent transparent transparent #541E29; }
+.dropdown.menu .has-submenu.is-down-arrow > a::after { border-color: #E2D0D4 transparent transparent; }
+.button.hollow { border: 1px solid #A9737E !important; color: #A9737E !important; }
+.button.hollow:hover { border: 1px solid #702837; color: #702837; background-color: #F0E7E9 }

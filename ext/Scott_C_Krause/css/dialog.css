@@ -1,0 +1,260 @@
+/*Blue color step*/
+.brand_blu_1 {color: #297FB8;}
+.brand_blu_2 {color: #408DBF;}
+.brand_blu_3 {color: #589BC7;}
+.brand_blu_4 {color: #70A9CF;}
+.brand_blu_5 {color: #88B7D7;}
+.brand_blu_6 {color: #9FC6DF;}
+.brand_blu_7 {color: #B7D4E7;}
+.brand_blu_8 {color: #CFE2EF;}
+
+.brand_pur_1 {color: #F0E7E9;}
+.brand_pur_2 {color: #E2D0D4;}
+.brand_pur_3 {color: #D4B9BE;}
+.brand_pur_4 {color: #C5A1A9;}
+.brand_pur_5 {color: #B78A93;}
+.brand_pur_6 {color: #A9737E;}
+.brand_pur_7 {color: #9A5B68;}
+.brand_pur_8 {color: #8C4453;}
+.brand_pur_9 {color: #7E2D3E;}
+.brand_pur_10 {color: #702837;}
+.brand_pur_11 {color: #622330;}
+.brand_pur_12 {color: #541E29;}
+.brand_pur_13 {color: #461922;}
+.brand_pur_14 {color: #38141B;}
+.brand_pur_15 {color: #2A0F14;}
+.brand_pur_16 {color: #1C0A0D;}
+.brand_pur_17 {color: #0E0506;}
+
+body {
+	font-weight: 200; outline: none !important; 
+}
+
+a, ul, li, a:hover, ul:hover, li:hover, a:focus, ul:focus, li:focus  { outline: none !important; }
+
+.off-canvas {
+	background-color: #FFFFFF;
+}
+
+.resp--br_12 {
+	height: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+.rev-modal {
+	width: 78% !important;
+	outline: none;
+}
+
+summary {
+	cursor: pointer;
+	color: #8C4453 !important;
+	outline: none;
+}
+
+.off-canvas-content {
+	min-height: 480px;
+}
+
+.dialog-caption {
+	min-width: 512px;
+}
+.caption--p__architectsdaughter{
+	font-family: "ArchitectsDaughter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1.1em;
+	font-weight: normal;
+	line-height: 1.5;
+	color: #000;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.article--p__roboto{
+	color: #222222;	
+	font-family: "Robot", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-align: justify;
+	text-justify: inter-word;
+	font-size: 14px;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+.article--psub__roboto{
+	color: #666666;	
+	font-family: "Robot", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-align: justify;
+	text-justify: inter-word;
+	font-size: 12px;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+.fa{
+	color: #D4B9BE;
+}
+.fa:hover{
+	color: #8C4453;
+}
+
+.fa-cog:hover {
+	color: #FFFFFF;
+}
+.menu > li > a {
+    padding: 0.6rem 0.4rem !important;
+}
+.menu > li:hover {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,a8d2ed+100 */
+	background-color: #B7D4E7;
+}
+
+.n5-card {
+	min-height: 112px;
+	min-width:  84%;
+	border: 1px solid  #AAAAAA;
+}
+
+
+
+
+.n5-card__default {
+	height: 48px;
+	border: 1px solid  #C5A1A9;
+	background: 
+	linear-gradient(
+	rgba(255, 255, 255, 1.00), 
+	rgba(240, 231, 233, 0.56)
+	),
+    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1.png );
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
+
+	-webkit-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-o-transition: all 1s ease-out;
+	transition: all 1s ease-out;
+}
+.n5-card__default:hover {
+	background: 
+	linear-gradient(
+	rgba(255, 255, 255, 1.00), 
+	rgba(240, 231, 233, 0.00)
+	),
+    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1.png );
+	-webkit-filter: grayscale(0);
+	filter: grayscale(0);
+
+	-webkit-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-o-transition: all 1s ease-out;
+	transition: all 1s ease-out;
+}
+	.n5-card--caption-1__default {
+		margin: 2px;
+		padding: 2px;
+		height: 36px;
+		margin-right: 12px;
+		overflow: hidden;
+	}
+	.n5-card--caption-1-h3__default {
+		margin: 0;
+		padding: 0;
+		font-size: 20px;
+		color: #C5A1A9;
+		text-align: center;
+	}
+	.n5-card--iconarrow-1__default {
+		width: 36px;
+		float: right;
+		cursor: pointer;
+		position: relative;
+		top: -32px;
+		margin: 0;
+		padding: 8px;
+		text-align: right;
+	}
+	.n5-card--summary-1__default {
+		position: relative;
+		top: -32px;
+		background-color: #C5A1A9;
+		height: 64px;
+		width: 100%;
+		overflow: hidden;
+	}
+		.n5-card--summary-1__default > p {
+			text-align: justify;
+			line-height: 1.44;
+			font-size: 14px;
+			color: #FFFFFF;
+			padding: 2px;
+		}
+	.n5-card--img-1__default {
+
+	}
+		.n5-card--img-1__default > img {
+
+		}
+
+
+
+.n5-card__icon {
+
+}
+	.n5-card--caption-1__icon {
+
+	}
+	.n5-card--iconarrow-1__icon {
+
+	}
+	.n5-card--summary-1__icon {
+
+	}
+	.n5-card--img-1__icon {
+
+	}
+
+
+.n5-card__moused {
+
+}
+	.n5-card--caption-1__moused {
+
+	}
+	.n5-card--iconarrow-1__moused {
+
+	}
+	.n5-card--summary-1__moused {
+
+	}
+	.n5-card--img-1__moused {
+
+	}
+
+
+.n5-card__selected {
+
+}
+	.n5-card--caption-1__selected {
+
+	}
+	.n5-card--iconarrow-1__selected {
+
+	}
+	.n5-card--summary-1__selected {
+
+	}
+	.n5-card--img-1__selected {
+
+	}
+
+
+.n5-card__zoomed {
+
+}
+
+.button {
+    font-size: 18px !important;
+}
