@@ -94,10 +94,14 @@ summary {
 }
 
 .fa{
-	color: #D4B9BE;
+	color: #A9737E;
 }
 .fa:hover{
 	color: #8C4453;
+}
+
+.fa-cog {
+	color: #C5A1A9;
 }
 
 .fa-cog:hover {

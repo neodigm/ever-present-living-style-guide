@@ -167,7 +167,6 @@ alert("do reveal | "+ sFilNam);
 		}else{
 			aJTab( sRepo_url + "/" + sFilNam );
 		}
-		
 	});
 
 	TweenLite.to( $(".n5-card__default"), 0, {height: "256px"});
@@ -176,13 +175,18 @@ alert("do reveal | "+ sFilNam);
 		//
 
 		var n5c = $( this ).closest(".n5-card__default");
+		var n5c_sum = $( n5c ).children(".n5-card--summary-1__default");
+		
 		oBackGroundEvent.audioAlert();
 		if( $( this ).hasClass("fa-chevron-down") ){
 			$( this ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
-			TweenLite.to( n5c, 0, {height: "256px"});
+			TweenLite.to( n5c, .4, {height: "256px"});
+			TweenLite.to( n5c_sum, .8, {height: "64px"});			
+
 		}else{
 			$( this ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-			TweenLite.to( n5c, 0, {height: "48px"});
+			TweenLite.to( n5c_sum, .4, {height: "0px"});			
+			TweenLite.to( n5c, .8, {height: "48px"});
 		}
 	});
 });
