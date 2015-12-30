@@ -1,6 +1,7 @@
 //    (C)2014-2016 Neo Studios Corporation
 
 //    Background Reference
+try {
 var oBackGroundEvent = chrome.extension.getBackgroundPage();  
 //    Repo base URL /wo ending slash
 var sRepo_url = "";
@@ -16,10 +17,13 @@ function aJLoad( sPanel ){
 			$(".oc_nav_content_left").load( sRepo_url + "/left_nav.html");
 		break;
 		case "oc_nav_content_right" :
-			$(".oc_nav_content_right").load("http://codepen.io/ltdc_ux_cookbook/pen/VeZxqv.html");
+			$(".oc_nav_content_left").load( sRepo_url + "/right_nav.html");
 		break;
 		case "ql_nav_dropdown" :
 			$(".ql_nav_dropdown").load( sRepo_url + "/ql_nav_dropdown.html");
+		break;
+		case "modAboutThisGuide" :
+			$("#modAboutThisGuide_ugc").load( sRepo_url + "/modAboutThisGuide.html");
 		break;
 	}
 }
@@ -32,10 +36,12 @@ function aJTab( sPanel ){
 }
 
 function loadDynRepo(){
-	//    
+	//    Content Template Driver
 
 	aJLoad("oc_nav_content_left");
+	//aJLoad("oc_nav_content_right");
 	aJLoad("ql_nav_dropdown");
+	aJLoad("modAboutThisGuide");
 }
 
 $( document ).ready(function(){
@@ -72,10 +78,6 @@ $( document ).ready(function(){
 		}else{
 
 		}
-
-// GSAP animation test
-TweenLite.to( $("#crd-1"), 6, {width:40, height: 15});
-
 	});
 
 	$("#cmdRepo-new").on("click", function(e){
@@ -155,7 +157,7 @@ $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
 	$(".oc_nav_content_left--a").unbind().on("click",function( e ){
-	//    Left Nav Menu Click
+		//    Left Nav Menu Click
 
 		e.preventDefault();
 		oBackGroundEvent.audioAlert();
@@ -163,7 +165,11 @@ $( document ).bind("ajaxComplete", function(){
 		var sFilNam = e.target.pathname; //    This contains the extension path
 		sFilNam = sFilNam.substring(sFilNam.lastIndexOf( "/" ) + 1);
 		if( sFilNam.substring(0, 2) === "--"){
-alert("do reveal | "+ sFilNam);
+			//  Open the reveal by attr naming convention
+			//  May need to wait for the off canvas to close
+			setTimeout( function(){
+				$("[data-content-link=" + sFilNam + "]").foundation("open");
+			}, 640);
 		}else{
 			aJTab( sRepo_url + "/" + sFilNam );
 		}
@@ -193,4 +199,11 @@ alert("do reveal | "+ sFilNam);
 
 function n5c_icon( n5card ){
 
+}
+
+
+
+}
+catch( e ){
+	console.log("Error | " + e.message);
 }
