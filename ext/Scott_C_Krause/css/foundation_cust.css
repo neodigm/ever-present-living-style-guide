@@ -9,7 +9,7 @@ padding: 0.5rem;
 }
 .button { background: #461922; }
 .button:hover, .button:focus { background: #461922; }
-.button.expanded { min-width: 228px; }
+.zzzzzzzzzzzzzzzzzzzzbutton.expanded { min-width: 228px; }
 .dropdown.menu .has-submenu.is-down-arrow > a::after { color: #D4B9BE !important; }
 a { color: #702837; outline: none !important; }
 a:hover, a:focus { color: #1C0A0D; }

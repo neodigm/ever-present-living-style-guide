@@ -42,6 +42,12 @@ a, ul, li, a:hover, ul:hover, li:hover, a:focus, ul:focus, li:focus  { outline: 
 	padding: 0;
 }
 
+.cmd--dropdown {
+	min-height: 52px;
+	min-width: 228px;
+	padding-top: 16px !important;
+}
+
 .rev-modal {
 	width: 78% !important;
 	outline: none;
@@ -108,7 +114,7 @@ summary {
 	color: #FFFFFF;
 }
 .menu > li > a {
-    padding: 0.6rem 0.4rem !important;
+    padding: 0.6rem 0.4rem;
 }
 .menu > li:hover {
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,a8d2ed+100 */
