@@ -17,7 +17,8 @@ function aJLoad( sPanel ){
 			$(".oc_nav_content_left").load( sRepo_url + "/left_nav.html");
 		break;
 		case "oc_nav_content_right" :
-			$(".oc_nav_content_left").load( sRepo_url + "/right_nav.html");
+		//  Change below
+			$(".oc_nav_content_right").load( sRepo_url + "/left_nav.html");
 		break;
 		case "ql_nav_dropdown" :
 			$(".ql_nav_dropdown").load( sRepo_url + "/ql_nav_dropdown.html");
@@ -39,7 +40,7 @@ function loadDynRepo(){
 	//    Content Template Driver
 
 	aJLoad("oc_nav_content_left");
-	//aJLoad("oc_nav_content_right");
+	aJLoad("oc_nav_content_right");
 	aJLoad("ql_nav_dropdown");
 	aJLoad("modAboutThisGuide");
 }
@@ -162,8 +163,13 @@ $( window ).load(function(){
 
 });
 
+$('.close-button:not(.callout)').click(function( e ) {
+	//    Sound | Audio ping close
+	oBackGroundEvent.audioTick_1();	
+});
+
 $('.callout > .close-button').click(function( e ) {
-	//    Fade Alert
+	//    Fade Alert (not modal)
 
 	e.preventDefault();
 	oBackGroundEvent.audioTick_1();	
@@ -181,7 +187,7 @@ $( document ).bind("ajaxComplete", function(){
 		
 		var sFilNam = e.target.pathname; //    This contains the extension path
 		sFilNam = sFilNam.substring(sFilNam.lastIndexOf( "/" ) + 1);
-		if( sFilNam.substring(0, 2) === "--"){
+		if( sFilNam.substring(0, 2) === "--" ){
 			//  Open the reveal by attr naming convention
 			//  May need to wait for the off canvas to close
 			setTimeout( function(){
