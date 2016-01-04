@@ -18,5 +18,4 @@ $( window ).load(function(){
 
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
-
 });

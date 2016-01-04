@@ -1,6 +1,52 @@
-var oAudContx = new AudioContext(); // HTML5 Audio
-//
-var oTabContent;
+var oAudContx = new AudioContext();    //    HTML5 Audio
+var oTabContent;    //    Chrome Tab
+
+var oAJAXReq = new XMLHttpRequest();    //    Get Sounds
+var aAudioBuffer = new Array(10);    //    Store Sound files
+var fetchSoundConfig = {sound_max: 11, sound_current: 1};    //    Sound limits
+
+fetchSound();
+
+function fetchSound(){
+	//    AJAX a single sound binary
+	oAJAXReq.open("GET", "Scott_C_Krause/au/s" + fetchSoundConfig.sound_current + ".mp3", true);
+	oAJAXReq.responseType = "arraybuffer";
+    oAJAXReq.send();
+    oAJAXReq.onload = fetchSoundonload;
+}
+
+function fetchSoundonload() {
+	//    The audio file has loaded via AJAX
+    oAudContx.decodeAudioData(oAJAXReq.response, function (decAudBuf) {
+        aAudioBuffer[ fetchSoundConfig.sound_current ] = decAudBuf;
+        fetchSoundConfig.sound_current = fetchSoundConfig.sound_current + 1;
+        if(fetchSoundConfig.sound_current <= fetchSoundConfig.sound_max){
+            oAJAXReq = new XMLHttpRequest();
+            oAJAXReq.responseType = "arraybuffer";
+            fetchSound( fetchSoundConfig.sound_current );
+        }
+    });
+};
+
+function playAudioFile( nSound ) {
+	//    
+
+    if( localStorage.getItem("sound_switch") !== "false" ){
+        var oSrc = oAudContx.createBufferSource();
+        var volume = oAudContx.createGain();
+
+        //volume.gain.setValueAtTime(0.00, startTime + duration - 0.04);
+        oSrc.buffer = aAudioBuffer[nSound];
+        volume.gain.value = 0.16;
+        oSrc.connect(volume);  
+        volume.connect(oAudContx.destination);
+
+        oSrc.connect(oAudContx.destination);
+
+        volume.gain.value = 0.16;
+        oSrc.start(oAudContx.currentTime);
+    }    
+};
 
 function audioSuccessSound() {
 	//
@@ -27,36 +73,39 @@ function audioTick_1() {
 
 function playNote(frequency, startTime, duration) {
 	//
-    var osc = oAudContx.createOscillator(),
-        osc2 = oAudContx.createOscillator(),
-        volume = oAudContx.createGain();
 
-    // Multiplies the incoming signal by 0.16
-    volume.gain.value = 0.16;
+    if( localStorage.getItem("sound_switch") !== "false" ){
+        var osc = oAudContx.createOscillator(),
+            osc2 = oAudContx.createOscillator(),
+            volume = oAudContx.createGain();
 
-    // Make sure the gain value is at 0.216, 0.04 seconds before the note stops.
-    volume.gain.setValueAtTime(0.16, startTime + duration - 0.04);
-    volume.gain.linearRampToValueAtTime(0, startTime + duration);
+        // Multiplies the incoming signal by 0.16
+        volume.gain.value = 0.16;
 
-    osc.frequency.value = frequency;
-    osc.type = 'triangle';
+        // Make sure the gain value is at 0.216, 0.04 seconds before the note stops.
+        volume.gain.setValueAtTime(0.16, startTime + duration - 0.04);
+        volume.gain.linearRampToValueAtTime(0, startTime + duration);
 
-    osc2.frequency.value = frequency;
-    osc2.type = 'triangle';
+        osc.frequency.value = frequency;
+        osc.type = 'triangle';
 
-    osc.detune.value = -16;
-    osc2.detune.value = 16;
+        osc2.frequency.value = frequency;
+        osc2.type = 'triangle';
 
-    osc.connect(volume);
-    volume.connect(oAudContx.destination);
+        osc.detune.value = -16;
+        osc2.detune.value = 16;
 
-    osc2.connect(volume);
+        osc.connect(volume);
+        volume.connect(oAudContx.destination);
 
-    osc.start(startTime);
-    osc.stop(startTime + duration);
+        osc2.connect(volume);
 
-    osc2.start(startTime);
-    osc2.stop(startTime + duration);
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+
+        osc2.start(startTime);
+        osc2.stop(startTime + duration);
+    }
 };
 
 function aJTab( sPanel ){
@@ -67,17 +116,13 @@ function aJTab( sPanel ){
 	if( oTabContent === undefined ){
 		chrome.tabs.create({url: "Scott_C_Krause/ever_present_living_style_guide.html"}, function(tab) {
 			oTabContent = tab;
-			//chrome.tabs.executeScript(oTabContent.id, { code: 'document.body.style.backgroundColor="red"' });
 		 });	
 	}else{
 		chrome.tabs.update(oTabContent.Id, {url: "Scott_C_Krause/ever_present_living_style_guide.html"}, function(tab) {
-			//chrome.tabs.executeScript(oTabContent.id, { code: 'document.body.style.backgroundColor="red"' });
-
-
 		});
 	}
 }
-//"document.getElementsByClassName('eplsg-template--article').innerHTML = " + "'JSON.stringify(data)'"
+
 function displayMsg( sMsg ){
 	//
 
