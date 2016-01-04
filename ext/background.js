@@ -114,7 +114,7 @@ function aJTab( sPanel ){
 	localStorage.setItem("eplsg-template--article", sPanel);
 
 	if( oTabContent === undefined ){
-		chrome.tabs.create({url: "Scott_C_Krause/ever_present_living_style_guide.html"}, function(tab) {
+		chrome.tabs.create({url: "Scott_C_Krause/ever_present_living_style_guide.html", index: 0}, function(tab) {
 			oTabContent = tab;
 		 });	
 	}else{
