@@ -18,7 +18,7 @@ function aJLoad( sPanel ){
 		break;
 		case "oc_nav_content_right" :
 		//  Change below
-			$(".oc_nav_content_right").load( sRepo_url + "/left_nav.html");
+			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html");
 		break;
 		case "ql_nav_dropdown" :
 			$(".ql_nav_dropdown").load( sRepo_url + "/ql_nav_dropdown.html");
