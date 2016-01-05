@@ -155,9 +155,8 @@ summary {
 	filter: grayscale(1);
 
 	-webkit-transition: all 1s ease-out;
-	-moz-transition: all 1s ease-out;
-	-o-transition: all 1s ease-out;
 	transition: all 1s ease-out;
+	cursor: pointer;
 }
 .n5-card__default:hover {
 	background: 
@@ -170,8 +169,6 @@ summary {
 	filter: grayscale(0);
 
 	-webkit-transition: all 1s ease-out;
-	-moz-transition: all 1s ease-out;
-	-o-transition: all 1s ease-out;
 	transition: all 1s ease-out;
 }
 	.n5-card--caption-1__default {

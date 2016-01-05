@@ -201,7 +201,15 @@ $( document ).bind("ajaxComplete", function(){
 	//    Init Expand all cards
 	TweenLite.to( $(".n5-card__default"), 0, {height: "256px"});
 
-	$(".n5-card--iconarrow-1__default > i").unbind().on("click", function(){
+	$(".n5-card__default").unbind().on("click", function( e ){
+		//  Pop into modal somehow magic
+
+		alert("stuff");
+		e.preventDefault();
+
+	});
+
+	$(".n5-card--iconarrow-1__default > i").unbind().on("click", function( e ){
 		//  Iconify or expand card
 
 		var n5c = $( this ).closest(".n5-card__default");
@@ -213,17 +221,17 @@ $( document ).bind("ajaxComplete", function(){
 			oBackGroundEvent.playAudioFile( 3 );        
 			$( this ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
 			TweenLite.to( n5c, .2, {height: "256px"});
-			TweenLite.to( n5c_sum, .4, {height: "64px"});			
-
+			TweenLite.to( n5c_sum, .4, {height: "64px"});
+TweenLite.to("#spank", 1, {rotation:-90, transformOrigin:"50% 50%"});
 		}else{
 			oBackGroundEvent.playAudioFile( 4 );        
 			$( this ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
 			TweenLite.to( n5c_sum, .2, {height: "0px"});			
 			TweenLite.to( n5c, .4, {height: "48px"});
-
-TweenLite.to("#spank", 10, {rotation:360, transformOrigin:"50% 50%"});
-
+TweenLite.to("#spank", 1, {rotation:90, transformOrigin:"50% 50%"});
 		}
+		e.preventDefault();
+		e.stopPropagation();
 	});
 });
 
