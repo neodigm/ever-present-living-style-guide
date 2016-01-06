@@ -204,31 +204,32 @@ $( document ).bind("ajaxComplete", function(){
 	$(".n5-card").unbind().on("click", function( e ){
 		//  Pop into modal somehow magic
 
-		alert("stuff");
+		$("#"+ $(this).attr("id")+"--mod").foundation("open");
+		oBackGroundEvent.playAudioFile( 2 );    //    ping
 		e.preventDefault();
 
 	});
 
-	$(".n5-card--caption-1, .n5-card--iconarrow-1").unbind().on("click", function( e ){
-		//  Iconify or expand card
+	$(".n5-card--caption-1").unbind().on("click", function( e ){
+		//    Iconify or expand card
 
 		var n5c = $( this ).closest(".n5-card");
-		var n5c_sum = $( n5c ).children(".n5-card--summary-1");
+		var n5c_sumr = $( n5c ).children(".n5-card--summary-1");
+		//    Get Ref to I element to change chevron icon
+		var n5c_i = $( "#"+n5c.attr("id")+" .n5-card--iconarrow-1 .fa" ).first();
 
-		
 		//oBackGroundEvent.audioAlert();
-		if( $( this ).hasClass("fa-chevron-down") ){
+		if( $( n5c_i ).hasClass("fa-chevron-down") ){
 			oBackGroundEvent.playAudioFile( 3 );        
-			$( this ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+			$( n5c_i ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
 			TweenLite.to( n5c, .2, {height: "256px"});
-			TweenLite.to( n5c_sum, .4, {height: "64px"});
+			TweenLite.to( n5c_sumr, .4, {height: "64px"});
 TweenLite.to("#spank", 1, {rotation:-90, transformOrigin:"50% 50%"});
 		}else{
 			oBackGroundEvent.playAudioFile( 4 );        
-			$( this ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-			TweenLite.to( n5c_sum, .2, {height: "0px"});			
+			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+			TweenLite.to( n5c_sumr, .2, {height: "0px"});			
 			TweenLite.to( n5c, .4, {height: "48px"});
-console.log( n5c.attr("id") );
 TweenLite.to("#spank", 1, {rotation:90, transformOrigin:"50% 50%"});
 		}
 		e.preventDefault();
@@ -244,5 +245,5 @@ function n5c_icon( n5card ){
 
 }
 catch( e ){
-	console.log("Error | " + e.message);
+	//console.log("Error | " + e.message);
 }

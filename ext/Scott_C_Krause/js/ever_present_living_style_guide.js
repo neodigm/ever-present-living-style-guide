@@ -1,5 +1,5 @@
 //    (C)2014-2016 Neo Studios Corporation
-
+try {
 //    Background Reference
 var oBackGroundEvent = chrome.extension.getBackgroundPage();
 
@@ -19,3 +19,8 @@ $( window ).load(function(){
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 });
+
+}
+catch( e ){
+	//console.log("Error | " + e.message);
+}
