@@ -4,12 +4,13 @@ try {
 var oBackGroundEvent = chrome.extension.getBackgroundPage();
 
 $( document ).ready(function(){
-	//    Fire up the Zurb Foundation 6 RWD framework
-	$( document ).foundation();
-
 	//    Fetch abs url from local storage and populate declaritive template element
 	//    via ajax
-	$(".eplsg-template--article").load( localStorage.getItem("eplsg-template--article") );
+	$(".eplsg-template--article").load( localStorage.getItem("eplsg-template--article"), function(){
+		//    Fire up the Zurb Foundation 6 RWD framework
+		$( document ).foundation();		
+		Prism.highlightAll();
+	} );
 });
 
 $( window ).load(function(){

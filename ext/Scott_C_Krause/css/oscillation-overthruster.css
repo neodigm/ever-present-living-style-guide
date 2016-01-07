@@ -32,6 +32,12 @@ body {
 
 a, ul, li, a:hover, ul:hover, li:hover, a:focus, ul:focus, li:focus  { outline: none !important; }
 
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(112, 40, 55, 0.75), rgba(0, 0, 0, 0));
+}
+
 .off-canvas {
 	background-color: #FFFFFF;
 }

@@ -132,6 +132,9 @@ $( document ).ready(function(){
 	});
 	$(".store-repo-get--a").on("click", function(e){
 		oBackGroundEvent.displayMsg( localStorage.getItem("repo_name") );
+		//    Lets also show the last template content
+		oBackGroundEvent.displayMsg( localStorage.getItem("eplsg-template--article") );
+alert( localStorage.getItem("eplsg-template--article")  );
 		e.preventDefault();
 	});
 	$(".store-repo-clear--a").on("click", function(e){
@@ -179,7 +182,8 @@ $('.callout > .close-button').click(function( e ) {
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
-	$(".oc_nav_content_left--a").unbind().on("click",function( e ){
+	//$(".oc_nav_content_left--a").unbind().on("click",function( e ){
+	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
 		//    Left Nav Menu Click
 
 		e.preventDefault();
