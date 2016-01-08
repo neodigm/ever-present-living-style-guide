@@ -1,3 +1,6 @@
+.off-canvas-content{
+	min-width: 764px;
+}
 .title-bar {
 background: #38141b;
 background: -moz-linear-gradient(left,  #38141b 1%, #a9737e 99%);
