@@ -206,7 +206,7 @@ $( document ).bind("ajaxComplete", function(){
 	TweenLite.to( $(".n5-card"), 0, {height: "256px"});
 
 	$(".n5-card").unbind().on("click", function( e ){
-		//  Pop into modal somehow magic
+		//  Pop into modal - open by naming convesion
 
 		$("#"+ $(this).attr("id")+"--mod").foundation("open");
 		oBackGroundEvent.playAudioFile( 2 );    //    ping
@@ -222,18 +222,19 @@ $( document ).bind("ajaxComplete", function(){
 		//    Get Ref to I element to change chevron icon
 		var n5c_i = $( "#"+n5c.attr("id")+" .n5-card--iconarrow-1 .fa" ).first();
 
-		//oBackGroundEvent.audioAlert();
 		if( $( n5c_i ).hasClass("fa-chevron-down") ){
+			//    open
 			oBackGroundEvent.playAudioFile( 3 );        
 			$( n5c_i ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
-			TweenLite.to( n5c, .2, {height: "256px"});
-			TweenLite.to( n5c_sumr, .4, {height: "64px"});
+			TweenLite.to( n5c, .6, {ease: Expo.easeOut, height: "256px"});
+			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeOut, delay:0.4, height: "64px"});
 TweenLite.to("#spank", 1, {rotation:-90, transformOrigin:"50% 50%"});
 		}else{
+			//    close
 			oBackGroundEvent.playAudioFile( 4 );        
 			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-			TweenLite.to( n5c_sumr, .2, {height: "0px"});			
-			TweenLite.to( n5c, .4, {height: "48px"});
+			TweenLite.to( n5c_sumr, .4, {ease: Expo.easeIn, height: "0px"});			
+			TweenLite.to( n5c, .6, {ease: Expo.easeIn, height: "48px"});
 TweenLite.to("#spank", 1, {rotation:90, transformOrigin:"50% 50%"});
 		}
 		e.preventDefault();

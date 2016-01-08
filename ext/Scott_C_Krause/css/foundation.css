@@ -2088,19 +2088,22 @@ select {
     margin-top: 3px;
     margin-left: 10px; }
   .dropdown.menu .has-submenu.is-down-arrow a {
-    padding-right: 1.5rem;
+    /* CUST SCK padding-right: 1.5rem;*/
     position: relative; }
   .dropdown.menu .has-submenu.is-down-arrow > a::after {
+/* CUST SCK
     content: '';
     display: block;
     width: 0;
     height: 0;
-    border: inset 5px;
+    zzzzborder: inset 5px;
     border-color: #2199e8 transparent transparent;
     border-top-style: solid;
     position: absolute;
     top: 12px;
-    right: 5px; }
+    zzzzright: 5px;
+*/
+     }
   .dropdown.menu .has-submenu.is-left-arrow > a::after {
     content: '';
     display: block;

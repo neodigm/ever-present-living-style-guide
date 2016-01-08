@@ -50,12 +50,12 @@ hr {
 
 .cmd--dropdown {
 	min-height: 52px;
-	min-width: 231px;
+	min-width: 224px;
 	padding-top: 16px !important;
 }
 
 .rev-modal {
-	width: 78% !important;
+	/*width: 78% !important;*/
 	outline: none;
 }
 
@@ -71,6 +71,15 @@ summary {
 
 .dialog-caption {
 	min-width: 512px;
+}
+.p--mono {
+	font-family: monospace;
+	font-size: 1.2em;
+	font-weight: normal;
+	line-height: 1.5;
+	color: #1C0A0D;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 .caption--p__architectsdaughter{
 	font-family: "ArchitectsDaughter", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -133,15 +142,19 @@ summary {
 	color: #8C4453;
 }
 
-.fa-tag {
+.fa-times-circle-o{
+	color: #E2D0D4;
+}
+
+.fa-tag, .fa-clipboard {
 	color: #FFFFFF;
 }
 
-.fa-cog {
-	color: #C5A1A9;
+.fa-cog, .fa-clipboard {
+	color: #E2D0D4;
 }
 
-.fa-cog:hover {
+.fa-cog:hover, .fa-clipboard:hover {
 	color: #FFFFFF;
 }
 .menu > li > a {
@@ -228,13 +241,50 @@ summary {
 
 		}
 
-
-
-
-.n5-card__zoomed {
-
-}
-
 .button {
     font-size: 18px !important;
 }
+
+.tag-lable--accessibility {background-color: #296661; }
+.tag-lable--browser       {background-color: #4D2850; }
+.tag-lable--color         {background-color: #EC3A40; }
+.tag-lable--component     {background-color: #506F8D; }
+.tag-lable--content       {background-color: #E80C7A; }
+.tag-lable--crm           {background-color: #FFCE00; }
+.tag-lable--form          {background-color: #A49060; }
+.tag-lable--imagery       {background-color: #2C6418; }
+.tag-lable--media         {background-color: #4B3B32; }
+.tag-lable--mobile        {background-color: #BF5B21; }
+.tag-lable--pattern       {background-color: #968851; }
+.tag-lable--process       {background-color: #4CA192; }
+.tag-lable--performance   {background-color: #DC8C3D; }
+.tag-lable--resource      {background-color: #9B3C25; }
+.tag-lable--seo           {background-color: #748C7A; }
+.tag-lable--social        {background-color: #9E9E4D; }
+.tag-lable--testing       {background-color: #F691AD; }
+.tag-lable--typography    {background-color: #256069; }
+.tag-lable--utility       {background-color: #E80C7A; }
+.tag-lable--ux            {background-color: #EDBA08; }
+.tag-lable--video         {background-color: #F24444; }
+
+.tag-lable--accessibility::after {content: " Accessibility"; }
+.tag-lable--browser::after       {content: " Browser"; }
+.tag-lable--color::after         {content: " Color"; }
+.tag-lable--component::after     {content: " Component"; }
+.tag-lable--content::after       {content: " Content"; }
+.tag-lable--crm::after           {content: " CRM"; }
+.tag-lable--form::after          {content: " Form"; }
+.tag-lable--imagery::after       {content: " Imagery"; }
+.tag-lable--media::after         {content: " Media"; }
+.tag-lable--mobile::after        {content: " Mobile"; }
+.tag-lable--pattern::after       {content: " Pattern"; }
+.tag-lable--process::after       {content: " Process"; }
+.tag-lable--performance::after   {content: " Performance"; }
+.tag-lable--resource::after      {content: " Resource"; }
+.tag-lable--seo::after           {content: " SEO"; }
+.tag-lable--social::after        {content: " Social"; }
+.tag-lable--testing::after       {content: " Testing"; }
+.tag-lable--typography::after    {content: " Typography"; }
+.tag-lable--utility::after       {content: " Utility"; }
+.tag-lable--ux::after            {content: " UX"; }
+.tag-lable--video::after         {content: " Video"; }
