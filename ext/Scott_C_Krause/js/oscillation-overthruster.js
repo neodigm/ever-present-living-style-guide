@@ -214,6 +214,16 @@ $( document ).bind("ajaxComplete", function(){
 
 	});
 
+	$( ".n5-card" ).hover(
+		function() {
+			//    mouseover
+			TweenLite.to( this, 1, {ease: Expo.easeIn, backgroundPosition: "-444px 0px"});
+		}, function() {
+			//    mouseout
+			setTimeout( TweenLite.to( this, 1, {ease: Expo.easeOut, delay:0.4, backgroundPosition: "0px 0px"}) , 6000);
+		}
+	);
+
 	$(".n5-card--caption-1").unbind().on("click", function( e ){
 		//    Iconify or expand card
 
@@ -224,18 +234,16 @@ $( document ).bind("ajaxComplete", function(){
 
 		if( $( n5c_i ).hasClass("fa-chevron-down") ){
 			//    open
-			oBackGroundEvent.playAudioFile( 3 );        
+			oBackGroundEvent.playAudioFile( 3 );
 			$( n5c_i ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
 			TweenLite.to( n5c, .6, {ease: Expo.easeOut, height: "256px"});
 			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeOut, delay:0.4, height: "64px"});
-TweenLite.to("#spank", 1, {rotation:-90, transformOrigin:"50% 50%"});
 		}else{
 			//    close
-			oBackGroundEvent.playAudioFile( 4 );        
+			oBackGroundEvent.playAudioFile( 4 );
 			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
 			TweenLite.to( n5c_sumr, .4, {ease: Expo.easeIn, height: "0px"});			
 			TweenLite.to( n5c, .6, {ease: Expo.easeIn, height: "48px"});
-TweenLite.to("#spank", 1, {rotation:90, transformOrigin:"50% 50%"});
 		}
 		e.preventDefault();
 		e.stopPropagation();

@@ -174,7 +174,8 @@ summary {
 	rgba(255, 255, 255, 1.00), 
 	rgba(240, 231, 233, 0.56)
 	),
-    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1.png );
+    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1_an-01.png );
+	background-position:  0px 0px;
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1);
 
@@ -188,7 +189,8 @@ summary {
 	rgba(255, 255, 255, 1.00), 
 	rgba(240, 231, 233, 0.00)
 	),
-    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1.png );
+    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1_an-01.png );
+	background-position:  0px 0px;
 	-webkit-filter: grayscale(0);
 	filter: grayscale(0);
 
