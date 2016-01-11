@@ -69,12 +69,12 @@ Your Clipboard is empty.
 					
 					<header class="title-bar dialog-caption">
 					  <nav class="title-bar-left">
-					    <span class="title-bar-title dialog-caption--span"> Living Style Guide&nbsp; |&nbsp; Pattern Library</span>
+					    <span class="title-bar-title dialog-caption--span">Living Style Guide&nbsp; <i class="fa fa-paper-plane"></i>&nbsp; Pattern Library</span>
 					  </nav>
 
 					  <nav class="title-bar-right">
 					 	<a class="store-repo-dialog--a" href="#"><i class="fa fa-cog fa-lg"></i></a>&nbsp;
-						<button type="button" data-open="offCanvasRight">
+						<button id="cmdOffCanvMyClip" type="button" data-open="offCanvasRight">
 							<i class="fa fa-clipboard"></i>
 						</button>
 					  </nav>
@@ -170,8 +170,8 @@ Your Clipboard is empty.
 		</td>
 		<td>
 			<nav class="button-group">
-			  <a class="tiny button hollow">One</a>
-			  <a class="tiny button hollow">Two</a>
+			  <a data-tool-cmd-action="cmdGrayScale"      class="tool-cmd--a tiny button hollow">Gray Scale</a>
+			  <a data-tool-cmd-action="cmdMissingAltTags" class="tool-cmd--a tiny button hollow">Missing Alt</a>
 			  <a class="tiny button hollow">Three</a>
 			</nav>
 		</td>

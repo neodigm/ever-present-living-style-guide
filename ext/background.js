@@ -123,6 +123,21 @@ function aJTab( sPanel ){
 	}
 }
 
+function runTool( sTool ){
+    //    Inject CSS or JS into a tab
+
+    switch ( sTool ) {
+        case "cmdGrayScale":
+            //
+            chrome.tabs.insertCSS({code: "body {-webkit-filter: grayscale(1);}"});
+            break;
+        case "cmdMissingAltTags":
+            //
+            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+            break;
+    }    
+}
+
 function displayMsg( sMsg ){
 	//
 
@@ -164,5 +179,6 @@ function appendMyClipboard( sClip ){
 
 function Nowish(){
     var dNow = new Date();
-    return (dNow.getMonth() + 1) + '/' + dNow.getDate() + '/' + dNow.getFullYear();
+    return dNow.toString();
+    //return (dNow.getMonth() + 1) + '/' + dNow.getDate() + '/' + dNow.getFullYear();
 }

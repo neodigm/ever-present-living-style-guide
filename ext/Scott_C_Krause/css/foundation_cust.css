@@ -1,7 +1,7 @@
 .off-canvas-content{
 	min-width: 764px;
 }
-.column, .columns { padding-right: 8px; padding-left: 8px;}
+.zzzcolumn, .zzzcolumns { padding-right: 8px; padding-left: 8px;}
 .title-bar {
 background: #38141b;
 background: -moz-linear-gradient(left,  #38141b 1%, #a9737e 99%);
@@ -30,4 +30,8 @@ a:hover, a:focus { color: #1C0A0D; }
 }
 .button.hollow { border: 1px solid #A9737E !important; color: #702837 !important; } 
 .button.hollow:hover { border: 1px solid #702837; color: #702837; background-color: #F0E7E9 }
-#n5c_1--mod__ugc > table { width: 100%; }
+
+.title-bar-title {
+    font-weight: 400;
+    font-family: "Roboto Condensed";
+}

@@ -191,8 +191,8 @@ summary {
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1);
 
-	-webkit-transition: all 1s ease-out;
-	transition: all 1s ease-out;
+	-webkit-transition: all .8s ease-in;
+	transition: all .8s ease-in;
 	overflow: hidden;
 }
 .n5-card:hover {
@@ -206,8 +206,8 @@ summary {
 	-webkit-filter: grayscale(0);
 	filter: grayscale(0);
 
-	-webkit-transition: all 1s ease-out;
-	transition: all 1s ease-out;
+	-webkit-transition: all .8s ease-out;
+	transition: all .8s ease-out;
 	cursor: pointer;
 	overflow: hidden;
 }
@@ -256,6 +256,8 @@ summary {
 		.n5-card--img-1 > img {
 
 		}
+
+#n5c_1--mod__ugc > table { width: 100%; }
 
 .button {
     font-size: 18px !important;

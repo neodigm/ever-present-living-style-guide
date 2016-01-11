@@ -47,7 +47,6 @@ $( document ).ready(function(){
 
 	oBackGroundEvent.playAudioFile( 6 ); // Intro sound
 
-console.log( localStorage.getItem("MyClipboard") );
 	if( localStorage.getItem("MyClipboard") !== null ){
         $("#p_MyClipboard").html( localStorage.getItem("MyClipboard") ); //  Init My Clipboard display
     }
@@ -83,12 +82,19 @@ console.log( localStorage.getItem("MyClipboard") );
 
 		}
 	});
+	//    Tool Button Wire Up
+	$(".tool-cmd--a").on("click", function( e ){
+		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
+	});
 
-	$("#cmdMyClipboard_download").on("click", function(e){
-		//    Download clip contents
-
-alert("download stuff");
-		e.preventDefault();
+	$("#cmdOffCanvMyClip").on("click", function(){
+		//    Generate the href for the download button
+		//    When the Clipboard/OffCanvas is clicked, does not matter if currently open or closed
+chrome.storage.local.get("myclipboard_temp", function(fetchedData){
+	alert( fetchedData.myclipboard_temp );
+});
+		var sMU = $("#p_MyClipboard").html();
+		$( "#cmdMyClipboard_download" ).attr("href", "data:text/html;charset=UTF-8,"+encodeURIComponent(sMU) ).attr("download", "MyClipboard.html");
 	});
 
 	$("#cmdMyClipboard_clear").on("click", function(e){
@@ -212,7 +218,7 @@ $( document ).bind("ajaxComplete", function(){
 			setTimeout( function(){
 				$("[data-content-link=" + sFilNam + "]").foundation("open");
 				oBackGroundEvent.playAudioFile( 11 );    //    Spoken
-			}, 640);
+			}, 320);
 		}else{
 			aJTab( sRepo_url + "/" + sFilNam );
 		}
@@ -254,14 +260,14 @@ $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id")
 			//    open
 			oBackGroundEvent.playAudioFile( 3 );
 			$( n5c_i ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
-			TweenLite.to( n5c, .6, {ease: Expo.easeOut, height: "256px"});
-			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeOut, delay:0.4, height: "64px"});
+			TweenLite.to( n5c, 1, {ease: Expo.easeOut, height: "256px"});
+			TweenLite.to( n5c_sumr, 1.2, {ease: Expo.easeOut, delay:0.4, height: "64px"});
 		}else{
 			//    close
 			oBackGroundEvent.playAudioFile( 4 );
 			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-			TweenLite.to( n5c_sumr, .4, {ease: Expo.easeIn, height: "0px"});
-			TweenLite.to( n5c, .6, {ease: Expo.easeIn, height: "48px"});
+			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeIn, height: "0px"});
+			TweenLite.to( n5c, 1, {ease: Expo.easeIn, height: "48px"});
 		}
 		e.preventDefault();
 		e.stopPropagation();
