@@ -146,4 +146,23 @@ function displayMsg( sMsg ){
 	}
 }
 
+function appendMyClipboard( sClip ){
+    //    timestamp and append to existing loc str then
+    //    return entire persisted value
 
+    var sPre = "\n<br>---- " + Nowish() + " ----<br>\n";
+    var sPost = ""
+    if( localStorage.getItem("MyClipboard") !== null ){
+        sPost = localStorage.getItem("MyClipboard");
+    }
+
+    sClip = sPre + sClip +  sPost;
+
+    localStorage.setItem("MyClipboard", sClip);
+    return localStorage.getItem("MyClipboard");
+}
+
+function Nowish(){
+    var dNow = new Date();
+    return (dNow.getMonth() + 1) + '/' + dNow.getDate() + '/' + dNow.getFullYear();
+}

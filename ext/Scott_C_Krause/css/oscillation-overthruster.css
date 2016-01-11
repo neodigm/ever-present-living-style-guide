@@ -7,7 +7,7 @@
 .brand_blu_6  {color: #9FC6DF;}
 .brand_blu_7  {color: #B7D4E7;}
 .brand_blu_8  {color: #CFE2EF;}
-
+/*Purple color step*/
 .brand_pur_1  {color: #F0E7E9;}
 .brand_pur_2  {color: #E2D0D4;}
 .brand_pur_3  {color: #D4B9BE;}
@@ -111,6 +111,18 @@ summary {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 }
+
+.article--p__monospace{
+	color: #222222;	
+	font-family: monospace;
+	text-align: left;
+	font-size: 10px;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
 .article--psub__roboto{
 	color: #666666;	
 	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -181,7 +193,7 @@ summary {
 
 	-webkit-transition: all 1s ease-out;
 	transition: all 1s ease-out;
-	cursor: pointer;
+	overflow: hidden;
 }
 .n5-card:hover {
 	background: 
@@ -196,6 +208,8 @@ summary {
 
 	-webkit-transition: all 1s ease-out;
 	transition: all 1s ease-out;
+	cursor: pointer;
+	overflow: hidden;
 }
 	.n5-card--caption-1 {
 		margin: 2px;
@@ -230,7 +244,7 @@ summary {
 		overflow: hidden;
 	}
 		.n5-card--summary-1 > p {
-			text-align: justify;
+			/*text-align: justify;*/
 			line-height: 1.44;
 			font-size: 14px;
 			color: #FFFFFF;
@@ -247,27 +261,33 @@ summary {
     font-size: 18px !important;
 }
 
-.tag-lable--accessibility {background-color: #296661; }
-.tag-lable--browser       {background-color: #4D2850; }
-.tag-lable--color         {background-color: #EC3A40; }
-.tag-lable--component     {background-color: #506F8D; }
-.tag-lable--content       {background-color: #E80C7A; }
-.tag-lable--crm           {background-color: #FFCE00; }
-.tag-lable--form          {background-color: #A49060; }
-.tag-lable--imagery       {background-color: #2C6418; }
-.tag-lable--media         {background-color: #4B3B32; }
-.tag-lable--mobile        {background-color: #BF5B21; }
-.tag-lable--pattern       {background-color: #968851; }
-.tag-lable--process       {background-color: #4CA192; }
-.tag-lable--performance   {background-color: #DC8C3D; }
-.tag-lable--resource      {background-color: #9B3C25; }
-.tag-lable--seo           {background-color: #748C7A; }
-.tag-lable--social        {background-color: #9E9E4D; }
-.tag-lable--testing       {background-color: #F691AD; }
-.tag-lable--typography    {background-color: #256069; }
-.tag-lable--utility       {background-color: #E80C7A; }
-.tag-lable--ux            {background-color: #EDBA08; }
-.tag-lable--video         {background-color: #F24444; }
+.myclipboard--article {
+	max-height: 256px;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.tag-lable--accessibility {background-color: #296661; margin: 2px;}
+.tag-lable--browser       {background-color: #4D2850; margin: 2px;}
+.tag-lable--color         {background-color: #EC3A40; margin: 2px;}
+.tag-lable--component     {background-color: #506F8D; margin: 2px;}
+.tag-lable--content       {background-color: #E80C7A; margin: 2px;}
+.tag-lable--crm           {background-color: #FFCE00; margin: 2px;}
+.tag-lable--form          {background-color: #A49060; margin: 2px;}
+.tag-lable--imagery       {background-color: #2C6418; margin: 2px;}
+.tag-lable--media         {background-color: #4B3B32; margin: 2px;}
+.tag-lable--mobile        {background-color: #BF5B21; margin: 2px;}
+.tag-lable--pattern       {background-color: #968851; margin: 2px;}
+.tag-lable--process       {background-color: #4CA192; margin: 2px;}
+.tag-lable--performance   {background-color: #DC8C3D; margin: 2px;}
+.tag-lable--resource      {background-color: #9B3C25; margin: 2px;}
+.tag-lable--seo           {background-color: #748C7A; margin: 2px;}
+.tag-lable--social        {background-color: #9E9E4D; margin: 2px;}
+.tag-lable--testing       {background-color: #F691AD; margin: 2px;}
+.tag-lable--typography    {background-color: #256069; margin: 2px;}
+.tag-lable--utility       {background-color: #E80C7A; margin: 2px;}
+.tag-lable--ux            {background-color: #EDBA08; margin: 2px;}
+.tag-lable--video         {background-color: #F24444; margin: 2px;}
 
 .tag-lable--accessibility::after {content: " Accessibility"; }
 .tag-lable--browser::after       {content: " Browser"; }

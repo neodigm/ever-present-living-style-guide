@@ -13,9 +13,6 @@ function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
 
 	switch ( sPanel ){
-		case "oc_nav_content_left" :
-			$(".oc_nav_content_left").load( sRepo_url + "/left_nav.html");
-		break;
 		case "oc_nav_content_right" :
 		//  Change below
 			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html");
@@ -39,7 +36,6 @@ function aJTab( sPanel ){
 function loadDynRepo(){
 	//    Content Template Driver
 
-	aJLoad("oc_nav_content_left");
 	aJLoad("oc_nav_content_right");
 	aJLoad("ql_nav_dropdown");
 	aJLoad("modAboutThisGuide");
@@ -50,6 +46,11 @@ $( document ).ready(function(){
 	$( document ).foundation();
 
 	oBackGroundEvent.playAudioFile( 6 ); // Intro sound
+
+console.log( localStorage.getItem("MyClipboard") );
+	if( localStorage.getItem("MyClipboard") !== null ){
+        $("#p_MyClipboard").html( localStorage.getItem("MyClipboard") ); //  Init My Clipboard display
+    }
 
 	$('.owl-carousel').owlCarousel({
 	    loop:true,
@@ -81,6 +82,21 @@ $( document ).ready(function(){
 		}else{
 
 		}
+	});
+
+	$("#cmdMyClipboard_download").on("click", function(e){
+		//    Download clip contents
+
+alert("download stuff");
+		e.preventDefault();
+	});
+
+	$("#cmdMyClipboard_clear").on("click", function(e){
+		//    Clear clip contents
+
+		$("#p_MyClipboard").html("");
+		localStorage.removeItem("MyClipboard");
+		e.preventDefault();
 	});
 
 	$("#cmdRepo-new").on("click", function(e){
@@ -182,7 +198,6 @@ $('.callout > .close-button').click(function( e ) {
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
-	//$(".oc_nav_content_left--a").unbind().on("click",function( e ){
 	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
 		//    Left Nav Menu Click
 
@@ -210,6 +225,9 @@ $( document ).bind("ajaxComplete", function(){
 
 		$("#"+ $(this).attr("id")+"--mod").foundation("open");
 		oBackGroundEvent.playAudioFile( 2 );    //    ping
+
+$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id") ) );
+
 		e.preventDefault();
 
 	});
@@ -242,7 +260,7 @@ $( document ).bind("ajaxComplete", function(){
 			//    close
 			oBackGroundEvent.playAudioFile( 4 );
 			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-			TweenLite.to( n5c_sumr, .4, {ease: Expo.easeIn, height: "0px"});			
+			TweenLite.to( n5c_sumr, .4, {ease: Expo.easeIn, height: "0px"});
 			TweenLite.to( n5c, .6, {ease: Expo.easeIn, height: "48px"});
 		}
 		e.preventDefault();
