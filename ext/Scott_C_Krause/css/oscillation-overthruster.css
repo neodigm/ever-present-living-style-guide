@@ -186,30 +186,18 @@ summary {
 	rgba(255, 255, 255, 1.00), 
 	rgba(240, 231, 233, 0.56)
 	),
-    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1_an-01.png );
-	background-position:  0px 0px;
+    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1.png );
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1);
 
-	-webkit-transition: all .8s ease-in;
-	transition: all .8s ease-in;
+	-zzzzwebkit-transition: all 1s ease-in;
+	zzzztransition: all 1s ease-in;
 	overflow: hidden;
+	cursor: pointer;
 }
 .n5-card:hover {
-	background: 
-	linear-gradient(
-	rgba(255, 255, 255, 1.00), 
-	rgba(240, 231, 233, 0.00)
-	),
-    url( http://neodigm.github.io/ever-present-living-style-guide-site/img/ltdc_eplsg_n5card_back_1_an-01.png );
-	background-position:  0px 0px;
 	-webkit-filter: grayscale(0);
 	filter: grayscale(0);
-
-	-webkit-transition: all .8s ease-out;
-	transition: all .8s ease-out;
-	cursor: pointer;
-	overflow: hidden;
 }
 	.n5-card--caption-1 {
 		margin: 2px;

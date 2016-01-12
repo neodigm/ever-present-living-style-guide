@@ -82,17 +82,22 @@ $( document ).ready(function(){
 
 		}
 	});
-	//    Tool Button Wire Up
+	
 	$(".tool-cmd--a").on("click", function( e ){
+		//    Tool Buttons Wire Up
+
 		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
 	});
 
 	$("#cmdOffCanvMyClip").on("click", function(){
 		//    Generate the href for the download button
 		//    When the Clipboard/OffCanvas is clicked, does not matter if currently open or closed
-chrome.storage.local.get("myclipboard_temp", function(fetchedData){
-	alert( fetchedData.myclipboard_temp );
-});
+
+		chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
+//alert( fetchedData.myclipboard_temp );
+			//oBackGroundEvent.displayMsg(  "Tool Summary\n" + fetchedData.myclipboard_temp_summary );
+			//oBackGroundEvent.playAudioFile( 4 ); //    Unknown
+		});
 		var sMU = $("#p_MyClipboard").html();
 		$( "#cmdMyClipboard_download" ).attr("href", "data:text/html;charset=UTF-8,"+encodeURIComponent(sMU) ).attr("download", "MyClipboard.html");
 	});
@@ -147,7 +152,7 @@ chrome.storage.local.get("myclipboard_temp", function(fetchedData){
 	loadDynRepo(); //    Fetch Content
 
 
-	//    Temp dev events - delete later
+	//    Temp dev events - DELETE later
 	$(".store-repo-set--a").on("click", function(e){
 		localStorage.setItem("repo_name", "ltdc_ux_cookbook");
 		e.preventDefault();
@@ -204,6 +209,10 @@ $('.callout > .close-button').click(function( e ) {
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
+	//    Init Expand all cards
+	TweenLite.to( $(".n5-card:even"), 2.1, {height: "256px"});
+	TweenLite.to( $(".n5-card:odd"),   .4, {height: "256px"});
+
 	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
 		//    Left Nav Menu Click
 
@@ -223,15 +232,14 @@ $( document ).bind("ajaxComplete", function(){
 			aJTab( sRepo_url + "/" + sFilNam );
 		}
 	});
-	//    Init Expand all cards
-	TweenLite.to( $(".n5-card"), 0, {height: "256px"});
 
 	$(".n5-card").unbind().on("click", function( e ){
-		//  Pop into modal - open by naming convesion
+		//  Pop into modal - open by naming convention
 
 		$("#"+ $(this).attr("id")+"--mod").foundation("open");
 		oBackGroundEvent.playAudioFile( 2 );    //    ping
 
+// This is an example of how to generate content for MyClip
 $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id") ) );
 
 		e.preventDefault();
@@ -241,10 +249,10 @@ $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id")
 	$( ".n5-card" ).hover(
 		function() {
 			//    mouseover
-			TweenLite.to( this, 1, {ease: Expo.easeIn, backgroundPosition: "-444px 0px"});
+			TweenLite.to( this, 4, {ease: Expo.easeOut, backgroundPosition: "-444px 0px"});
 		}, function() {
 			//    mouseout
-			setTimeout( TweenLite.to( this, 1, {ease: Expo.easeOut, delay:0.4, backgroundPosition: "0px 0px"}) , 6000);
+			//TweenLite.to( this, 2, {ease: Expo.easeIn, backgroundPosition: "0px 0px"});
 		}
 	);
 

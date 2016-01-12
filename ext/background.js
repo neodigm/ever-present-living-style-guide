@@ -139,15 +139,15 @@ function runTool( sTool ){
 }
 
 function displayMsg( sMsg ){
-	//
+	//    System Tray Notification
 
-	audioSuccessSound();
 	console.log( sMsg );
 	if (!("Notification" in window)) {
-		alert('Notification API not supported.');
+		console.log('Notification API not supported.');
 		return;
 	} else if (Notification.permission === "granted") {
 		// If it's okay let's create a notification
+        audioSuccessSound();
 		var notification = new Notification( sMsg );
 	} else if (Notification.permission !== 'denied') {
 		// Otherwise, we need to ask the user for permission
@@ -162,7 +162,7 @@ function displayMsg( sMsg ){
 }
 
 function appendMyClipboard( sClip ){
-    //    timestamp and append to existing loc str then
+    //    Timestamp and append to existing loc str then
     //    return entire persisted value
 
     var sPre = "\n<br>---- " + Nowish() + " ----<br>\n";
@@ -178,7 +178,24 @@ function appendMyClipboard( sClip ){
 }
 
 function Nowish(){
+    //    A readable Client-side time/date stamp
+
     var dNow = new Date();
-    return dNow.toString();
-    //return (dNow.getMonth() + 1) + '/' + dNow.getDate() + '/' + dNow.getFullYear();
+    return dNow.toString().substr(0, dNow.toString().length - 33);
 }
+
+//    Fetch a given value from chrome storage, create notification then clear value
+var NotfChromeStor_value = "";
+var NotfChromeStor = {
+    pubCS : function( sKey ){
+        //
+console.log( "sKey | "+sKey);
+        chrome.storage.local.get(sKey, function(fetchedData){
+            NotfChromeStor_value = fetchedData[sKey];
+            displayMsg(  "Tool Summary\n" + NotfChromeStor_value );
+            chrome.storage.local.remove( sKey );
+            return NotfChromeStor_value;
+        });
+    }
+};
+setInterval(NotfChromeStor.pubCS( "myclipboard_temp_summary" ), 1800);
