@@ -210,8 +210,8 @@ $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
 	//    Init Expand all cards
-	TweenLite.to( $(".n5-card:even"), 2.1, {height: "256px"});
-	TweenLite.to( $(".n5-card:odd"),   .4, {height: "256px"});
+	TweenLite.to( $(".n5-card:even"), 1.8, {height: "256px"});
+	TweenLite.to( $(".n5-card:odd"),  1.0, {height: "256px"});
 
 	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
 		//    Left Nav Menu Click
@@ -274,8 +274,8 @@ $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id")
 			//    close
 			oBackGroundEvent.playAudioFile( 4 );
 			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeIn, height: "0px"});
-			TweenLite.to( n5c, 1, {ease: Expo.easeIn, height: "48px"});
+			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeOut, height: "0px"});
+			TweenLite.to( n5c, 1, {ease: Expo.easeOut, height: "48px"});
 		}
 		e.preventDefault();
 		e.stopPropagation();

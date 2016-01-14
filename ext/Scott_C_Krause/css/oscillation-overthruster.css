@@ -225,11 +225,13 @@ summary {
 	}
 	.n5-card--summary-1 {
 		position: relative;
-		/*top: -32px;*/
 		background-color: #B78A93;
 		height: 64px;
 		width: 100%;
 		overflow: hidden;
+	}
+	.n5-card:hover .n5-card--summary-1 {
+		background-color: #835260;
 	}
 		.n5-card--summary-1 > p {
 			/*text-align: justify;*/
@@ -262,7 +264,7 @@ summary {
 .tag-lable--color         {background-color: #EC3A40; margin: 2px;}
 .tag-lable--component     {background-color: #506F8D; margin: 2px;}
 .tag-lable--content       {background-color: #E80C7A; margin: 2px;}
-.tag-lable--crm           {background-color: #FFCE00; margin: 2px;}
+.tag-lable--crm           {background-color: #EEBD00; margin: 2px;}
 .tag-lable--form          {background-color: #A49060; margin: 2px;}
 .tag-lable--imagery       {background-color: #2C6418; margin: 2px;}
 .tag-lable--media         {background-color: #4B3B32; margin: 2px;}
@@ -273,10 +275,10 @@ summary {
 .tag-lable--resource      {background-color: #9B3C25; margin: 2px;}
 .tag-lable--seo           {background-color: #748C7A; margin: 2px;}
 .tag-lable--social        {background-color: #9E9E4D; margin: 2px;}
-.tag-lable--testing       {background-color: #F691AD; margin: 2px;}
+.tag-lable--testing       {background-color: #E5809C; margin: 2px;}
 .tag-lable--typography    {background-color: #256069; margin: 2px;}
 .tag-lable--utility       {background-color: #E80C7A; margin: 2px;}
-.tag-lable--ux            {background-color: #EDBA08; margin: 2px;}
+.tag-lable--ux            {background-color: #DCA907; margin: 2px;}
 .tag-lable--video         {background-color: #F24444; margin: 2px;}
 
 .tag-lable--accessibility::after {content: " Accessibility"; }

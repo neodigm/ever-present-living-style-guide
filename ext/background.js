@@ -135,6 +135,10 @@ function runTool( sTool ){
             //
             chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
             break;
+        case "cmdInjectPrimeBanner":
+            //
+            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_inject_prime_banner.js"});
+            break;
     }    
 }
 

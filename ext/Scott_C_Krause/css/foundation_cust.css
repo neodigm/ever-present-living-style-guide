@@ -3,11 +3,10 @@
 }
 .zzzcolumn, .zzzcolumns { padding-right: 8px; padding-left: 8px;}
 .title-bar {
-background: #38141b;
-background: -moz-linear-gradient(left,  #38141b 1%, #a9737e 99%);
-background: -webkit-linear-gradient(left,  #38141b 1%,#a9737e 99%);
-background: linear-gradient(to right,  #38141b 1%,#a9737e 99%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#38141b', endColorstr='#a9737e',GradientType=1 );
+background: #58383F;
+background: -moz-linear-gradient(left,  #58383F 1%, #a9737e 99%);
+background: -webkit-linear-gradient(left,  #58383F 1%,#a9737e 99%);
+background: linear-gradient(to right,  #58383F 1%,#a9737e 99%);
 color: #FFF;
 padding: 0.5rem;
 }
