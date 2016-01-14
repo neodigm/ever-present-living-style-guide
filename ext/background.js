@@ -3,7 +3,7 @@ var oTabContent;    //    Chrome Tab
 
 var oAJAXReq = new XMLHttpRequest();    //    Get Sounds
 var aAudioBuffer = new Array(10);    //    Store Sound files
-var fetchSoundConfig = {sound_max: 11, sound_current: 1};    //    Sound limits
+var fetchSoundConfig = {sound_max: 14, sound_current: 1};    //    Sound limits
 
 fetchSound();
 
