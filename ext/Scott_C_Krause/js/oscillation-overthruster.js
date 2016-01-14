@@ -1,4 +1,4 @@
-//    (C)2014-2016 Neo Studios Corporation
+//    An endeavor by Scott C. Krause
 
 //    Background Reference
 try {
@@ -8,6 +8,98 @@ var sRepo_url = "";
 //    Repo Demo base URL /wo ending slash
 var sRepo_url_demo = "http://neodigm.github.io/ever-present-living-style-guide-site";
 
+var n5Tags = new n5Tags();
+var n5Contents = new n5Contents();
+
+n5Tags.addTag( new n5Tag("accessibility"  ,"accessibility"  ,"296661",	"Allow people with disabilities to perceive, understand, navigate, and interact with the Web"));
+n5Tags.addTag( new n5Tag("browser"        ,"browsers"       ,"4D2850",	"User Agents, Android, Blink, Chrome, Edge, Explorer, Firefox, Opera, Safari, Webkit"));
+n5Tags.addTag( new n5Tag("color"          ,"colors"         ,"EC3A40",	"Branded Color Motif, Palette, Scheme, Theme"));
+n5Tags.addTag( new n5Tag("component"      ,"components"     ,"506F8D",	"Bundle markup and styles into encapsulated custom HTML elements"));
+n5Tags.addTag( new n5Tag("content"        ,"content"        ,"E80C7A",	"Creating and distributing valuable, relevant, and consistent content"));
+n5Tags.addTag( new n5Tag("crm"            ,"CRM"            ,"EEBD00",	"Customer Relationship Management"));
+n5Tags.addTag( new n5Tag("form"           ,"forms"          ,"A49060",	"Data input, validation and file upload"));
+n5Tags.addTag( new n5Tag("imagery"        ,"images"         ,"2C6418",	"Image presentation formatting and optimization"));
+n5Tags.addTag( new n5Tag("media"          ,"media"          ,"4B3B32",	"Video and Audio presentation and capture"));
+n5Tags.addTag( new n5Tag("mobile"         ,"mobile"         ,"BF5B21",	"Hybrid and Native Mobile Apps"));
+n5Tags.addTag( new n5Tag("pattern"        ,"patterns"       ,"968851",	"Common reusable design patterns"));
+n5Tags.addTag( new n5Tag("process"        ,"processes"      ,"4CA192",	"Business, Creative and Technical workflow"));
+n5Tags.addTag( new n5Tag("performance"    ,"performance"    ,"DC8C3D",	"Web performance optimization tuning"));
+n5Tags.addTag( new n5Tag("resource"       ,"resources"      ,"9B3C25",	"Curated UX Blogs, Knowledge base, articles, links and online tools"));
+n5Tags.addTag( new n5Tag("seo"            ,"SEO"            ,"748C7A",	"Search engine optimization and Marketing"));
+n5Tags.addTag( new n5Tag("social"         ,"social"         ,"9E9E4D",	"Social Media Platforms and Networks"));
+n5Tags.addTag( new n5Tag("testing"        ,"testing"        ,"E5809C",	"QA testing, user acceptance, security, defect, integration, and regression"));
+n5Tags.addTag( new n5Tag("typography"     ,"typography"     ,"256069",	"Text layout presentation design"));
+n5Tags.addTag( new n5Tag("utility"        ,"utilities"      ,"E80C7A",	"Diagnostic tools, scripts, snippets, audits, generators and templates"));
+n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Experience, Computer Human Interaction and User Interface design"));
+n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
+
+n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",	"component",	"accessibility|content|pattern"));
+n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",	"component",	"accessibility|content|pattern"));
+n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	"component",	"accessibility|content|pattern|ux"));
+n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"Pattern: JavaScript Media Queries Component",	4,	"pattern-javascript-media-queries.html",	"component",	"browser|pattern"));
+
+function n5Tags(){
+	this.an5Tags = [];
+	this.addTag = function( oTag ){
+		this.an5Tags.push( oTag );
+	};
+	this.getTag = function( name_short ){
+		//    Iterate, fetch and return obj give name (token)
+		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
+			if( this.an5Tags[iCnt].name_short === name_short){
+				return this.an5Tags[iCnt];
+			}
+		}
+	}
+}
+
+function n5Tag(name_short,plural,color,summary){
+	this.name_short = name_short;
+	this.plural = plural;
+	this.summary = summary;
+	this.color = color;
+}
+
+function n5Contents(){
+	this.an5Contents = [];
+	this.addContent = function( oContent ){
+		this.an5Contents.push( oContent );
+	};
+	this.getContent = function( name_short ){
+		//    Iterate, fetch and return obj given name (token)
+		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
+			if( this.an5Contents[iCnt].name_short === name_short){
+				return this.an5Contents[iCnt];
+			}
+		}
+	}
+	this.countContentByTag = function( sTagToken ){
+		//    Iterate, count and return total given name (token)
+		var iCnt_total = 0;
+		sTagToken += "|";
+		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
+console.log( "len |"+ this.an5Contents.length );
+console.log( this.an5Contents[iCnt].tags );
+console.log( "indexof |"+ this.an5Contents[iCnt].tags.indexOf( sTagToken ) );
+			if( this.an5Contents[iCnt].tags.indexOf( sTagToken ) > 0){
+				iCnt_total++;
+			}
+		}
+		return iCnt_total;
+	}
+}
+
+console.log( n5Contents.countContentByTag("content") );
+
+function n5Content(content_type, name_short, name_long, sound, file_name, tag, tags){
+	this.content_type = content_type;
+	this.name_short = name_short;
+	this.name_long = name_long;
+	this.sound = sound;
+	this.file_name = file_name;
+	this.tag = tag;
+	this.tags = tags;
+}
 
 function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
@@ -46,6 +138,15 @@ $( document ).ready(function(){
 	$( document ).foundation();
 
 	oBackGroundEvent.playAudioFile( 6 ); // Intro sound
+
+	//    Lets init the n5 Cards
+	$(".n5-card").each(function(){
+		var sTagToken = $( this ).attr("data-n5c-token");
+
+		//  Populate the cards caption and summary
+		$( this ).find(".n5-card--caption-1-h3").html(  n5Tags.getTag( sTagToken ).name_short );
+		$( this ).find(".n5-card--summary-1 > p").html( n5Tags.getTag( sTagToken ).summary );
+	});
 
 	if( localStorage.getItem("MyClipboard") !== null ){
         $("#p_MyClipboard").html( localStorage.getItem("MyClipboard") ); //  Init My Clipboard display

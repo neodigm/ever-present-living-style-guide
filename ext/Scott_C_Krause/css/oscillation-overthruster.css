@@ -234,17 +234,17 @@ summary {
 		background-color: #835260;
 	}
 		.n5-card--summary-1 > p {
-			/*text-align: justify;*/
 			line-height: 1.44;
 			font-size: 14px;
 			color: #FFFFFF;
 			padding: 2px 6px;
 		}
 	.n5-card--img-1 {
-
+		margin: 6px 64px;
 	}
-		.n5-card--img-1 > img {
-
+		.n5-card--img-1 p {
+			/*these are paragraphs*/
+			margin-bottom: 2px;
 		}
 
 #n5c_1--mod__ugc > table { width: 100%; }
@@ -259,46 +259,46 @@ summary {
 	overflow-x: hidden;
 }
 
-.tag-lable--accessibility {background-color: #296661; margin: 2px;}
-.tag-lable--browser       {background-color: #4D2850; margin: 2px;}
-.tag-lable--color         {background-color: #EC3A40; margin: 2px;}
-.tag-lable--component     {background-color: #506F8D; margin: 2px;}
-.tag-lable--content       {background-color: #E80C7A; margin: 2px;}
-.tag-lable--crm           {background-color: #EEBD00; margin: 2px;}
-.tag-lable--form          {background-color: #A49060; margin: 2px;}
-.tag-lable--imagery       {background-color: #2C6418; margin: 2px;}
-.tag-lable--media         {background-color: #4B3B32; margin: 2px;}
-.tag-lable--mobile        {background-color: #BF5B21; margin: 2px;}
-.tag-lable--pattern       {background-color: #968851; margin: 2px;}
-.tag-lable--process       {background-color: #4CA192; margin: 2px;}
-.tag-lable--performance   {background-color: #DC8C3D; margin: 2px;}
-.tag-lable--resource      {background-color: #9B3C25; margin: 2px;}
-.tag-lable--seo           {background-color: #748C7A; margin: 2px;}
-.tag-lable--social        {background-color: #9E9E4D; margin: 2px;}
-.tag-lable--testing       {background-color: #E5809C; margin: 2px;}
-.tag-lable--typography    {background-color: #256069; margin: 2px;}
-.tag-lable--utility       {background-color: #E80C7A; margin: 2px;}
-.tag-lable--ux            {background-color: #DCA907; margin: 2px;}
-.tag-lable--video         {background-color: #F24444; margin: 2px;}
+.tag-label--accessibility {background-color: #296661; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--browser       {background-color: #4D2850; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--color         {background-color: #EC3A40; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--component     {background-color: #506F8D; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--content       {background-color: #E80C7A; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--crm           {background-color: #EEBD00; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--form          {background-color: #A49060; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--imagery       {background-color: #2C6418; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--media         {background-color: #4B3B32; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--mobile        {background-color: #BF5B21; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--pattern       {background-color: #968851; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--process       {background-color: #4CA192; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--performance   {background-color: #DC8C3D; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--resource      {background-color: #9B3C25; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--seo           {background-color: #748C7A; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--social        {background-color: #9E9E4D; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--testing       {background-color: #E5809C; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--typography    {background-color: #256069; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--utility       {background-color: #E80C7A; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--ux            {background-color: #DCA907; margin: 2px; font-family: "Roboto Condensed"}
+.tag-label--video         {background-color: #F24444; margin: 2px; font-family: "Roboto Condensed"}
 
-.tag-lable--accessibility::after {content: " Accessibility"; }
-.tag-lable--browser::after       {content: " Browser"; }
-.tag-lable--color::after         {content: " Color"; }
-.tag-lable--component::after     {content: " Component"; }
-.tag-lable--content::after       {content: " Content"; }
-.tag-lable--crm::after           {content: " CRM"; }
-.tag-lable--form::after          {content: " Form"; }
-.tag-lable--imagery::after       {content: " Imagery"; }
-.tag-lable--media::after         {content: " Media"; }
-.tag-lable--mobile::after        {content: " Mobile"; }
-.tag-lable--pattern::after       {content: " Pattern"; }
-.tag-lable--process::after       {content: " Process"; }
-.tag-lable--performance::after   {content: " Performance"; }
-.tag-lable--resource::after      {content: " Resource"; }
-.tag-lable--seo::after           {content: " SEO"; }
-.tag-lable--social::after        {content: " Social"; }
-.tag-lable--testing::after       {content: " Testing"; }
-.tag-lable--typography::after    {content: " Typography"; }
-.tag-lable--utility::after       {content: " Utility"; }
-.tag-lable--ux::after            {content: " UX"; }
-.tag-lable--video::after         {content: " Video"; }
+.tag-label--accessibility::after {content: " Accessibility"; }
+.tag-label--browser::after       {content: " Browser"; }
+.tag-label--color::after         {content: " Color"; }
+.tag-label--component::after     {content: " Component"; }
+.tag-label--content::after       {content: " Content"; }
+.tag-label--crm::after           {content: " CRM"; }
+.tag-label--form::after          {content: " Form"; }
+.tag-label--imagery::after       {content: " Imagery"; }
+.tag-label--media::after         {content: " Media"; }
+.tag-label--mobile::after        {content: " Mobile"; }
+.tag-label--pattern::after       {content: " Pattern"; }
+.tag-label--process::after       {content: " Process"; }
+.tag-label--performance::after   {content: " Performance"; }
+.tag-label--resource::after      {content: " Resource"; }
+.tag-label--seo::after           {content: " SEO"; }
+.tag-label--social::after        {content: " Social"; }
+.tag-label--testing::after       {content: " Testing"; }
+.tag-label--typography::after    {content: " Typography"; }
+.tag-label--utility::after       {content: " Utility"; }
+.tag-label--ux::after            {content: " UX"; }
+.tag-label--video::after         {content: " Video"; }
