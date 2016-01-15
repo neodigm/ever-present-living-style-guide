@@ -33,10 +33,10 @@ n5Tags.addTag( new n5Tag("utility"        ,"utilities"      ,"E80C7A",	"Diagnost
 n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Experience, Computer Human Interaction and User Interface design"));
 n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
 
-n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",	"component",	"accessibility|content|pattern"));
-n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",	"component",	"accessibility|content|pattern"));
-n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	"component",	"accessibility|content|pattern|ux"));
-n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"Pattern: JavaScript Media Queries Component",	4,	"pattern-javascript-media-queries.html",	"component",	"browser|pattern"));
+n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",	"component",	"accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",	"component",	"accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	"component",	"accessibility|content|pattern|ux",""));
+n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"Pattern: JavaScript Media Queries Component",	4,	"pattern-javascript-media-queries.html",	"component",	"browser|pattern",""));
 
 function n5Tags(){
 	this.an5Tags = [];
@@ -78,9 +78,6 @@ function n5Contents(){
 		var iCnt_total = 0;
 		sTagToken += "|";
 		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
-console.log( "len |"+ this.an5Contents.length );
-console.log( this.an5Contents[iCnt].tags );
-console.log( "indexof |"+ this.an5Contents[iCnt].tags.indexOf( sTagToken ) );
 			if( this.an5Contents[iCnt].tags.indexOf( sTagToken ) > 0){
 				iCnt_total++;
 			}
@@ -91,14 +88,15 @@ console.log( "indexof |"+ this.an5Contents[iCnt].tags.indexOf( sTagToken ) );
 
 console.log( n5Contents.countContentByTag("content") );
 
-function n5Content(content_type, name_short, name_long, sound, file_name, tag, tags){
-	this.content_type = content_type;
+function n5Content(content_type, name_short, name_long, sound, file_name, tag, tags, notification){
+	this.content_type = content_type;  //    PATTERN  TOOL-CSS  TOOL-JS  RESOURCE  DIALOG
 	this.name_short = name_short;
 	this.name_long = name_long;
 	this.sound = sound;
 	this.file_name = file_name;
 	this.tag = tag;
 	this.tags = tags;
+	this.notification = notification;
 }
 
 function aJLoad( sPanel ){

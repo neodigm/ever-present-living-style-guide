@@ -139,6 +139,10 @@ function runTool( sTool ){
             //
             chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_inject_prime_banner.js"});
             break;
+        case "cmdInjectPhotoCust":
+            //
+            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_inject_photo_cust.js"});
+            break;
     }    
 }
 
