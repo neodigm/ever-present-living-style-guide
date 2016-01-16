@@ -84,18 +84,39 @@ function n5Contents(){
 		}
 		return iCnt_total;
 	}
+	this.getTags = function( sName_short ){
+		//    Return an (almost alpha sorted) array of short_names and counts
+		//    Associated to this tag container
+
+		var aTag_Count = [];
+
+		aTag_Count.push( {source: sName_short, target: "name_short"});
+		aTag_Count.push( {source: "12", target: "tag_count"});
+
+		return aTag_Count;
+	}
 }
 
-console.log( n5Contents.countContentByTag("content") );
+function popuTemplate(sTemplate_id, aContents){
+	//    Return a string after swapping an assn array (objects)
+	//    replacing pipe delm tokens in the template html
+
+	var $oTempl = $("#" + sTemplate_id);
+	var sMUout = $oTempl.html();
+	for(var iC=0; iC < aContents.length; iC++){
+		sMUout = sMUout.replace(("|"+aContents[iC].target+"|"), aContents[iC].source);
+	}
+	return sMUout;
+}
 
 function n5Content(content_type, name_short, name_long, sound, file_name, tag, tags, notification){
 	this.content_type = content_type;  //    PATTERN  TOOL-CSS  TOOL-JS  RESOURCE  DIALOG
-	this.name_short = name_short;
+	this.name_short = name_short; // aka token
 	this.name_long = name_long;
 	this.sound = sound;
 	this.file_name = file_name;
-	this.tag = tag;
-	this.tags = tags;
+	this.tag = tag; // aka token
+	this.tags = tags + "|";
 	this.notification = notification;
 }
 
@@ -141,9 +162,13 @@ $( document ).ready(function(){
 	$(".n5-card").each(function(){
 		var sTagToken = $( this ).attr("data-n5c-token");
 
-		//  Populate the cards caption and summary
+		//    Populate the cards caption and summary
 		$( this ).find(".n5-card--caption-1-h3").html(  n5Tags.getTag( sTagToken ).name_short );
 		$( this ).find(".n5-card--summary-1 > p").html( n5Tags.getTag( sTagToken ).summary );
+
+		//    Render tag labels /w count into card container
+		$( this ).find(".n5-card--img-1").html( popuTemplate("templ_tag_label_count",
+			n5Contents.getTags( sTagToken ) ));
 	});
 
 	if( localStorage.getItem("MyClipboard") !== null ){
