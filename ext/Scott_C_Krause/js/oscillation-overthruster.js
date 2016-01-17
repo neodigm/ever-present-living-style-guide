@@ -33,23 +33,76 @@ n5Tags.addTag( new n5Tag("utility"        ,"utilities"      ,"E80C7A",	"Diagnost
 n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Experience, Computer Human Interaction and User Interface design"));
 n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
 
-n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",	"component",	"accessibility|content|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",	"component",	"accessibility|content|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	"component",	"accessibility|content|pattern|ux",""));
-n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"Pattern: JavaScript Media Queries Component",	4,	"pattern-javascript-media-queries.html",	"component",	"browser|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",	"component",				"accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",	"component",			"accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	                                                "component","accessibility|content|pattern|ux",""));
+n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"Pattern: JavaScript Media Queries Component",	4,	"pattern-javascript-media-queries.html",	"component","browser|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"A11y",	"Accessibility Patterns",	5,	"pattern-a11y.html",	                                                        "accessibility","pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"A11y | Skip Nav",	"Skip Nav Pattern",	6,	"pattern-a11y-skip-nav.html",	                                                  "pattern","accessibility|form",""));
 
 function n5Tags(){
 	this.an5Tags = [];
 	this.addTag = function( oTag ){
 		this.an5Tags.push( oTag );
 	};
-	this.getTag = function( name_short ){
-		//    Iterate, fetch and return obj give name (token)
+	this.getTag = function( sName_short ){
+		//    Iterate, fetch and return obj given name (token)
 		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
-			if( this.an5Tags[iCnt].name_short === name_short){
+			if( this.an5Tags[iCnt].name_short === sName_short){
 				return this.an5Tags[iCnt];
 			}
 		}
+	}
+	this.clearCardSub = function(){
+		//    Empty each object.cardSubTotal
+		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
+			//this.an5Tags[iCnt].cardSubTotal = "";
+		}
+	}
+	this.addCardSub = function( sName_short, sTags_single ){
+		//    Insanity
+
+		var sMU_MyClip = "";
+		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
+			if( this.an5Tags[iCnt].name_short === sName_short){
+				this.an5Tags[iCnt].cardSubTotal = this.an5Tags[iCnt].cardSubTotal + sTags_single +"|";
+			}
+sMU_MyClip += this.an5Tags[iCnt].name_short+" - "+this.an5Tags[iCnt].cardSubTotal+"</br>";			
+		}
+localStorage.removeItem("MyClipboard");
+$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sMU_MyClip ));
+	}
+	this.getCardSub = function( sName_short ){
+		//    Iterate, fetch and return total given name (token)
+		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
+			if( this.an5Tags[iCnt].name_short === sName_short){
+				return this.an5Tags[iCnt].cardSubTotal;
+			}
+		}
+	}
+	this.getCardSubAll = function( sTagToken ){
+		//    Iterate, fetch and return an array of DTO objects given name (token)
+		var aTag_Count = [];
+		var aCompare = [];
+		var sCompare = "";
+
+		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
+
+			if( this.an5Tags[iCnt].cardSubTotal.length > 0 && this.an5Tags[iCnt].name_short === sTagToken){
+				aCompare = this.an5Tags[iCnt].cardSubTotal.split("|");
+				for(var iCompare=0; iCompare < aCompare.length; iCompare++){
+					if(sCompare.indexOf( aCompare[iCompare] ) >= 0){
+					}else{
+						sCompare += aCompare[iCompare];
+						var nOccr= 0;
+						nOccr = occurrences(this.an5Tags[iCnt].cardSubTotal, aCompare[iCompare], false);
+						aTag_Count.push( {source: aCompare[iCompare], target: "name_short"});
+						aTag_Count.push( {source: nOccr,              target: "tag_count"});
+					}
+				}
+			}
+		}
+		return aTag_Count;
 	}
 }
 
@@ -58,6 +111,7 @@ function n5Tag(name_short,plural,color,summary){
 	this.plural = plural;
 	this.summary = summary;
 	this.color = color;
+	this.cardSubTotal = "";
 }
 
 function n5Contents(){
@@ -65,20 +119,33 @@ function n5Contents(){
 	this.addContent = function( oContent ){
 		this.an5Contents.push( oContent );
 	};
-	this.getContent = function( name_short ){
-		//    Iterate, fetch and return obj given name (token)
+	this.getContentByTags = function( sTags ){
+		//    Iterate, fetch and return an array of objs given a tag fragment
+
+		var aContainedInTags = [];
 		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
-			if( this.an5Contents[iCnt].name_short === name_short){
-				return this.an5Contents[iCnt];
+			if( this.an5Contents[iCnt].tags.indexOf( sTags ) > 0 ){
+				aContainedInTags.push( this.an5Contents[iCnt] );
 			}
 		}
+		return aContainedInTags;		
+	}
+	this.countContentByTags = function( sName_short ){
+		//    Iterate, count and return total (from tags) given name (token)
+		var iCnt_total = 0;
+		sName_short += "|";
+		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
+			if( this.an5Contents[iCnt].tags.indexOf( sName_short ) > 0 ){
+				iCnt_total++;
+			}
+		}
+		return iCnt_total;
 	}
 	this.countContentByTag = function( sTagToken ){
-		//    Iterate, count and return total given name (token)
+		//    Iterate, count and return total (from primary tag) given name (token)
 		var iCnt_total = 0;
-		sTagToken += "|";
 		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
-			if( this.an5Contents[iCnt].tags.indexOf( sTagToken ) > 0){
+			if( this.an5Contents[iCnt].tag === sTagToken){
 				iCnt_total++;
 			}
 		}
@@ -87,26 +154,16 @@ function n5Contents(){
 	this.getTags = function( sName_short ){
 		//    Return an (almost alpha sorted) array of short_names and counts
 		//    Associated to this tag container
+		//    Return an empty array if 0
 
 		var aTag_Count = [];
-
-		aTag_Count.push( {source: sName_short, target: "name_short"});
-		aTag_Count.push( {source: "12", target: "tag_count"});
-
+		var nTag_Count = this.countContentByTag( sName_short );
+		if( nTag_Count > 0 ){
+			aTag_Count.push( {source: sName_short, target: "name_short"});
+			aTag_Count.push( {source: nTag_Count, target: "tag_count"});
+		}
 		return aTag_Count;
 	}
-}
-
-function popuTemplate(sTemplate_id, aContents){
-	//    Return a string after swapping an assn array (objects)
-	//    replacing pipe delm tokens in the template html
-
-	var $oTempl = $("#" + sTemplate_id);
-	var sMUout = $oTempl.html();
-	for(var iC=0; iC < aContents.length; iC++){
-		sMUout = sMUout.replace(("|"+aContents[iC].target+"|"), aContents[iC].source);
-	}
-	return sMUout;
 }
 
 function n5Content(content_type, name_short, name_long, sound, file_name, tag, tags, notification){
@@ -116,8 +173,50 @@ function n5Content(content_type, name_short, name_long, sound, file_name, tag, t
 	this.sound = sound;
 	this.file_name = file_name;
 	this.tag = tag; // aka token
-	this.tags = tags + "|";
+	this.tags = "|" + tags + "|";
 	this.notification = notification;
+}
+
+function popuTemplate(sTemplate_id, aContents){
+	//    Return a string after swapping an assn array (objects)
+	//    replacing pipe delm tokens in the template html
+
+	if( aContents.length > 0){
+		var $oTempl = $("#" + sTemplate_id);
+		var sMUout = "";//$oTempl.html();
+		var sMUprc = $oTempl.html();
+		for(var iC=0; iC < aContents.length; iC++){		
+			if( sMUprc.indexOf("|") <= 0){
+				sMUout += sMUprc;
+				sMUprc = $oTempl.html();
+			}
+			sMUprc = sMUprc.replace(("|"+aContents[iC].target+"|"), aContents[iC].source);
+		}
+		sMUout += sMUprc;
+		return sMUout;
+	}else{
+		return "";
+	}
+}
+
+function occurrences(string, subString, allowOverlapping) {
+
+    string += "";
+    subString += "";
+    if (subString.length <= 0) return (string.length + 1);
+
+    var n = 0,
+        pos = 0,
+        step = allowOverlapping ? 1 : subString.length;
+
+    while (true) {
+        pos = string.indexOf(subString, pos);
+        if (pos >= 0) {
+            ++n;
+            pos += step;
+        } else break;
+    }
+    return n;
 }
 
 function aJLoad( sPanel ){
@@ -167,8 +266,20 @@ $( document ).ready(function(){
 		$( this ).find(".n5-card--summary-1 > p").html( n5Tags.getTag( sTagToken ).summary );
 
 		//    Render tag labels /w count into card container
-		$( this ).find(".n5-card--img-1").html( popuTemplate("templ_tag_label_count",
+		//    Primary Tag
+		$oCardContainer = $( this ).find(".n5-card--img-1");
+		$oCardContainer.html( popuTemplate("templ_tag_label_count",
 			n5Contents.getTags( sTagToken ) ));
+		//    Associated TagS
+		if( n5Contents.countContentByTags( sTagToken ) > 0 ){
+			n5Tags.clearCardSub(); // Clear counters
+			var aTags = n5Contents.getContentByTags( sTagToken );
+			for(var iC=0; iC < aTags.length; iC++){
+				n5Tags.addCardSub( sTagToken, aTags[iC].tag ); // Increment counters
+			}
+			$oCardContainer.html( $oCardContainer.html() + popuTemplate("templ_tag_label_count",
+			n5Tags.getCardSubAll( sTagToken )) );
+		}
 	});
 
 	if( localStorage.getItem("MyClipboard") !== null ){
