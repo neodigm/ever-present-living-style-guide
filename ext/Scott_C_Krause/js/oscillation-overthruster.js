@@ -160,6 +160,19 @@ function n5Contents(){
 		}
 		return aTag_Count;
 	}
+	this.hasContent = function( sName_short ){
+		//    Return true if this card has any content
+		//    Parse both tag and contained in tagS
+		for(var iCnt=0;iCnt < this.an5Contents.length; iCnt++){
+console.log("yikes1 | "+sName_short+"-"+this.an5Contents[iCnt].tag+"-"+this.an5Contents[iCnt].tags.indexOf( sName_short ));
+			if(( this.an5Contents[iCnt].tag === sName_short ) || ( this.an5Contents[iCnt].tags.indexOf( sName_short ) >= 0)){
+
+console.log("yikes2 | "+sName_short+"-"+this.an5Contents[iCnt].tag+"-"+this.an5Contents[iCnt].tags);
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 function n5Content(content_type, name_short, name_long, sound, file_name, tag, tags, notification){
@@ -219,7 +232,6 @@ function occurrences(string, subString, allowOverlapping) {
 
 function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
-
 	switch ( sPanel ){
 		case "oc_nav_content_right" :
 		//  Change below
@@ -236,14 +248,12 @@ function aJLoad( sPanel ){
 
 function aJTab( sPanel ){
 	//    Create or reuse a tab and make its location that had from an href
-
 	oBackGroundEvent.playAudioFile( 8 );
 	oBackGroundEvent.aJTab( sPanel );
 }
 
 function loadDynRepo(){
 	//    Content Template Driver
-
 	aJLoad("oc_nav_content_right");
 	aJLoad("ql_nav_dropdown");
 	aJLoad("modAboutThisGuide");
@@ -306,7 +316,6 @@ $( document ).ready(function(){
 
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function () {
 		//    The config modal was closed
-
 		if( $("#txtRepo_name").val() == ""){
 			sRepo_url = sRepo_url_demo;
 			localStorage.setItem("repo_name", sRepo_url);
@@ -318,14 +327,12 @@ $( document ).ready(function(){
 	
 	$(".tool-cmd--a").on("click", function( e ){
 		//    Tool Buttons Wire Up
-
 		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
 	});
 
 	$("#cmdOffCanvMyClip").on("click", function(){
 		//    Generate the href for the download button
 		//    When the Clipboard/OffCanvas is clicked, does not matter if currently open or closed
-
 		chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
 //alert( fetchedData.myclipboard_temp );
 			//oBackGroundEvent.displayMsg(  "Tool Summary\n" + fetchedData.myclipboard_temp_summary );
@@ -337,7 +344,6 @@ $( document ).ready(function(){
 
 	$("#cmdMyClipboard_clear").on("click", function(e){
 		//    Clear clip contents
-
 		$("#p_MyClipboard").html("");
 		localStorage.removeItem("MyClipboard");
 		e.preventDefault();
@@ -346,7 +352,6 @@ $( document ).ready(function(){
 	$("#cmdRepo-new").on("click", function(e){
 		//    The [Custom Repo] button on the Config Modal
 		//    was explicitly clicked
-
 		var sURL = $("#txtRepo_name").val();
 		if( sURL != "" && isValidRepo( sURL ) ){
 			sRepo_url = sURL;
@@ -358,7 +363,6 @@ $( document ).ready(function(){
 
 	$(".store-repo-dialog--a").on("click", function(e){
 		//    Cog Clicked
-
 		oBackGroundEvent.playAudioFile( 7 );    //    ping
 		if( localStorage.getItem("repo_name") !== null ){
 			$("#txtRepo_name").val( localStorage.getItem("repo_name") );
@@ -433,7 +437,6 @@ $('.close-button:not(.callout)').click(function( e ) {
 
 $('.callout > .close-button').click(function( e ) {
 	//    Fade Alert (not modal)
-
 	e.preventDefault();
 	oBackGroundEvent.audioTick_1();	
 	$(this).closest('.callout').fadeOut();
@@ -469,9 +472,12 @@ $( document ).bind("ajaxComplete", function(){
 
 	$(".n5-card").unbind().on("click", function( e ){
 		//  Pop into modal - open by naming convention
-
-		$("#"+ $(this).attr("id")+"--mod").foundation("open");
-		oBackGroundEvent.playAudioFile( 3 );    //    wind whizz
+		if( n5Contents.hasContent( $( this ).attr("data-n5c-token") )){
+			$("#"+ $(this).attr("id")+"--mod").foundation("open");
+			oBackGroundEvent.playAudioFile( 3 );    //    wind whizz
+		}else{
+			oBackGroundEvent.playAudioFile( 10 );    //    beep errorish
+		}   
 
 // This is an example of how to generate content for MyClip
 $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id") ) );
