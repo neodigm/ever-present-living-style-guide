@@ -253,7 +253,7 @@ $( document ).ready(function(){
 	//    Fire up the Zurb Foundation 6 RWD framework
 	$( document ).foundation();
 
-	oBackGroundEvent.playAudioFile( 6 ); // Intro sound
+	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random() * 2) + 0) === 0) ? 6 : 4 ); // Intro sound
 
 	//    Lets init the n5 Cards
 	$(".n5-card").each(function(){
@@ -439,11 +439,6 @@ $('.callout > .close-button').click(function( e ) {
 	$(this).closest('.callout').fadeOut();
 });
 
-$(".cmd--dropdown").on("click", function(){
-	//  Quick Links Audio - 12
-	oBackGroundEvent.playAudioFile( $(this).attr("data-sound") );
-});
-
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
@@ -476,13 +471,12 @@ $( document ).bind("ajaxComplete", function(){
 		//  Pop into modal - open by naming convention
 
 		$("#"+ $(this).attr("id")+"--mod").foundation("open");
-		oBackGroundEvent.playAudioFile( 2 );    //    ping
+		oBackGroundEvent.playAudioFile( 3 );    //    wind whizz
 
 // This is an example of how to generate content for MyClip
 $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id") ) );
 
 		e.preventDefault();
-
 	});
 
 	$( ".n5-card" ).hover(
@@ -505,19 +499,26 @@ $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id")
 
 		if( $( n5c_i ).hasClass("fa-chevron-down") ){
 			//    open
-			oBackGroundEvent.playAudioFile( 3 );
+			//oBackGroundEvent.playAudioFile( 5 );    //    slap echo
+			oBackGroundEvent.playAudioFile( 18 );    //    mechanical whirl
 			$( n5c_i ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
 			TweenLite.to( n5c, 1, {ease: Expo.easeOut, height: "256px"});
 			TweenLite.to( n5c_sumr, 1.2, {ease: Expo.easeOut, delay:0.4, height: "64px"});
 		}else{
 			//    close
-			oBackGroundEvent.playAudioFile( 4 );
+			oBackGroundEvent.playAudioFile( 8 );    //    alien whirl
 			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
 			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeOut, height: "0px"});
 			TweenLite.to( n5c, 1, {ease: Expo.easeOut, height: "48px"});
 		}
 		e.preventDefault();
 		e.stopPropagation();
+	});
+
+	$(".cmd--dropdown").on("click", function(){
+		//  Quick Links Audio - 12
+		//oBackGroundEvent.playAudioFile( $(this).attr("data-sound") );
+		oBackGroundEvent.playAudioFile( 12 );
 	});
 });
 
