@@ -55,22 +55,19 @@ function n5Tags(){
 	}
 	this.clearCardSub = function(){
 		//    Empty each object.cardSubTotal
-		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
+		//for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
 			//this.an5Tags[iCnt].cardSubTotal = "";
-		}
+		//}
 	}
 	this.addCardSub = function( sName_short, sTags_single ){
-		//    Insanity
-
+		//    Insanity - Append the name of the current tag to the end of the 
+		//    delimited subtotal property.
 		var sMU_MyClip = "";
 		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
 			if( this.an5Tags[iCnt].name_short === sName_short){
 				this.an5Tags[iCnt].cardSubTotal = this.an5Tags[iCnt].cardSubTotal + sTags_single +"|";
-			}
-sMU_MyClip += this.an5Tags[iCnt].name_short+" - "+this.an5Tags[iCnt].cardSubTotal+"</br>";			
+			}		
 		}
-localStorage.removeItem("MyClipboard");
-$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sMU_MyClip ));
 	}
 	this.getCardSub = function( sName_short ){
 		//    Iterate, fetch and return total given name (token)
@@ -155,7 +152,6 @@ function n5Contents(){
 		//    Return an (almost alpha sorted) array of short_names and counts
 		//    Associated to this tag container
 		//    Return an empty array if 0
-
 		var aTag_Count = [];
 		var nTag_Count = this.countContentByTag( sName_short );
 		if( nTag_Count > 0 ){
@@ -180,11 +176,13 @@ function n5Content(content_type, name_short, name_long, sound, file_name, tag, t
 function popuTemplate(sTemplate_id, aContents){
 	//    Return a string after swapping an assn array (objects)
 	//    replacing pipe delm tokens in the template html
+	//    If all the tokens have been replaced but there is still data in 
+	//    the contents array then use a new copy of the template.
 
 	if( aContents.length > 0){
 		var $oTempl = $("#" + sTemplate_id);
-		var sMUout = "";//$oTempl.html();
-		var sMUprc = $oTempl.html();
+		var sMUout = ""; //  Might contain more than one template html
+		var sMUprc = $oTempl.html(); // In process string
 		for(var iC=0; iC < aContents.length; iC++){		
 			if( sMUprc.indexOf("|") <= 0){
 				sMUout += sMUprc;
@@ -200,7 +198,7 @@ function popuTemplate(sTemplate_id, aContents){
 }
 
 function occurrences(string, subString, allowOverlapping) {
-
+	//  Return the number of accurences of one string within another
     string += "";
     subString += "";
     if (subString.length <= 0) return (string.length + 1);
@@ -272,7 +270,7 @@ $( document ).ready(function(){
 			n5Contents.getTags( sTagToken ) ));
 		//    Associated TagS
 		if( n5Contents.countContentByTags( sTagToken ) > 0 ){
-			n5Tags.clearCardSub(); // Clear counters
+			//n5Tags.clearCardSub(); // Clear counters
 			var aTags = n5Contents.getContentByTags( sTagToken );
 			for(var iC=0; iC < aTags.length; iC++){
 				n5Tags.addCardSub( sTagToken, aTags[iC].tag ); // Increment counters
@@ -441,6 +439,11 @@ $('.callout > .close-button').click(function( e ) {
 	$(this).closest('.callout').fadeOut();
 });
 
+$(".cmd--dropdown").on("click", function(){
+	//  Quick Links Audio - 12
+	oBackGroundEvent.playAudioFile( $(this).attr("data-sound") );
+});
+
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
@@ -449,7 +452,7 @@ $( document ).bind("ajaxComplete", function(){
 	TweenLite.to( $(".n5-card:odd"),  1.0, {height: "256px"});
 
 	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
-		//    Left Nav Menu Click
+		//    Left Nav Menu Click or any in-doc click
 
 		e.preventDefault();
 		oBackGroundEvent.audioAlert();
@@ -459,9 +462,10 @@ $( document ).bind("ajaxComplete", function(){
 		if( sFilNam.substring(0, 2) === "--" ){
 			//  Open the reveal by attr naming convention
 			//  May need to wait for the off canvas to close
-			setTimeout( function(){
+			var sSoundCode = $(this).attr("data-sound");
+			setTimeout( function( ){
 				$("[data-content-link=" + sFilNam + "]").foundation("open");
-				oBackGroundEvent.playAudioFile( 11 );    //    Spoken
+				oBackGroundEvent.playAudioFile( sSoundCode );    //    Spoken
 			}, 320);
 		}else{
 			aJTab( sRepo_url + "/" + sFilNam );
