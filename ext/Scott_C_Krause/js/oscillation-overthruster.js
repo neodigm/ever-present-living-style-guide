@@ -53,12 +53,6 @@ function n5Tags(){
 			}
 		}
 	}
-	this.clearCardSub = function(){
-		//    Empty each object.cardSubTotal
-		//for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
-			//this.an5Tags[iCnt].cardSubTotal = "";
-		//}
-	}
 	this.addCardSub = function( sName_short, sTags_single ){
 		//    Insanity - Append the name of the current tag to the end of the 
 		//    delimited subtotal property.
@@ -263,7 +257,7 @@ $( document ).ready(function(){
 	//    Fire up the Zurb Foundation 6 RWD framework
 	$( document ).foundation();
 
-	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random() * 2) + 0) === 0) ? 6 : 4 ); // Intro sound
+	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random()*2)) === 0) ? 6 : 4 ); //  Random Intro sound
 
 	//    Lets init the n5 Cards
 	$(".n5-card").each(function(){
@@ -280,7 +274,6 @@ $( document ).ready(function(){
 			n5Contents.getTags( sTagToken ) ));
 		//    Associated TagS
 		if( n5Contents.countContentByTags( sTagToken ) > 0 ){
-			//n5Tags.clearCardSub(); // Clear counters
 			var aTags = n5Contents.getContentByTags( sTagToken );
 			for(var iC=0; iC < aTags.length; iC++){
 				n5Tags.addCardSub( sTagToken, aTags[iC].tag ); // Increment counters
@@ -288,6 +281,10 @@ $( document ).ready(function(){
 			$oCardContainer.html( $oCardContainer.html() + popuTemplate("templ_tag_label_count",
 			n5Tags.getCardSubAll( sTagToken )) );
 		}
+		//    Populate Reveal Modal Dialogs (ugc) via template (zoomed nav n5c state)
+		$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details",
+			[{source: "x", target: "y"}]));
+		//templ_n5-card-mod-details
 	});
 
 	if( localStorage.getItem("MyClipboard") !== null ){
@@ -450,7 +447,7 @@ $( document ).bind("ajaxComplete", function(){
 	TweenLite.to( $(".n5-card:odd"),  1.0, {height: "256px"});
 
 	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
-		//    Left Nav Menu Click or any in-doc click
+		//    Left Nav Menu Click OR any in-doc click
 
 		e.preventDefault();
 		oBackGroundEvent.audioAlert();
