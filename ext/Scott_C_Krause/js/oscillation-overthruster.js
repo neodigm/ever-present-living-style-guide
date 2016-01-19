@@ -56,7 +56,6 @@ function n5Tags(){
 	this.addCardSub = function( sName_short, sTags_single ){
 		//    Insanity - Append the name of the current tag to the end of the 
 		//    delimited subtotal property.
-		var sMU_MyClip = "";
 		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
 			if( this.an5Tags[iCnt].name_short === sName_short){
 				this.an5Tags[iCnt].cardSubTotal = this.an5Tags[iCnt].cardSubTotal + sTags_single +"|";
@@ -158,10 +157,7 @@ function n5Contents(){
 		//    Return true if this card has any content
 		//    Parse both tag and contained in tagS
 		for(var iCnt=0;iCnt < this.an5Contents.length; iCnt++){
-console.log("yikes1 | "+sName_short+"-"+this.an5Contents[iCnt].tag+"-"+this.an5Contents[iCnt].tags.indexOf( sName_short ));
 			if(( this.an5Contents[iCnt].tag === sName_short ) || ( this.an5Contents[iCnt].tags.indexOf( sName_short ) >= 0)){
-
-console.log("yikes2 | "+sName_short+"-"+this.an5Contents[iCnt].tag+"-"+this.an5Contents[iCnt].tags);
 				return true;
 			}
 		}
@@ -278,11 +274,15 @@ $( document ).ready(function(){
 			for(var iC=0; iC < aTags.length; iC++){
 				n5Tags.addCardSub( sTagToken, aTags[iC].tag ); // Increment counters
 			}
+
 			$oCardContainer.html( $oCardContainer.html() + popuTemplate("templ_tag_label_count",
 			n5Tags.getCardSubAll( sTagToken )) );
 		}
 		//    Populate Reveal Modal Dialogs (ugc) via template (zoomed nav n5c state)
+if( sTagToken !== "accessibility"){		
 $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details",[{source: "x", target: "y"}]));
+}
+
 	});
 
 	if( localStorage.getItem("MyClipboard") !== null ){
@@ -327,10 +327,18 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 		//    Generate the href for the download button
 		//    When the Clipboard/OffCanvas is clicked, does not matter if currently open or closed
 		chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
-//alert( fetchedData.myclipboard_temp );
-			//oBackGroundEvent.displayMsg(  "Tool Summary\n" + fetchedData.myclipboard_temp_summary );
-			//oBackGroundEvent.playAudioFile( 4 ); //    Unknown
+			sChromeStore = fetchedData.myclipboard_temp_summary;
+			if( sChromeStore !== undefined){
+				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
+			}
 		});
+		chrome.storage.local.get("myclipboard_temp", function(fetchedData){
+			sChromeStore = fetchedData.myclipboard_temp;
+			if( sChromeStore !== undefined){
+				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
+			}
+		});
+
 		var sMU = $("#p_MyClipboard").html();
 		$( "#cmdMyClipboard_download" ).attr("href", "data:text/html;charset=UTF-8,"+encodeURIComponent(sMU) ).attr("download", "MyClipboard.html");
 	});
@@ -339,6 +347,9 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 		//    Clear clip contents
 		$("#p_MyClipboard").html("");
 		localStorage.removeItem("MyClipboard");
+//TODO: Clear chrome storage as well
+		chrome.storage.local.remove( "myclipboard_temp_summary" );
+		chrome.storage.local.remove( "myclipboard_temp" );
 		e.preventDefault();
 	});
 
@@ -388,10 +399,35 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 		e.preventDefault();
 	});
 	$(".store-repo-get--a").on("click", function(e){
-		oBackGroundEvent.displayMsg( localStorage.getItem("repo_name") );
-		//    Lets also show the last template content
-		oBackGroundEvent.displayMsg( localStorage.getItem("eplsg-template--article") );
-alert( localStorage.getItem("eplsg-template--article")  );
+		//    Notify the local storage vars / check console.log as well
+
+		console.clear()
+		console.group("Local Storage");
+			oBackGroundEvent.displayMsg( "repo_name: " + localStorage.getItem("repo_name") );
+			console.log("repo_name: " + localStorage.getItem("repo_name"));
+
+			oBackGroundEvent.displayMsg( "article: " + localStorage.getItem("eplsg-template--article") );
+			console.log("article: " + localStorage.getItem("eplsg-template--article"));
+
+			oBackGroundEvent.displayMsg( "sound_switch: " + localStorage.getItem("sound_switch") );
+			console.log("sound_switch: " + localStorage.getItem("sound_switch"));
+
+			console.groupCollapsed("MyClipboard");
+				console.log("MyClipboard: " + localStorage.getItem("MyClipboard"));
+			console.groupEnd();
+		console.groupEnd();
+
+		console.group("Chrome Storage");
+	        chrome.storage.local.get("myclipboard_temp_summary" , function(fetchedData){
+	            NotfChromeStor_value = fetchedData["myclipboard_temp_summary"];
+	            console.log(  "Tool Summary: " + NotfChromeStor_value );
+	        });
+	        chrome.storage.local.get("myclipboard_temp" , function(fetchedData){
+	            NotfChromeStor_value = fetchedData["myclipboard_temp"];
+	            console.log(  "Tool Report: " + NotfChromeStor_value );
+	        });
+		console.groupEnd();
+
 		e.preventDefault();
 	});
 	$(".store-repo-clear--a").on("click", function(e){
@@ -515,8 +551,7 @@ $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id")
 	});
 
 	$(".cmd--dropdown").on("click", function(){
-		//  Quick Links Audio - 12
-		//oBackGroundEvent.playAudioFile( $(this).attr("data-sound") );
+		//  Quick Links Spoken Audio - 12
 		oBackGroundEvent.playAudioFile( 12 );
 	});
 });

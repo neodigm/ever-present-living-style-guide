@@ -198,9 +198,9 @@ console.log( "sKey | "+sKey);
         chrome.storage.local.get(sKey, function(fetchedData){
             NotfChromeStor_value = fetchedData[sKey];
             displayMsg(  "Tool Summary\n" + NotfChromeStor_value );
-            chrome.storage.local.remove( sKey );
+            //chrome.storage.local.remove( sKey );
             return NotfChromeStor_value;
         });
     }
 };
-setInterval(NotfChromeStor.pubCS( "myclipboard_temp_summary" ), 1800);
+//setInterval(NotfChromeStor.pubCS( "myclipboard_temp_summary" ), 1800);
