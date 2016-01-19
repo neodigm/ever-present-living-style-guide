@@ -315,8 +315,6 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 			sRepo_url = sRepo_url_demo;
 			localStorage.setItem("repo_name", sRepo_url);
 			oBackGroundEvent.displayMsg(  "No Style Guide connected\nLoading Demo" );
-		}else{
-
 		}
 	});
 	

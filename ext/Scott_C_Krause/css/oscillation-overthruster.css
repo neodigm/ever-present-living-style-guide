@@ -212,10 +212,11 @@ summary {
 	filter: grayscale(0);
 }
 	.n5-card--caption-1 {
-		margin: 2px;
-		padding: 2px;
-		height: 36px;
+		/*margin: 2px;*/
+		padding: 6px 2px 0 2px;
+		height: 46px;
 		margin-right: 12px;
+		width: 220px;
 		overflow: hidden;
 	}
 	.n5-card--caption-1-h3 {
