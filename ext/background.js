@@ -148,7 +148,6 @@ function runTool( sTool ){
 
 function displayMsg( sMsg ){
 	//    System Tray Notification
-
 	console.log( sMsg );
 	if (!("Notification" in window)) {
 		console.log('Notification API not supported.');
@@ -172,7 +171,6 @@ function displayMsg( sMsg ){
 function appendMyClipboard( sClip ){
     //    Timestamp and append to existing loc str then
     //    return entire persisted value
-
     var sPre = "\n<br>---- " + Nowish() + " ----<br>\n";
     var sPost = ""
     if( localStorage.getItem("MyClipboard") !== null ){
@@ -187,7 +185,6 @@ function appendMyClipboard( sClip ){
 
 function Nowish(){
     //    A readable Client-side time/date stamp
-
     var dNow = new Date();
     return dNow.toString().substr(0, dNow.toString().length - 33);
 }

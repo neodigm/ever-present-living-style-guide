@@ -143,7 +143,7 @@ function n5Contents(){
 		return iCnt_total;
 	}
 	this.getTags = function( sName_short ){
-		//    Return an (almost alpha sorted) array of short_names and counts
+		//    Return an array of short_names and counts
 		//    Associated to this tag container
 		//    Return an empty array if 0
 		var aTag_Count = [];
@@ -270,7 +270,7 @@ $( document ).ready(function(){
 		//    Render tag labels /w count into card container
 		//    Primary Tag
 		$oCardContainer = $( this ).find(".n5-card--img-1");
-		$oCardContainer.html( popuTemplate("templ_tag_label_count",
+		$oCardContainer.html( popuTemplate("templ_tag_label_count_primary",
 			n5Contents.getTags( sTagToken ) ));
 		//    Associated TagS
 		if( n5Contents.countContentByTags( sTagToken ) > 0 ){
@@ -282,9 +282,7 @@ $( document ).ready(function(){
 			n5Tags.getCardSubAll( sTagToken )) );
 		}
 		//    Populate Reveal Modal Dialogs (ugc) via template (zoomed nav n5c state)
-		$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details",
-			[{source: "x", target: "y"}]));
-		//templ_n5-card-mod-details
+$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details",[{source: "x", target: "y"}]));
 	});
 
 	if( localStorage.getItem("MyClipboard") !== null ){
