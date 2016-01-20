@@ -320,7 +320,10 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 	
 	$(".tool-cmd--a").on("click", function( e ){
 		//    Tool Buttons Wire Up
+		oBackGroundEvent.playAudioFile( 5 );    //    slap echo
 		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
+		$(".rev-modal").foundation("close");
+		e.preventDefault();
 	});
 
 	$("#cmdOffCanvMyClip").on("click", function(){
@@ -332,22 +335,26 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
 			}
 		});
+		chrome.storage.local.clear("myclipboard_temp_summary");
 		chrome.storage.local.get("myclipboard_temp", function(fetchedData){
 			sChromeStore = fetchedData.myclipboard_temp;
 			if( sChromeStore !== undefined){
 				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
 			}
 		});
+		chrome.storage.local.clear("myclipboard_temp");
 
 		var sMU = $("#p_MyClipboard").html();
-		$( "#cmdMyClipboard_download" ).attr("href", "data:text/html;charset=UTF-8,"+encodeURIComponent(sMU) ).attr("download", "MyClipboard.html");
+		setTimeout( function( ){
+			$( "#cmdMyClipboard_download" ).attr("href", "data:text/html;charset=UTF-8,"+encodeURIComponent(sMU) ).attr("download", "MyClipboard.html");
+		}, 420);
 	});
 
 	$("#cmdMyClipboard_clear").on("click", function(e){
 		//    Clear clip contents
 		$("#p_MyClipboard").html("");
 		localStorage.removeItem("MyClipboard");
-//TODO: Clear chrome storage as well
+
 		chrome.storage.local.remove( "myclipboard_temp_summary" );
 		chrome.storage.local.remove( "myclipboard_temp" );
 		e.preventDefault();
@@ -492,7 +499,7 @@ $( document ).bind("ajaxComplete", function(){
 			var sSoundCode = $(this).attr("data-sound");
 			setTimeout( function( ){
 				$("[data-content-link=" + sFilNam + "]").foundation("open");
-				oBackGroundEvent.playAudioFile( sSoundCode );    //    Spoken
+				oBackGroundEvent.playAudioFile( sSoundCode );    //    From sound attr on anchor
 			}, 320);
 		}else{
 			aJTab( sRepo_url + "/" + sFilNam );
@@ -501,16 +508,15 @@ $( document ).bind("ajaxComplete", function(){
 
 	$(".n5-card").unbind().on("click", function( e ){
 		//  Pop into modal - open by naming convention
+		var sTagToken = $( this ).attr("data-n5c-token");
 		if( n5Contents.hasContent( $( this ).attr("data-n5c-token") )){
 			$("#"+ $(this).attr("id")+"--mod").foundation("open");
 			oBackGroundEvent.playAudioFile( 3 );    //    wind whizz
+			// Generate content for MyClip
+			$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( "Open "+sTagToken ) );
 		}else{
 			oBackGroundEvent.playAudioFile( 10 );    //    beep errorish
-		}   
-
-// This is an example of how to generate content for MyClip
-$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id") ) );
-
+		}
 		e.preventDefault();
 	});
 
@@ -520,7 +526,6 @@ $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id")
 			TweenLite.to( this, 4, {ease: Expo.easeOut, backgroundPosition: "-444px 0px"});
 		}, function() {
 			//    mouseout
-			//TweenLite.to( this, 2, {ease: Expo.easeIn, backgroundPosition: "0px 0px"});
 		}
 	);
 
@@ -555,12 +560,6 @@ $("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( $(this).attr("id")
 		oBackGroundEvent.playAudioFile( 12 );
 	});
 });
-
-function n5c_icon( n5card ){
-
-}
-
-
 
 }
 catch( e ){

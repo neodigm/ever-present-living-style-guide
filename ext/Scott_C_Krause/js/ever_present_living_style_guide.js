@@ -1,4 +1,4 @@
-//    (C)2014-2016 Neo Studios Corporation
+//    An endeavor by Scott C. Krause
 try {
 //    Background Reference
 var oBackGroundEvent = chrome.extension.getBackgroundPage();

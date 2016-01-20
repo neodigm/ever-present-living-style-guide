@@ -1,7 +1,6 @@
-.off-canvas-content{
-	min-width: 764px;
-}
-.zzzcolumn, .zzzcolumns { padding-right: 8px; padding-left: 8px;}
+.off-canvas-content{ min-width: 764px;}
+
+.column, .small-4 { padding-right: 8px; padding-left: 8px;}
 .title-bar {
 background: #58383F;
 background: -moz-linear-gradient(left,  #58383F 1%, #a9737e 99%);

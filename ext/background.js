@@ -143,7 +143,11 @@ function runTool( sTool ){
             //
             chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_inject_photo_cust.js"});
             break;
-    }    
+    } 
+    //
+    setTimeout( function(){
+        postToolAction();
+    }, 840);
 }
 
 function displayMsg( sMsg ){
@@ -155,7 +159,7 @@ function displayMsg( sMsg ){
 	} else if (Notification.permission === "granted") {
 		// If it's okay let's create a notification
         audioSuccessSound();
-		var notification = new Notification( sMsg );
+                var notification = new Notification( sMsg );
 	} else if (Notification.permission !== 'denied') {
 		// Otherwise, we need to ask the user for permission
 
@@ -190,17 +194,32 @@ function Nowish(){
 }
 
 //    Fetch a given value from chrome storage, create notification then clear value
-var NotfChromeStor_value = "";
-var NotfChromeStor = {
-    pubCS : function( sKey ){
-        //
-console.log( "sKey | "+sKey);
-        chrome.storage.local.get(sKey, function(fetchedData){
-            NotfChromeStor_value = fetchedData[sKey];
-            displayMsg(  "Tool Summary\n" + NotfChromeStor_value );
+//var NotfChromeStor_value = "";
+//var NotfChromeStor = {
+//    pubCS : function( sKey ){
+//        //
+//console.log( "sKey | "+sKey);
+//        chrome.storage.local.get(sKey, function(fetchedData){
+//            NotfChromeStor_value = fetchedData[sKey];
+//            displayMsg(  "Tool Summary\n" + NotfChromeStor_value );
             //chrome.storage.local.remove( sKey );
+//            return NotfChromeStor_value;
+//        });
+//    }
+//};
+
+//setInterval(NotfChromeStor.pubCS( "myclipboard_temp_summary" ), 1800);
+
+function postToolAction(){
+    //    Delay execute after Tool has been actuated
+    //    System tray notification of summary
+    //    I think the summary needs to be text not markup !?
+    //    Should use | delim in case we want to create a list type of notf in the future.
+
+        chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
+            NotfChromeStor_value = fetchedData["myclipboard_temp_summary"];
+            displayMsg( NotfChromeStor_value );
             return NotfChromeStor_value;
         });
-    }
-};
-//setInterval(NotfChromeStor.pubCS( "myclipboard_temp_summary" ), 1800);
+            //chrome.storage.local.remove( sKey );
+}
