@@ -10,13 +10,13 @@ $( document ).ready(function(){
 	$(".eplsg-template--article").load( localStorage.getItem("eplsg-template--article"), function(){
 		//    Fire up the Zurb Foundation 6 RWD framework
 
-		if( $("#myclipboard_temp_summary").length === 1){
-			chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
-				NotfChromeStor_value = fetchedData["myclipboard_temp_summary"];
+		if( $("#myclipboard_summary").length === 1){
+			chrome.storage.local.get("myclipboard_summary", function(fetchedData){
+				NotfChromeStor_value = fetchedData["myclipboard_summary"];
 				if( typeof NotfChromeStor_value === typeof undefined ){
-					$("#myclipboard_temp_summary").html( "Report not available - re-run" );
+					$("#myclipboard_summary").html( "Report not available - re-run" );
 				}else{
-					$("#myclipboard_temp_summary").html( NotfChromeStor_value );
+					$("#myclipboard_summary").html( NotfChromeStor_value );
 					$("pre code").addClass("language-markup");
 					Prism.highlightAll();
 				}

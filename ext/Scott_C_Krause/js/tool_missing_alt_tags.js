@@ -54,12 +54,12 @@ sMU += " Alt without an equal " + nALT_NO_EQUAL;
 sMU += " Alt with empty quotes " + nALT_NO_VALUE;
 sMU += " Alt with desc " + nALT_DESCR;
 
-chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
-    sChromeStor_value = fetchedData["myclipboard_temp_summary"];
+chrome.storage.local.get("myclipboard_summary", function(fetchedData){
+    sChromeStor_value = fetchedData["myclipboard_summary"];
     if(typeof sChromeStor_value !== typeof undefined){
         sMU += "<hr>" + sChromeStor_value;
     }
-    chrome.storage.local.set({myclipboard_temp_summary: sMU});
+    chrome.storage.local.set({myclipboard_summary: sMU});
 });
 
 sMU += "<hr>";

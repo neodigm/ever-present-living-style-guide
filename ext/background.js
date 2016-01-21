@@ -206,23 +206,6 @@ function Nowish(){
     return dNow.toString().substr(0, dNow.toString().length - 33);
 }
 
-//    Fetch a given value from chrome storage, create notification then clear value
-//var NotfChromeStor_value = "";
-//var NotfChromeStor = {
-//    pubCS : function( sKey ){
-//        //
-//console.log( "sKey | "+sKey);
-//        chrome.storage.local.get(sKey, function(fetchedData){
-//            NotfChromeStor_value = fetchedData[sKey];
-//            displayMsg(  "Tool Summary\n" + NotfChromeStor_value );
-            //chrome.storage.local.remove( sKey );
-//            return NotfChromeStor_value;
-//        });
-//    }
-//};
-
-//setInterval(NotfChromeStor.pubCS( "myclipboard_temp_summary" ), 1800);
-
 function postToolAction(){
     //    Delay execute after Tool has been actuated
     //    System tray notification of summary

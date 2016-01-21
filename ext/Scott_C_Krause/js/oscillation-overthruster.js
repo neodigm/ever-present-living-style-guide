@@ -329,8 +329,8 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 	$("#cmdOffCanvMyClip").on("click", function(){
 		//    Generate the href for the download button
 		//    When the Clipboard/OffCanvas is clicked, does not matter if currently open or closed
-		chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
-			sChromeStore = fetchedData.myclipboard_temp_summary;
+		chrome.storage.local.get("myclipboard_summary", function(fetchedData){
+			sChromeStore = fetchedData.myclipboard_summary;
 			if( sChromeStore !== undefined){
 				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
 			}
@@ -361,7 +361,7 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 		$("#p_MyClipboard").html("");
 		localStorage.removeItem("MyClipboard");
 
-		chrome.storage.local.remove( "myclipboard_temp_summary" );
+		chrome.storage.local.remove( "myclipboard_summary" );
 		chrome.storage.local.remove( "myclipboard_temp" );
 		chrome.storage.local.clear(function() {
 		    var error = chrome.runtime.lastError;
@@ -437,8 +437,8 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 		console.groupEnd();
 
 		console.group("Chrome Storage");
-	        chrome.storage.local.get("myclipboard_temp_summary" , function(fetchedData){
-	            NotfChromeStor_value = fetchedData["myclipboard_temp_summary"];
+	        chrome.storage.local.get("myclipboard_summary" , function(fetchedData){
+	            NotfChromeStor_value = fetchedData["myclipboard_summary"];
 	            console.log(  "Tool Summary: " + NotfChromeStor_value );
 	        });
 	        chrome.storage.local.get("myclipboard_temp" , function(fetchedData){
