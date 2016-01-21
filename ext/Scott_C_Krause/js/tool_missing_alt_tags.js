@@ -69,7 +69,7 @@ sMU += sAttr;
 chrome.storage.local.get("myclipboard_temp", function(fetchedData){
     sChromeStor_value = fetchedData["myclipboard_temp"];
     if(typeof sChromeStor_value !== typeof undefined){
-        //sMU += "<hr>" + sChromeStor_value;
+        sMU += "<hr>" + sChromeStor_value;
     }
     chrome.storage.local.set({myclipboard_temp: sMU});
 });
