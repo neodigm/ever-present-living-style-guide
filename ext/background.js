@@ -143,6 +143,10 @@ function runTool( sTool ){
             //
             chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_inject_photo_cust.js"});
             break;
+        case "cmdTabReport":
+            //
+            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tab-report.js"});
+            break;
     } 
     //
     setTimeout( function(){
@@ -175,14 +179,23 @@ function displayMsg( sMsg ){
 function appendMyClipboard( sClip ){
     //    Timestamp and append to existing loc str then
     //    return entire persisted value
-    var sPre = "\n<br>---- " + Nowish() + " ----<br>\n";
-    var sPost = ""
+
+    console.clear();
+    console.groupCollapsed("appendMyClipboard IN");
+        console.log( sClip );
+    console.groupEnd();
+
+    var sPre = "<br>---- " + Nowish() + " ----<br>";
+    var sPost = "";
     if( localStorage.getItem("MyClipboard") !== null ){
         sPost = localStorage.getItem("MyClipboard");
+        if(sPost.indexOf( sPre ) >= 0){
+            sPost = "";
+        }
     }
 
-    sClip = sPre + sClip +  sPost;
-
+    sClip = sPre + sClip +  "<hr>" + sPost;
+    localStorage.removeItem("MyClipboard");
     localStorage.setItem("MyClipboard", sClip);
     return localStorage.getItem("MyClipboard");
 }

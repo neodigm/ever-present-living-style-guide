@@ -335,14 +335,20 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
 			}
 		});
-		chrome.storage.local.clear("myclipboard_temp_summary");
+
 		chrome.storage.local.get("myclipboard_temp", function(fetchedData){
 			sChromeStore = fetchedData.myclipboard_temp;
 			if( sChromeStore !== undefined){
 				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
 			}
 		});
-		chrome.storage.local.clear("myclipboard_temp");
+
+		chrome.storage.local.clear(function() {
+		    var error = chrome.runtime.lastError;
+		    if (error) {
+		        console.error(error);
+		    }
+		});
 
 		var sMU = $("#p_MyClipboard").html();
 		setTimeout( function( ){
@@ -357,6 +363,12 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 
 		chrome.storage.local.remove( "myclipboard_temp_summary" );
 		chrome.storage.local.remove( "myclipboard_temp" );
+		chrome.storage.local.clear(function() {
+		    var error = chrome.runtime.lastError;
+		    if (error) {
+		        console.error(error);
+		    }
+		});
 		e.preventDefault();
 	});
 
@@ -440,6 +452,12 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 	$(".store-repo-clear--a").on("click", function(e){
 		localStorage.removeItem("repo_name");
 		localStorage.removeItem("sound_switch");
+		chrome.storage.local.clear(function() {
+		    var error = chrome.runtime.lastError;
+		    if (error) {
+		        console.error(error);
+		    }
+		});
 		e.preventDefault();
 	});
 	$(".store-sound-switch--a").on("click", function(e){
