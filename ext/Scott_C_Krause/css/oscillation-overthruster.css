@@ -96,7 +96,7 @@ summary {
 	-moz-osx-font-smoothing: grayscale;
 }
 .caption--p__roboto{
-	font-family: "Roboto-Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 1.4em;
 	font-weight: 500;
 	line-height: 1.5;
@@ -206,8 +206,6 @@ summary {
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1);
 
-	-zzzzwebkit-transition: all 1s ease-in;
-	zzzztransition: all 1s ease-in;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -293,7 +291,10 @@ summary {
 
 .n5-card .label {cursor: pointer;}
 
-
+.status-table--td__warn    {border-left: #FFC04C 4px solid;background-color: #FFE26E;}
+.status-table--td__miss    {border-left: #FF0000 4px solid;background-color: #FF9999;}
+.status-table--td__info    {border-left: #00FF00 4px solid;background-color: #99FF99;}
+.status-table--td__source  { max-width: 840px !important; width: 840px !important; overflow: hidden !important;}
 
 
 .myclipboard--article {

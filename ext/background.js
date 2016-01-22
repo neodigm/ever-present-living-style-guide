@@ -133,7 +133,29 @@ function runTool( sTool ){
             break;
         case "cmdMissingAltTags":
             //
-            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+            chrome.tabs.getSelected(null, function(tab){
+              chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/?Ntt=cats&_requestid=1609373"});
+                sleep(4000);
+                chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                sleep(1800);
+                audioSuccessSound();  //postToolAction();
+                chrome.tabs.getSelected(null, function(tab){
+                  chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/Garden-Outdoor-DIY/_/N-276x"});
+                    sleep(4000);
+                    chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                    sleep(1800);
+                    audioSuccessSound();  //postToolAction();  
+                    chrome.tabs.getSelected(null, function(tab){
+                      chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/"});
+                        sleep(4000);
+                        chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                        sleep(1800);
+                        audioSuccessSound();  //postToolAction();
+                        aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");
+                    });                 
+                });
+            });
+
             break;
         case "cmdInjectPrimeBanner":
             //
@@ -145,13 +167,19 @@ function runTool( sTool ){
             break;
         case "cmdTabReport":
             //
-            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tab-report.js"});
+            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tab-report.js"});            
             break;
     } 
     //
     setTimeout( function(){
         postToolAction();
     }, 840);
+}
+
+function sleep(ms) {
+  var start = new Date().getTime(), expire = start + ms;
+  while (new Date().getTime() < expire) { }
+  return;
 }
 
 function displayMsg( sMsg ){
@@ -218,4 +246,15 @@ function postToolAction(){
             return NotfChromeStor_value;
         });
             //chrome.storage.local.remove( sKey );
+}
+
+function addBreaks(s,c) {
+    var l = s.length;
+    var i = 0;
+    while (l > c) {
+        l = l-c;
+        i=i+c;
+        s = s.substring(0,c)+"\n"+s.substring(c);
+    }
+    return s;
 }

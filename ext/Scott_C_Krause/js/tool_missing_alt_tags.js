@@ -9,11 +9,9 @@ var sLocation = "";     //  URL and Title
 var sAttr = "";         //  Outer HTML
 var sMU = "";
 
-sLocation  = "<h3>"
-sLocation += document.title;
-sLocation += "<br>"
-sLocation += document.location;
-sLocation += "</h3>"
+sLocation  = "<h4 class='text-center'>"
+sLocation += "<a href='"+ document.location + "'>"+document.title+"</a>";
+sLocation += "</h4>"
 
 sAttr += "<table border=1>";
 
@@ -24,25 +22,29 @@ $("img").each(function(){
         if( $( this ).attr("alt").length <= 0 ){
             if( $( this )[0].outerHTML.toString().indexOf('alt=""') >= 0){
                 sIMG_ISSUE = "Alt with empty quotes";
+                sIssue_class = "status-table--td__warn"
                 nALT_NO_VALUE++;
             }else{
                 sIMG_ISSUE = "Alt without an equal";
+                sIssue_class = "status-table--td__miss"
                 nALT_NO_EQUAL++;
             }
         }else{
             sIMG_ISSUE = "Alt with desc";
+            sIssue_class = "status-table--td__info"
+                $( this ).css("-webkit-filter", "grayscale(.8) opacity(.08)");
+                //$( this ).css("filter", "grayscale(1) opacity(.08)"); 
             nALT_DESCR++;
-            $( this ).css("-webkit-filter", "grayscale(.8) opacity(.08)");
-            $( this ).css("filter", "grayscale(1) opacity(.08)"); 
         }
     }else{
         sIMG_ISSUE = "Alt does not exist";
+        sIssue_class = "status-table--td__miss"
         nALT_NO++;
     }
     nIMG_TOTAL++;
-    sAttr += "<tr><td>" + nIMG_TOTAL + "</td>";
-    sAttr += "<td>" + sIMG_ISSUE + "</td>";
-    sAttr += "<td><pre><code>";
+    sAttr += "<tr class='"+sIssue_class.split("__").pop()+"'><td>" + nIMG_TOTAL + "</td>";
+    sAttr += "<td class='"+sIssue_class+"''>" + sIMG_ISSUE + "</td>";
+    sAttr += "<td class='"+"status-table--td__source"+"'><pre><code>";
     sAttr += $( this )[0].outerHTML.toString().replace(/\</g,"&lt;").replace(/\>/g,"&gt;");
     sAttr += "</code></pre></td></tr>";
 });
@@ -74,4 +76,6 @@ chrome.storage.local.get("myclipboard_temp", function(fetchedData){
     chrome.storage.local.set({myclipboard_temp: sMU});
 });
 
-console.log( sMU );
+console.group("Missing ALT attributes");
+    console.log( sMU );
+console.groupEnd();

@@ -16,6 +16,8 @@ $( document ).ready(function(){
 				if( typeof NotfChromeStor_value === typeof undefined ){
 					$("#myclipboard_summary").html( "Report not available - re-run" );
 				}else{
+				    var dNow = new Date();
+					$("#p-report-caption").html( "ALT Audit Summary: "+ dNow.toString().substr(0, dNow.toString().length - 33));
 					$("#myclipboard_summary").html( NotfChromeStor_value );
 					$("pre code").addClass("language-markup");
 					Prism.highlightAll();
@@ -24,8 +26,7 @@ $( document ).ready(function(){
 		}else{
 		}
 		$( document ).foundation();		
-		Prism.highlightAll();
-		//		
+		Prism.highlightAll();	
 	});
 });
 
