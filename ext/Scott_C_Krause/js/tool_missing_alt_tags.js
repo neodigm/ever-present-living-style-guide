@@ -56,24 +56,23 @@ sMU += " Alt without an equal " + nALT_NO_EQUAL;
 sMU += " Alt with empty quotes " + nALT_NO_VALUE;
 sMU += " Alt with desc " + nALT_DESCR;
 
-chrome.storage.local.get("myclipboard_summary", function(fetchedData){
-    sChromeStor_value = fetchedData["myclipboard_summary"];
+chrome.storage.local.get("tool_tab_summary", function(fetchedData){
+    sChromeStor_value = fetchedData["tool_tab_summary"];
     if(typeof sChromeStor_value !== typeof undefined){
-        sMU += "<hr>" + sChromeStor_value;
+        sMU += sChromeStor_value;
     }
-    chrome.storage.local.set({myclipboard_summary: sMU});
+    chrome.storage.local.set({tool_tab_summary: sMU});
 });
 
-sMU += "<hr>";
-sMU += sLocation;
+sMU  = "<hr>"+sLocation+"<p class='text-center'>"+sMU+"</p>";
 sMU += sAttr;
 
-chrome.storage.local.get("myclipboard_temp", function(fetchedData){
-    sChromeStor_value = fetchedData["myclipboard_temp"];
+chrome.storage.local.get("tool_tab_temp", function(fetchedData){
+    sChromeStor_value = fetchedData["tool_tab_temp"];
     if(typeof sChromeStor_value !== typeof undefined){
         sMU += "<hr>" + sChromeStor_value;
     }
-    chrome.storage.local.set({myclipboard_temp: sMU});
+    chrome.storage.local.set({tool_tab_temp: sMU});
 });
 
 console.group("Missing ALT attributes");

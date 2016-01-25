@@ -8,15 +8,15 @@ var fetchSoundConfig = {sound_max: 18, sound_current: 1};    //    Sound limits
 fetchSound();
 
 function fetchSound(){
-	//    AJAX a single sound binary
-	oAJAXReq.open("GET", "Scott_C_Krause/au/s" + fetchSoundConfig.sound_current + ".mp3", true);
-	oAJAXReq.responseType = "arraybuffer";
+    //    AJAX a single sound binary
+    oAJAXReq.open("GET", "Scott_C_Krause/au/s" + fetchSoundConfig.sound_current + ".mp3", true);
+    oAJAXReq.responseType = "arraybuffer";
     oAJAXReq.send();
     oAJAXReq.onload = fetchSoundonload;
 }
 
 function fetchSoundonload() {
-	//    The audio file has loaded via AJAX
+    //    The audio file has loaded via AJAX
     oAudContx.decodeAudioData(oAJAXReq.response, function (decAudBuf) {
         aAudioBuffer[ fetchSoundConfig.sound_current ] = decAudBuf;
         fetchSoundConfig.sound_current = fetchSoundConfig.sound_current + 1;
@@ -29,7 +29,7 @@ function fetchSoundonload() {
 };
 
 function playAudioFile( nSound ) {
-	//    
+    //    
 
     if( localStorage.getItem("sound_switch") !== "false" ){
         var oSrc = oAudContx.createBufferSource();
@@ -49,30 +49,30 @@ function playAudioFile( nSound ) {
 };
 
 function audioSuccessSound() {
-	//
+    //
     playNote(493.883, oAudContx.currentTime,  0.12);
     playNote(659.255, oAudContx.currentTime + 0.12, 0.24);
 };
 
 function audioAlert() {
-	//
+    //
     playNote(300, oAudContx.currentTime,  0.03);
     playNote(400, oAudContx.currentTime + 0.03, 0.06);
 };
 
 function audioBleep_1() {
-	//
+    //
     playNote(800, oAudContx.currentTime + 0.0, 0.10);
 };
 
 function audioTick_1() {
-	//
+    //
     playNote(100, oAudContx.currentTime,  0.60, 0.80);
     playNote(200, oAudContx.currentTime + 0.80, 0.10);
 };
 
 function playNote(frequency, startTime, duration) {
-	//
+    //
 
     if( localStorage.getItem("sound_switch") !== "false" ){
         var osc = oAudContx.createOscillator(),
@@ -109,18 +109,18 @@ function playNote(frequency, startTime, duration) {
 };
 
 function aJTab( sPanel ){
-	//    Create or reuse a tab and make its location that had from an href
+    //    Create or reuse a tab and make its location that had from an href
 
-	localStorage.setItem("eplsg-template--article", sPanel);
+    localStorage.setItem("eplsg-template--article", sPanel);
 
-	if( oTabContent === undefined ){
-		chrome.tabs.create({url: "Scott_C_Krause/ever_present_living_style_guide.html", index: 0}, function(tab) {
-			oTabContent = tab;
-		 });	
-	}else{
-		chrome.tabs.update(oTabContent.Id, {url: "Scott_C_Krause/ever_present_living_style_guide.html"}, function(tab) {
-		});
-	}
+    if( oTabContent === undefined ){
+        chrome.tabs.create({url: "Scott_C_Krause/ever_present_living_style_guide.html", index: 0}, function(tab) {
+            oTabContent = tab;
+         });    
+    }else{
+        chrome.tabs.update(oTabContent.Id, {url: "Scott_C_Krause/ever_present_living_style_guide.html"}, function(tab) {
+        });
+    }
 }
 
 function runTool( sTool ){
@@ -133,25 +133,34 @@ function runTool( sTool ){
             break;
         case "cmdMissingAltTags":
             //
+            clearChromeStorage();
             chrome.tabs.getSelected(null, function(tab){
               chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/?Ntt=cats&_requestid=1609373"});
-                sleep(4000);
+                sleep(2800);
                 chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
-                sleep(1800);
+                sleep(800);
                 audioSuccessSound();  //postToolAction();
                 chrome.tabs.getSelected(null, function(tab){
                   chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/Garden-Outdoor-DIY/_/N-276x"});
-                    sleep(4000);
+                    sleep(2800);
                     chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
-                    sleep(1800);
+                    sleep(800);
                     audioSuccessSound();  //postToolAction();  
                     chrome.tabs.getSelected(null, function(tab){
-                      chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/"});
-                        sleep(4000);
+                      chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/Home-Decor/_/N-275b"});
+                        sleep(2800);
                         chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
-                        sleep(1800);
+                        sleep(800);
                         audioSuccessSound();  //postToolAction();
-                        aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");
+                        chrome.tabs.getSelected(null, function(tab){
+                          chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/"});
+                            sleep(2800);
+                            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                            sleep(800);
+                            audioSuccessSound();  //postToolAction();
+
+    aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");
+                        });
                     });                 
                 });
             });
@@ -173,7 +182,17 @@ function runTool( sTool ){
     //
     setTimeout( function(){
         postToolAction();
-    }, 840);
+    }, 1840);
+}
+
+function clearChromeStorage(){
+    //    Clear All Chrome Storage
+    chrome.storage.local.clear(function() {
+        var error = chrome.runtime.lastError;
+        if (error) {
+        console.error(error);
+        }
+    });
 }
 
 function sleep(ms) {
@@ -183,25 +202,25 @@ function sleep(ms) {
 }
 
 function displayMsg( sMsg ){
-	//    System Tray Notification
-	console.log( sMsg );
-	if (!("Notification" in window)) {
-		console.log('Notification API not supported.');
-		return;
-	} else if (Notification.permission === "granted") {
-		// If it's okay let's create a notification
+    //    System Tray Notification
+    console.log( sMsg );
+    if (!("Notification" in window)) {
+        console.log('Notification API not supported.');
+        return;
+    } else if (Notification.permission === "granted") {
+        // If it's okay let's create a notification
         audioSuccessSound();
                 var notification = new Notification( sMsg );
-	} else if (Notification.permission !== 'denied') {
-		// Otherwise, we need to ask the user for permission
+    } else if (Notification.permission !== 'denied') {
+        // Otherwise, we need to ask the user for permission
 
-		Notification.requestPermission(function (permission) {
-			// If the user accepts, let's create a notification
-			if (permission === "granted") {
-				var notification = new Notification( sMsg );
-			}
-		});
-	}
+        Notification.requestPermission(function (permission) {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                var notification = new Notification( sMsg );
+            }
+        });
+    }
 }
 
 function appendMyClipboard( sClip ){
@@ -240,12 +259,10 @@ function postToolAction(){
     //    I think the summary needs to be text not markup !?
     //    Should use | delim in case we want to create a list type of notf in the future.
 
-        chrome.storage.local.get("myclipboard_temp_summary", function(fetchedData){
-            NotfChromeStor_value = fetchedData["myclipboard_temp_summary"];
-            displayMsg( NotfChromeStor_value );
-            return NotfChromeStor_value;
-        });
-            //chrome.storage.local.remove( sKey );
+    chrome.storage.local.get("tool_tab_summary", function(fetchedData){
+        NotfChromeStor_value = fetchedData["tool_tab_summary"];
+        displayMsg( NotfChromeStor_value );
+    });
 }
 
 function addBreaks(s,c) {
