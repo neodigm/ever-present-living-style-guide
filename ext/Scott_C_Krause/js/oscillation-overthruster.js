@@ -224,7 +224,6 @@ function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
 	switch ( sPanel ){
 		case "oc_nav_content_right" :
-		//  Change below
 			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html");
 		break;
 		case "ql_nav_dropdown" :
@@ -285,10 +284,6 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 
 	});
 
-	if( localStorage.getItem("MyClipboard") !== null ){
-        $("#p_MyClipboard").html( localStorage.getItem("MyClipboard") ); //  Init My Clipboard display
-    }
-
 	$('.owl-carousel').owlCarousel({
 	    loop:true,
 	    margin:10,
@@ -323,52 +318,6 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 		oBackGroundEvent.playAudioFile( 5 );    //    slap echo
 		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
 		$(".rev-modal").foundation("close");
-		e.preventDefault();
-	});
-
-	$("#cmdOffCanvMyClip").on("click", function(){
-		//    Generate the href for the download button
-		//    When the Clipboard/OffCanvas is clicked, does not matter if currently open or closed
-		chrome.storage.local.get("myclipboard_summary", function(fetchedData){
-			sChromeStore = fetchedData.myclipboard_summary;
-			if( sChromeStore !== undefined){
-				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
-			}
-		});
-
-		chrome.storage.local.get("myclipboard_temp", function(fetchedData){
-			sChromeStore = fetchedData.myclipboard_temp;
-			if( sChromeStore !== undefined){
-				$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( sChromeStore ) );
-			}
-		});
-
-		chrome.storage.local.clear(function() {
-		    var error = chrome.runtime.lastError;
-		    if (error) {
-		        console.error(error);
-		    }
-		});
-
-		var sMU = $("#p_MyClipboard").html();
-		setTimeout( function( ){
-			$( "#cmdMyClipboard_download" ).attr("href", "data:text/html;charset=UTF-8,"+encodeURIComponent(sMU) ).attr("download", "MyClipboard.html");
-		}, 420);
-	});
-
-	$("#cmdMyClipboard_clear").on("click", function(e){
-		//    Clear clip contents
-		$("#p_MyClipboard").html("");
-		localStorage.removeItem("MyClipboard");
-
-		chrome.storage.local.remove( "myclipboard_summary" );
-		chrome.storage.local.remove( "myclipboard_temp" );
-		chrome.storage.local.clear(function() {
-		    var error = chrome.runtime.lastError;
-		    if (error) {
-		        console.error(error);
-		    }
-		});
 		e.preventDefault();
 	});
 

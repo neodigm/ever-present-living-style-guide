@@ -296,11 +296,18 @@ summary {
 .status-table--td__info    {color: #38141B;border-left: #00FF00 4px solid;background-color: #99FF99;}
 .status-table--td__source  { max-width: 840px !important; width: 840px !important; overflow: hidden !important;}
 
-
 .myclipboard--article {
 	max-height: 256px;
 	overflow: scroll;
 	overflow-x: hidden;
+}
+
+.tab-tool--table {
+	width: 100%;
+}
+.tab-tool--p_total {
+	font-size: 24px;
+	color: #8C4453;
 }
 
 .tab-label--primary {margin-left: -24px !important;}

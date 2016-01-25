@@ -129,40 +129,34 @@ function runTool( sTool ){
     switch ( sTool ) {
         case "cmdGrayScale":
             //
+openLoadingDialog( true );
             chrome.tabs.insertCSS({code: "body {-webkit-filter: grayscale(1);}"});
             break;
         case "cmdMissingAltTags":
             //
+
+            var aURL =  ["http://www.lakeside.com/browse/?Ntt=cats&_requestid=1609373",
+            "http://www.lakeside.com/browse/Apparel-Beauty/_/N-26y3",
+            "http://www.lakeside.com/browse/Garden-Outdoor-DIY/_/N-276x",
+            "http://www.lakeside.com/browse/Home-Decor/_/N-275b",
+            "http://www.lakeside.com/browse/Christmas-2015/_/N-1z0ziv5",
+            "http://www.lakeside.com/catalog/catalog_quick_order.jsp",
+            "http://www.lakeside.com/Garden--Outdoor---DIY/Home-Improvement/Household-Helpers/The-Redneck-Plunger-//prod1140079.jmp?fm=search",
+            "http://www.lakeside.com/artist-studio",
+            "http://www.lakeside.com/Ideas-and-Inspiration",
+            "http://www.lakeside.com/catalog_request/index.jsp",            
+            "https://www.lakeside.com/my_account/index.jsp",
+            "http://www.lakeside.com/"];
+
             clearChromeStorage();
             chrome.tabs.getSelected(null, function(tab){
-              chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/?Ntt=cats&_requestid=1609373"});
-                sleep(2800);
-                chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
-                sleep(800);
-                audioSuccessSound();  //postToolAction();
-                chrome.tabs.getSelected(null, function(tab){
-                  chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/Garden-Outdoor-DIY/_/N-276x"});
+                for(var iCnt=0;iCnt < aURL.length;iCnt++){
+                    chrome.tabs.update(tab.id, {url: aURL[iCnt]});
                     sleep(2800);
                     chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
                     sleep(800);
-                    audioSuccessSound();  //postToolAction();  
-                    chrome.tabs.getSelected(null, function(tab){
-                      chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/browse/Home-Decor/_/N-275b"});
-                        sleep(2800);
-                        chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
-                        sleep(800);
-                        audioSuccessSound();  //postToolAction();
-                        chrome.tabs.getSelected(null, function(tab){
-                          chrome.tabs.update(tab.id, {url: "http://www.lakeside.com/"});
-                            sleep(2800);
-                            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
-                            sleep(800);
-                            audioSuccessSound();  //postToolAction();
-
-    aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");
-                        });
-                    });                 
-                });
+                }
+                aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");                
             });
 
             break;
@@ -181,8 +175,20 @@ function runTool( sTool ){
     } 
     //
     setTimeout( function(){
-        postToolAction();
+        displayMsg( "Tab Tool Complete" );
     }, 1840);
+}
+
+function navToThenExec(aURL, sScript){
+    //    
+    chrome.tabs.getSelected(null, function(tab){
+        for(var iCnt=0;iCnt < aURL.length;iCnt++){
+            chrome.tabs.update(tab.id, {url: aURL[iCnt]});
+            sleep(3000);
+            chrome.tabs.executeScript({file: sScript});
+            sleep(600);
+        }
+    });
 }
 
 function clearChromeStorage(){
@@ -190,7 +196,7 @@ function clearChromeStorage(){
     chrome.storage.local.clear(function() {
         var error = chrome.runtime.lastError;
         if (error) {
-        console.error(error);
+            console.error(error);
         }
     });
 }
@@ -253,18 +259,6 @@ function Nowish(){
     return dNow.toString().substr(0, dNow.toString().length - 33);
 }
 
-function postToolAction(){
-    //    Delay execute after Tool has been actuated
-    //    System tray notification of summary
-    //    I think the summary needs to be text not markup !?
-    //    Should use | delim in case we want to create a list type of notf in the future.
-
-    chrome.storage.local.get("tool_tab_summary", function(fetchedData){
-        NotfChromeStor_value = fetchedData["tool_tab_summary"];
-        displayMsg( NotfChromeStor_value );
-    });
-}
-
 function addBreaks(s,c) {
     var l = s.length;
     var i = 0;
@@ -274,4 +268,11 @@ function addBreaks(s,c) {
         s = s.substring(0,c)+"\n"+s.substring(c);
     }
     return s;
+}
+
+function openLoadingDialog( bState ){
+            setTimeout( function( ){
+                $("#modLoading").foundation("open");//(bState) ? "open" : "close"
+                oBackGroundEvent.playAudioFile( 4 );    //    
+            }, 640);
 }

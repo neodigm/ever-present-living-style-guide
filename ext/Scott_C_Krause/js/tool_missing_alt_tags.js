@@ -33,7 +33,6 @@ $("img").each(function(){
             sIMG_ISSUE = "Alt with desc";
             sIssue_class = "status-table--td__info"
                 $( this ).css("-webkit-filter", "grayscale(.8) opacity(.08)");
-                //$( this ).css("filter", "grayscale(1) opacity(.08)"); 
             nALT_DESCR++;
         }
     }else{
@@ -50,11 +49,11 @@ $("img").each(function(){
 });
 sAttr += "</table>";
 
-sMU  = "Total Images " + nIMG_TOTAL;
-sMU += " Alt does not exist " + nALT_NO;
-sMU += " Alt without an equal " + nALT_NO_EQUAL;
-sMU += " Alt with empty quotes " + nALT_NO_VALUE;
-sMU += " Alt with desc " + nALT_DESCR;
+sMU  = "Total Images <span class='nIMG_TOTAL'>" + nIMG_TOTAL + "</span>";
+sMU += " Alt does not exist <span class='nALT_NO'>" + nALT_NO + "</span>";
+sMU += " Alt without an equal <span class='nALT_NO_EQUAL'>" + nALT_NO_EQUAL + "</span>";
+sMU += " Alt with empty quotes <span class='nALT_NO_VALUE'>" + nALT_NO_VALUE + "</span>";
+sMU += " Alt with desc <span class='nALT_DESCR'>" + nALT_DESCR + "</span>";
 
 chrome.storage.local.get("tool_tab_summary", function(fetchedData){
     sChromeStor_value = fetchedData["tool_tab_summary"];

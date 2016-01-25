@@ -35,25 +35,11 @@ git clone https://github.com/neodigm/ever-present-living-style-guide.git
 
 		<div class="off-canvas-wrapper">
 			<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-				<!--oc_nav_content_left-->
 
       			<section id="offCanvasRight" class="off-canvas position-right" data-off-canvas data-position="right">
-					<nav class="zzzzzzzzzzzoc_nav_content_right">
+					<nav class="oc_nav_content_right">
 						<!--    Dynamic HTML Content -->
 					</nav>
-
-					<article class="myclipboard--article callout radius" data-closable>
-						<p class="caption--p__architectsdaughter text-center">My Clipboard</p>
-						<nav class="button-group">
-							<a id="cmdMyClipboard_download" class="tiny button hollow"
-							href="#">Download</a>
-							<a id="cmdMyClipboard_clear" class="tiny button hollow"
-							href="#">Clear</a>
-						</nav>
-						<p id="p_MyClipboard" class="article--p__monospace">
-Your Clipboard is empty.
-						</p>
-					</article>
 
 					<br>
 					<section class="row">
@@ -168,10 +154,11 @@ Your Clipboard is empty.
 		</td>
 		<td>
 			<nav class="button-group">
-			  <a data-tool-cmd-action="cmdGrayScale"      class="tool-cmd--a tiny button hollow">Gray Scale</a>
-			  <a data-tool-cmd-action="cmdMissingAltTags" class="tool-cmd--a tiny button hollow">Missing Alt</a>
-			  <a data-tool-cmd-action="cmdInjectPrimeBanner" class="tool-cmd--a tiny button hollow">Inject Prime Banner</a>
-			  <a data-tool-cmd-action="cmdInjectPhotoCust" class="tool-cmd--a tiny button hollow">Inject Photo Cust</a>
+			  <a data-tool-cmd-action="cmdGrayScale"      class="tool-cmd--a expanded button hollow">Gray Scale</a>
+			  <a data-tool-cmd-action="cmdMissingAltTags" class="tool-cmd--a expanded button hollow">Alt Audit Lakeside<i class="fa fa-spinner fa-spin fa-3x"></i></a>
+			  <a data-tool-cmd-action="cmdMissingAltTags" class="tool-cmd--a expanded button hollow">Alt Audit LTD<i class="fa fa-spinner fa-spin fa-3x"></i></a>
+			  <a data-tool-cmd-action="cmdInjectPrimeBanner" class="tool-cmd--a expanded button hollow">Inject Prime Banner</a>
+			  <a data-tool-cmd-action="cmdInjectPhotoCust" class="tool-cmd--a expanded button hollow">Inject Photo Cust</a>
 			</nav>
 		</td>
 	</tr>
@@ -977,6 +964,13 @@ We should strive to write clean, maintainable code that focuses on future-proofi
 							</div>
 						</section>
 
+					</section>
+
+					<section id="modLoading" class="rev-modal reveal" data-reveal
+					data-content-link="--loading"
+						<div class="columns small-12 text-center">
+							<i class="fa fa-spinner fa-spin fa-4x"></i>
+						</div>
 					</section>
 
 					<section id="modSubmitAnArticle" class="rev-modal reveal" data-reveal
