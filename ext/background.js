@@ -129,12 +129,10 @@ function runTool( sTool ){
     switch ( sTool ) {
         case "cmdGrayScale":
             //
-openLoadingDialog( true );
             chrome.tabs.insertCSS({code: "body {-webkit-filter: grayscale(1);}"});
             break;
-        case "cmdMissingAltTags":
-            //
-
+        case "cmdMissingAltTagsLSC":
+            //  ALT Audit Lakeside
             var aURL =  ["http://www.lakeside.com/browse/?Ntt=cats&_requestid=1609373",
             "http://www.lakeside.com/browse/Apparel-Beauty/_/N-26y3",
             "http://www.lakeside.com/browse/Garden-Outdoor-DIY/_/N-276x",
@@ -147,6 +145,60 @@ openLoadingDialog( true );
             "http://www.lakeside.com/catalog_request/index.jsp",            
             "https://www.lakeside.com/my_account/index.jsp",
             "http://www.lakeside.com/"];
+
+            clearChromeStorage();
+            chrome.tabs.getSelected(null, function(tab){
+                for(var iCnt=0;iCnt < aURL.length;iCnt++){
+                    chrome.tabs.update(tab.id, {url: aURL[iCnt]});
+                    sleep(2800);
+                    chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                    sleep(800);
+                }
+                aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");                
+            });
+
+            break;
+        case "cmdMissingAltTagsLTD":
+            //  ALT Audit LTD
+            var aURL =  ["http://www.ltdcommodities.com/browse/?Ntt=dog&_requestid=2456105",
+            "http://www.ltdcommodities.com/browse/Home-Decor/_/N-2748",
+            "http://www.ltdcommodities.com/browse/Toys-Electronics/_/N-27kp",
+            "http://www.ltdcommodities.com/browse/Apparel-Beauty/_/N-26wo",
+            "http://www.ltdcommodities.com/browse/What-s-New-2016/_/N-1z0xzba",
+            "http://www.ltdcommodities.com/catalog/catalog_quick_order.jsp",
+            "http://www.ltdcommodities.com/Garden--Outdoor---DIY/Home-Improvement/Household-Helpers/The-Redneck-Plunger-//prod1140079.jmp?fm=search",
+            "http://www.ltdcommodities.com/designer-showcase",
+            "http://www.ltdcommodities.com/World-of-Inspiration",
+            "http://www.ltdcommodities.com/catalog_request/index.jsp",            
+            "https://www.ltdcommodities.com/my_account/index.jsp",
+            "http://www.ltdcommodities.com/homeltd"];
+
+            clearChromeStorage();
+            chrome.tabs.getSelected(null, function(tab){
+                for(var iCnt=0;iCnt < aURL.length;iCnt++){
+                    chrome.tabs.update(tab.id, {url: aURL[iCnt]});
+                    sleep(2800);
+                    chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                    sleep(800);
+                }
+                aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");                
+            });
+
+            break;
+        case "cmdMissingAltTagsLTDStage":
+            //  ALT Audit LTD STAGE
+            var aURL =  ["http://stage.ltdcommodities.com/value/?Ntt=dog&_requestid=11125",
+            "http://stage.ltdcommodities.com/value/Home-Decor/_/N-276j",
+            "http://stage.ltdcommodities.com/value/Toys-Electronics/_/N-27n0",
+            "http://stage.ltdcommodities.com/value/Apparel-Beauty/_/N-26yz",
+            "http://stage.ltdcommodities.com/value/SHOPNOW4084/_/N-1z11or9",
+            "http://stage.ltdcommodities.com/catalog/catalog_quick_order.jsp",
+            "http://stage.ltdcommodities.com/Garden--Outdoor---DIY/Home-Improvement/Household-Helpers/The-Redneck-Plunger-//prod1140079.jmp?fm=search",
+            "http://stage.ltdcommodities.com/designer-showcase",
+            "http://stage.ltdcommodities.com/World-of-Inspiration",
+            "http://stage.ltdcommodities.com/catalog_request/index.jsp",            
+            "https://stage.ltdcommodities.com/my_account/index.jsp",
+            "http://stage.ltdcommodities.com/homeltd"];
 
             clearChromeStorage();
             chrome.tabs.getSelected(null, function(tab){
@@ -268,11 +320,4 @@ function addBreaks(s,c) {
         s = s.substring(0,c)+"\n"+s.substring(c);
     }
     return s;
-}
-
-function openLoadingDialog( bState ){
-            setTimeout( function( ){
-                $("#modLoading").foundation("open");//(bState) ? "open" : "close"
-                oBackGroundEvent.playAudioFile( 4 );    //    
-            }, 640);
 }

@@ -315,9 +315,14 @@ $("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-det
 	
 	$(".tool-cmd--a").on("click", function( e ){
 		//    Tool Buttons Wire Up
-		oBackGroundEvent.playAudioFile( 5 );    //    slap echo
+		var sSoundCode = $(this).attr("data-sound");
+		oBackGroundEvent.playAudioFile( sSoundCode );    //    From sound attr on anchor
+		//$(".rev-modal").foundation("close");
+		$("#modLoading").foundation("open");				
 		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
-		$(".rev-modal").foundation("close");
+		setTimeout( function( ){
+			$("#modLoading").foundation("close");
+		}, 640);
 		e.preventDefault();
 	});
 
@@ -460,10 +465,12 @@ $( document ).bind("ajaxComplete", function(){
 		
 		var sFilNam = e.target.pathname; //    This contains the extension path
 		sFilNam = sFilNam.substring(sFilNam.lastIndexOf( "/" ) + 1);
+
 		if( sFilNam.substring(0, 2) === "--" ){
 			//  Open the reveal by attr naming convention
 			//  May need to wait for the off canvas to close
 			var sSoundCode = $(this).attr("data-sound");
+			if( typeof sSoundCode === typeof undefined){ sSoundCode = 1; }
 			setTimeout( function( ){
 				$("[data-content-link=" + sFilNam + "]").foundation("open");
 				oBackGroundEvent.playAudioFile( sSoundCode );    //    From sound attr on anchor

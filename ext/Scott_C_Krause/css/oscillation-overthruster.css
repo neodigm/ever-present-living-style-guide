@@ -38,6 +38,10 @@ hr {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(112, 40, 55, 0.75), rgba(0, 0, 0, 0));
 }
 
+details summary::-webkit-details-marker {
+	display: none;
+}
+
 .off-canvas {
 	background-color: #FFFFFF;
 }
@@ -286,6 +290,16 @@ summary {
 	margin: 0;
 }
 .n5-card-mod--tab-tr__p {
+	color: #666666;	
+	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-align: justify;
+	text-justify: inter-word;
+	font-size: 12px;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+
 	margin-bottom: 2px;
 }
 

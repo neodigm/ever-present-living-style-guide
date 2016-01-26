@@ -44,6 +44,7 @@ $( document ).bind("ajaxComplete", function(){
 			$("#js-head--pages").append("<li><p class='article--p__roboto text-center'>"+$(this).text()+"</p></li>");
 			$( document ).foundation();
 		});
+		$("#js-head--spinner").remove(); // Remove animation
 		var nALT_DESCR=0,nALT_NO_VALUE=0,nALT_NO_EQUAL=0,nALT_NO=0,nIMG_TOTAL=0;
 		$(".nALT_DESCR").each(function(){
 			nALT_DESCR += Number( $( this ).text() );
