@@ -33,8 +33,8 @@ n5Tags.addTag( new n5Tag("utility"        ,"utilities"      ,"E80C7A",	"Diagnost
 n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Experience, Computer Human Interaction and User Interface design"));
 n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
 
-n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",	"component",				"accessibility|content|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",	"component",			"accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",					"component","accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",				"component","accessibility|content|pattern",""));
 n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	                                                "component","accessibility|content|pattern|ux",""));
 n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"Pattern: JavaScript Media Queries Component",	4,	"pattern-javascript-media-queries.html",	"component","browser|pattern",""));
 n5Contents.addContent( new n5Content("PATTERN",	"A11y",	"Accessibility Patterns",	5,	"pattern-a11y.html",	                                                        "accessibility","pattern",""));
@@ -55,7 +55,7 @@ function n5Tags(){
 	}
 	this.addCardSub = function( sName_short, sTags_single ){
 		//    Insanity - Append the name of the current tag to the end of the 
-		//    delimited subtotal property.
+		//    delimited subtotal property. (M:M)
 		for(var iCnt=0; iCnt < this.an5Tags.length; iCnt++){
 			if( this.an5Tags[iCnt].name_short === sName_short){
 				this.an5Tags[iCnt].cardSubTotal = this.an5Tags[iCnt].cardSubTotal + sTags_single +"|";
@@ -71,7 +71,7 @@ function n5Tags(){
 		}
 	}
 	this.getCardSubAll = function( sTagToken ){
-		//    Iterate, fetch and return an array of DTO objects given name (token)
+		//    Iterate, fetch and return an array of DTO given name (token)
 		var aTag_Count = [];
 		var aCompare = [];
 		var sCompare = "";
@@ -109,6 +109,34 @@ function n5Contents(){
 	this.addContent = function( oContent ){
 		this.an5Contents.push( oContent );
 	};
+	this.getContentButtonsByType = function( sContent_type, sTag ){
+		//    Given a content_type (PATTERN  TOOL-CSS  TOOL-JS  RESOURCE  DIALOG)
+		//    and a tag (i.e. form) return a tokenized assc array for template consumption
+		//  This may be tricky because the template will need to repeat itself....
+
+		var aToken =[];
+		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
+			if( (this.an5Contents[iCnt].content_type === sContent_type) && (this.an5Contents[iCnt].tag === sTag) ){
+				var oTok = new Object();
+					oTok.target = "sound";
+					oTok.source = this.an5Contents[iCnt].sound;
+				aToken.push( oTok );
+				var oTok = new Object();
+					oTok.target = "file_name";
+					oTok.source = this.an5Contents[iCnt].file_name;
+				aToken.push( oTok );
+				var oTok = new Object();
+					oTok.target = "name_short";
+					oTok.source = this.an5Contents[iCnt].name_short;
+				aToken.push( oTok );
+				var oTok = new Object();
+					oTok.target = "name_long";
+					oTok.source = this.an5Contents[iCnt].name_long;
+				aToken.push( oTok );
+			}
+		}
+		return aToken;		
+	}
 	this.getContentByTags = function( sTags ){
 		//    Iterate, fetch and return an array of objs given a tag fragment
 
@@ -256,11 +284,12 @@ $( document ).ready(function(){
 
 	//    Lets init the n5 Cards
 	$(".n5-card").each(function(){
-		var sTagToken = $( this ).attr("data-n5c-token");
-
+		var sTagToken = $( this ).attr("data-n5c-token");  //  attrib on the card
+		var sTagName_short = n5Tags.getTag( sTagToken ).name_short;
+		var sTagSummary    = n5Tags.getTag( sTagToken ).summary;
 		//    Populate the cards caption and summary
-		$( this ).find(".n5-card--caption-1-h3").html(  n5Tags.getTag( sTagToken ).name_short );
-		$( this ).find(".n5-card--summary-1 > p").html( n5Tags.getTag( sTagToken ).summary );
+		$( this ).find(".n5-card--caption-1-h3").html(  sTagName_short );
+		$( this ).find(".n5-card--summary-1 > p").html( sTagSummary );
 
 		//    Render tag labels /w count into card container
 		//    Primary Tag
@@ -278,10 +307,21 @@ $( document ).ready(function(){
 			n5Tags.getCardSubAll( sTagToken )) );
 		}
 		//    Populate Reveal Modal Dialogs (ugc) via template (zoomed nav n5c state)
-if( sTagToken !== "accessibility"){		
-$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details",[{source: "x", target: "y"}]));
-}
+		//    Template within a Template
 
+//  The below condition is for dev por tempo
+if( sTagToken !== "accessibility"){	
+		//    Populate the templates name_short and summary tokens and id the 3 tables
+		var aToken =[{source: sTagName_short , target: "name_short"},
+		{source: sTagSummary , target: "summary"},
+		{source: sTagName_short+"_PATTERN" , target: "name_short_PATTERN"},
+		{source: sTagName_short+"_JS-TOOL" , target: "name_short_JS-TOOL"},
+		{source: sTagName_short+"_JS-RESOURCE" , target: "name_short_JS-RESOURCE"}];
+		$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details", aToken ));
+
+		$("#"+ sTagName_short+"_PATTERN").html(popuTemplate("templ_n5-card-mod-details_tr", n5Contents.getContentButtonsByType("PATTERN",sTagToken) ));
+}
+$( document ).foundation();
 	});
 
 	$('.owl-carousel').owlCarousel({

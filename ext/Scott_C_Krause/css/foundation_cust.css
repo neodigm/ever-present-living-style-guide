@@ -1,3 +1,10 @@
+.callout{
+	border-radius: 6px 24px;
+	border-color: #DDDDDD;
+}
+
+.close-button { right: 10px !important;}
+
 .off-canvas-content{ min-width: 764px;}
 
 .column, .small-4 { padding-right: 8px; padding-left: 8px;}
