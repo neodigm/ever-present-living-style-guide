@@ -114,7 +114,7 @@ git clone https://github.com/neodigm/ever-present-living-style-guide.git
 									<div class="columns small-12">
 
 										<article id="n5c_1--mod__ugc">
-<!--  Should not need this block anymore - keep por tempo-->
+<!--  Should not need this block anymore - keep por tempo
 <br class="resp--br_14">
 <aside class="callout">
 	<p class="n5-card-mod--caption caption--p__roboto">
@@ -128,7 +128,7 @@ Allow people with disabilities to perceive, understand, navigate, and interact w
 		<summary class="caption--p__architectsdaughter"><i class="fa fa-code"></i>&nbsp; Design Patterns
 		</summary>
 			<table class="n5-card-mod--tab" border=1>
-				<!-- Each Content Begin -->
+				
 				<tr>
 					<td class="n5-card-mod--tab-tr__l text-center">
 						<a class="n5-card-mod--tab-tr__a
@@ -187,7 +187,7 @@ Allow people with disabilities to perceive, understand, navigate, and interact w
 		<summary class="caption--p__architectsdaughter"><i class="fa fa-wrench"></i>&nbsp; Browser Tab Tools
 		</summary>
 			<table class="n5-card-mod--tab" border=1>
-				<!-- Each Content Begin -->
+				
 				<tr>
 					<td class="n5-card-mod--tab-tr__l text-left">
 						<a class="n5-card-mod--tab-tr__a tool-cmd--a
@@ -272,14 +272,14 @@ Allow people with disabilities to perceive, understand, navigate, and interact w
 						</p>
 					</td>
 				</tr>
-				<!-- Each Content End -->
+				
 			</table>
 	</details>
 	<details class="JS-RESOURCE">
 		<summary class="caption--p__architectsdaughter"><i class="fa fa-link"></i>&nbsp; Links
 		</summary>
 			<table class="n5-card-mod--tab" border=1>
-				<!-- Each Content Begin -->
+				
 				<tr>
 					<td class="n5-card-mod--tab-tr__l text-left">
 						<a class="n5-card-mod--tab-tr__a
@@ -332,11 +332,11 @@ Allow people with disabilities to perceive, understand, navigate, and interact w
 						</p>
 					</td>
 				</tr>
-				<!-- Each Content End -->
+				
 			</table>
 	</details>
 </aside>
-
+-->
 
 										</article>
 									</div>
@@ -1148,20 +1148,41 @@ You can create your own Style Guide and access it via this extension. Simply use
 		</span>
 	</p>
 </template>
-<template id="templ_n5-card-mod-details_tr">
+<template id="templ_n5-card-mod-details_tr_PATTERN">
 <!-- Each Content Begin -->
-<tr>
-	<td class="n5-card-mod--tab-tr__l text-left">
-		<a class="n5-card-mod--tab-tr__a
-		href-loc-stor-wrap-templ button hollow"
-		data-sound="|sound|"
-		href="|file_name|">|name_short|</a>
-	</td>
-	<td class="n5-card-mod--tab-tr__r">
-		<p class="n5-card-mod--tab-tr__p
-		article--p__roboto_light">|name_long|</p>
-	</td>
-</tr>
+	<tbody>
+		<tr>
+			<td class="n5-card-mod--tab-tr__l text-left">
+				<a class="n5-card-mod--tab-tr__a
+				href-loc-stor-wrap-templ button hollow"
+				data-sound="|sound|"
+				href="|file_name|">|name_short|</a>
+			</td>
+			<td class="n5-card-mod--tab-tr__r">
+				<p class="n5-card-mod--tab-tr__p
+				article--p__roboto_light">|name_long|</p>
+			</td>
+		</tr>
+	</tbody>
+<!-- Each Content End -->
+</template>
+<template id="templ_n5-card-mod-details_tr_JS-TOOL">
+<!-- Each Content Begin -->
+	<tbody>
+		<tr>
+			<td class="n5-card-mod--tab-tr__l text-left">
+				<a class="n5-card-mod--tab-tr__a tool-cmd--a
+				button hollow"
+				data-sound="|sound|"
+				data-tool-cmd-action="|file_name|"
+				href="">|name_short|</a>
+			</td>
+			<td class="n5-card-mod--tab-tr__r">
+				<p class="n5-card-mod--tab-tr__p
+				article--p__roboto_light">|name_long|</p>
+			</td>
+		</tr>
+	</tbody>
 <!-- Each Content End -->
 </template>
 
@@ -1187,7 +1208,7 @@ You can create your own Style Guide and access it via this extension. Simply use
 															</table>
 													</details>
 													<details class="JS-RESOURCE">
-														<summary class="caption--p__architectsdaughter"><i class="fa fa-link"></i>&nbsp; Links
+														<summary class="caption--p__architectsdaughter"><i class="fa fa-link"></i>&nbsp; Resource Links
 														</summary>
 															<table id="|name_short_JS-RESOURCE|" class="n5-card-mod--tab" border=1>
 																<!-- Each Content Begin -->

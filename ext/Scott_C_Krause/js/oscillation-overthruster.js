@@ -33,12 +33,19 @@ n5Tags.addTag( new n5Tag("utility"        ,"utilities"      ,"E80C7A",	"Diagnost
 n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Experience, Computer Human Interaction and User Interface design"));
 n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
 
-n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"Pattern: Primary Banner Component",	1,	"pattern-primary-banner-component.html",					"component","accessibility|content|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",	"Tabs | Accordions",	"Pattern: Tabs | Accordions Component",	2,	"pattern-custom-accordion-component.html",				"component","accessibility|content|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	                                                "component","accessibility|content|pattern|ux",""));
-n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"Pattern: JavaScript Media Queries Component",	4,	"pattern-javascript-media-queries.html",	"component","browser|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",	"A11y",	"Accessibility Patterns",	5,	"pattern-a11y.html",	                                                        "accessibility","pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",	"A11y | Skip Nav",	"Skip Nav Pattern",	6,	"pattern-a11y-skip-nav.html",	                                                  "pattern","accessibility|form",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Primary Banner",	"A standard, reusable and consistent component for rendering the primary banner",	1,	"pattern-primary-banner-component.html",					"component","accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Tabs and Accordions",	"A custom bridge implementation of the Foundation 4 Accordion (AKA Sections) that works without F4",	2,	"pattern-custom-accordion-component.html",				"component","accessibility|content|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Carousel",	"Pattern: Carousel Component",	3,	"pattern-carousel.html",	                                                "component","content|pattern|ux",""));
+n5Contents.addContent( new n5Content("PATTERN",	"JavaScript Media Queries",	"jsMQ can tell you what the current state of the browser is (Small, Medium or Large) and notify you if there is a change",	4,	"pattern-javascript-media-queries.html",	"component","browser|pattern",""));
+n5Contents.addContent( new n5Content("PATTERN",	"A11y Skip Navigation",	"The skip navigation idea was invented to give screen reader and keyboard users the same capability of going directly to the main content that sighted mouse users take for granted.",	6,	"pattern-a11y-skip-nav.html", "accessibility","component|ux",""));
+n5Contents.addContent( new n5Content("PATTERN",	"Tab Report Viewer",	"Review the your last Tab Tool report.",	6,	"tab-report.html",	                                                  "accessibility","component|pattern|testing",""));
+
+n5Contents.addContent( new n5Content("JS-TOOL",	"Gray Scale",	"Remove Color Saturation. Understand the contrast between content and the background for anyone with low vision impairments and color deficiencies.",	6,	"cmdGrayScale", "accessibility","color|testing",""));
+n5Contents.addContent( new n5Content("JS-TOOL",	"ALT Audit Lakeside",	"Lakeside Production ALT Audit. This is an inference audit that captures the state of ALT attributes on the pages that are likely to change over time, due to user contributed content.",	7,	"cmdMissingAltTagsLSC", "accessibility","content|process|testing",""));
+n5Contents.addContent( new n5Content("JS-TOOL",	"ALT Audit LTD",	    "LTD Production ALT Audit. This is an inference audit that captures the state of ALT attributes on the pages that are likely to change over time, due to user contributed content.",	7,	"cmdMissingAltTagsLTD", "accessibility","content|process|testing",""));
+n5Contents.addContent( new n5Content("JS-TOOL",	"ALT Audit LTD (Stage)",	"LTD Stage ALT Audit. This is an inference audit that captures the state of ALT attributes on the pages that are likely to change over time, due to user contributed content.",	6,	"cmdMissingAltTagsLTDStage", "accessibility","content|process|testing",""));
+n5Contents.addContent( new n5Content("JS-TOOL",	"Inject Prime Banner",	"Inject a sample primary banner image using the Primary Banner pattern.",	6,	"cmdInjectPrimeBanner", "accessibility","content|process|testing",""));
+n5Contents.addContent( new n5Content("JS-TOOL",	"Inject Photo Cust",	"Inject Photo Customization iFrame to test the responsive layout. Must be on the PDP.",	6,	"cmdInjectPhotoCust", "component","content|pattern|testing",""));
 
 function n5Tags(){
 	this.an5Tags = [];
@@ -112,11 +119,32 @@ function n5Contents(){
 	this.getContentButtonsByType = function( sContent_type, sTag ){
 		//    Given a content_type (PATTERN  TOOL-CSS  TOOL-JS  RESOURCE  DIALOG)
 		//    and a tag (i.e. form) return a tokenized assc array for template consumption
-		//  This may be tricky because the template will need to repeat itself....
+		//  This may be tricky because the template might need to repeat itself....
 
 		var aToken =[];
 		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
 			if( (this.an5Contents[iCnt].content_type === sContent_type) && (this.an5Contents[iCnt].tag === sTag) ){
+				var oTok = new Object();
+					oTok.target = "sound";
+					oTok.source = this.an5Contents[iCnt].sound;
+				aToken.push( oTok );
+				var oTok = new Object();
+					oTok.target = "file_name";
+					oTok.source = this.an5Contents[iCnt].file_name;
+				aToken.push( oTok );
+				var oTok = new Object();
+					oTok.target = "name_short";
+					oTok.source = this.an5Contents[iCnt].name_short;
+				aToken.push( oTok );
+				var oTok = new Object();
+					oTok.target = "name_long";
+					oTok.source = this.an5Contents[iCnt].name_long;
+				aToken.push( oTok );
+			}
+		}
+		//    Process mv tagS
+		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
+			if( (this.an5Contents[iCnt].content_type === sContent_type) && (this.an5Contents[iCnt].tags.indexOf( sTag ) >= 0) ){
 				var oTok = new Object();
 					oTok.target = "sound";
 					oTok.source = this.an5Contents[iCnt].sound;
@@ -310,7 +338,7 @@ $( document ).ready(function(){
 		//    Template within a Template
 
 //  The below condition is for dev por tempo
-if( sTagToken !== "accessibility"){	
+//if( sTagToken !== "accessibility"){	
 		//    Populate the templates name_short and summary tokens and id the 3 tables
 		var aToken =[{source: sTagName_short , target: "name_short"},
 		{source: sTagSummary , target: "summary"},
@@ -319,8 +347,10 @@ if( sTagToken !== "accessibility"){
 		{source: sTagName_short+"_JS-RESOURCE" , target: "name_short_JS-RESOURCE"}];
 		$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details", aToken ));
 
-		$("#"+ sTagName_short+"_PATTERN").html(popuTemplate("templ_n5-card-mod-details_tr", n5Contents.getContentButtonsByType("PATTERN",sTagToken) ));
-}
+		$("#"+ sTagName_short+"_PATTERN").html(popuTemplate("templ_n5-card-mod-details_tr_PATTERN", n5Contents.getContentButtonsByType("PATTERN",sTagToken) ));
+
+		$("#"+ sTagName_short+"_JS-TOOL").html(popuTemplate("templ_n5-card-mod-details_tr_JS-TOOL", n5Contents.getContentButtonsByType("JS-TOOL",sTagToken) ));
+//}
 $( document ).foundation();
 	});
 
