@@ -1090,39 +1090,6 @@ You can create your own Style Guide and access it via this extension. Simply use
 			</div><!--end off-canvas-wrapper-inner-->
 		</div><!--end off-canvas-wrapper-->
 
-<br>
-<section class="row">
-    <div class="columns small-12">
-
-<p>
-
-<span class="tag-label--accessibility label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--browser       label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--color         label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--component     label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--content       label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--cRM           label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--form          label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--imagery       label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--media         label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--mobile        label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--pattern       label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--process       label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--performance   label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--resource      label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--seo           label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--social        label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--testing       label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--typography    label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--utility       label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--ux            label"><i class="fa fa-tag fa-lg"></i></span>
-<span class="tag-label--video         label"><i class="fa fa-tag fa-lg"></i></span>
-
-</p>
-
-    </div>
-</section>
-
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/TimelineMax.min.js"></script>
 		<script src="js/TweenMax.min.js"></script>
@@ -1148,6 +1115,9 @@ You can create your own Style Guide and access it via this extension. Simply use
 		</span>
 	</p>
 </template>
+<template id="templ_n5-card-tag">
+				<span class="tag-label--|tag| label"><i class="fa fa-tag fa-lg"></i></span>
+</template>
 <template id="templ_n5-card-mod-details_tr_PATTERN">
 <!-- Each Content Begin -->
 	<tbody>
@@ -1156,11 +1126,13 @@ You can create your own Style Guide and access it via this extension. Simply use
 				<a class="n5-card-mod--tab-tr__a
 				href-loc-stor-wrap-templ button hollow"
 				data-sound="|sound|"
+				data-all-tags="|all_tags|"
 				href="|file_name|">|name_short|</a>
 			</td>
 			<td class="n5-card-mod--tab-tr__r">
 				<p class="n5-card-mod--tab-tr__p
 				article--p__roboto_light">|name_long|</p>
+				|tags_mu|
 			</td>
 		</tr>
 	</tbody>
@@ -1174,15 +1146,37 @@ You can create your own Style Guide and access it via this extension. Simply use
 				<a class="n5-card-mod--tab-tr__a tool-cmd--a
 				button hollow"
 				data-sound="|sound|"
+				data-all-tags="|all_tags|"
 				data-tool-cmd-action="|file_name|"
 				href="">|name_short|</a>
 			</td>
 			<td class="n5-card-mod--tab-tr__r">
 				<p class="n5-card-mod--tab-tr__p
 				article--p__roboto_light">|name_long|</p>
+				|tags_mu|
 			</td>
 		</tr>
 	</tbody>
+<!-- Each Content End -->
+</template>
+<template id="templ_n5-card-mod-details_tr_JS-RESOURCE">
+<!-- Each Content Begin -->
+	<tbody>
+		<tr>
+			<td class="n5-card-mod--tab-tr__l text-left">
+				<a class="n5-card-mod--tab-tr__a button hollow"
+				data-sound="|sound|"
+				data-all-tags="|all_tags|"
+				href="|file_name|" target="_blank">|name_short|</a>
+			</td>
+			<td class="n5-card-mod--tab-tr__r">
+				<p class="n5-card-mod--tab-tr__p
+				article--p__roboto_light">|name_long|</p>
+				|tags_mu|
+			</td>
+		</tr>
+	</tbody>
+
 <!-- Each Content End -->
 </template>
 

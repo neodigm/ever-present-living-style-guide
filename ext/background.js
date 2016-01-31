@@ -108,10 +108,11 @@ function playNote(frequency, startTime, duration) {
     }
 };
 
-function aJTab( sPanel ){
+function aJTab( sPanel, sData_all_tags ){
     //    Create or reuse a tab and make its location that had from an href
 
     localStorage.setItem("eplsg-template--article", sPanel);
+    localStorage.setItem("eplsg-template--all_tags", sData_all_tags);
 
     if( oTabContent === undefined ){
         chrome.tabs.create({url: "Scott_C_Krause/ever_present_living_style_guide.html", index: 0}, function(tab) {
@@ -285,24 +286,24 @@ function appendMyClipboard( sClip ){
     //    Timestamp and append to existing loc str then
     //    return entire persisted value
 
-    console.clear();
-    console.groupCollapsed("appendMyClipboard IN");
-        console.log( sClip );
-    console.groupEnd();
+    //console.clear();
+    //console.groupCollapsed("appendMyClipboard IN");
+        //console.log( sClip );
+    //console.groupEnd();
 
-    var sPre = "<br>---- " + Nowish() + " ----<br>";
-    var sPost = "";
-    if( localStorage.getItem("MyClipboard") !== null ){
-        sPost = localStorage.getItem("MyClipboard");
-        if(sPost.indexOf( sPre ) >= 0){
-            sPost = "";
-        }
-    }
+    //var sPre = "<br>---- " + Nowish() + " ----<br>";
+    //var sPost = "";
+    //if( localStorage.getItem("MyClipboard") !== null ){
+        //sPost = localStorage.getItem("MyClipboard");
+        //if(sPost.indexOf( sPre ) >= 0){
+            //sPost = "";
+        //}
+    //}
 
-    sClip = sPre + sClip +  "<hr>" + sPost;
-    localStorage.removeItem("MyClipboard");
-    localStorage.setItem("MyClipboard", sClip);
-    return localStorage.getItem("MyClipboard");
+    //sClip = sPre + sClip +  "<hr>" + sPost;
+    //localStorage.removeItem("MyClipboard");
+    //localStorage.setItem("MyClipboard", sClip);
+    //return localStorage.getItem("MyClipboard");
 }
 
 function Nowish(){

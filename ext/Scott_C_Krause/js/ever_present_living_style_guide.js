@@ -7,6 +7,8 @@ $( document ).ready(function(){
 	//    Fetch abs url from local storage and populate declaritive template element
 	//    via ajax
 
+	$(".eplsg-template--all_tags").html( localStorage.getItem("eplsg-template--all_tags") );
+
 	$(".eplsg-template--article").load( localStorage.getItem("eplsg-template--article"), function(){
 		//    Fire up the Zurb Foundation 6 RWD framework
 
@@ -38,7 +40,7 @@ $( window ).load(function(){
 });
 $( document ).bind("ajaxComplete", function(){
 	setTimeout( function( ){
-			//    This logic is only for the ALT Audit
+		//    This logic is only for the ALT Audit
 		$("h4 a").each(function(){
 			//    Append an ordered list of pages
 			$("#js-head--pages").append("<li><p class='article--p__roboto text-center'>"+$(this).text()+"</p></li>");
