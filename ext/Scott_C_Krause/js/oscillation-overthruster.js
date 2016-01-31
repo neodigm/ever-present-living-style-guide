@@ -34,7 +34,7 @@ n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Exp
 n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
 
 n5Contents.addContent( new n5Content("JS-RESOURCE",	"A11y patterns",	        "An accessible widget and pattern library",	1,	"http://a11yproject.com/patterns/", "accessibility","content|pattern|ux",""));
-n5Contents.addContent( new n5Content("JS-RES_muOURCE",	"ARIA Standards",	        "Accessible Rich Internet Applications WAI-ARIA",	1,	"https://www.w3.org/standards/techs/aria#w3c_all", "accessibility","pattern|ux",""));
+n5Contents.addContent( new n5Content("JS-RESOURCE",	"ARIA Standards",	        "Accessible Rich Internet Applications WAI-ARIA",	1,	"https://www.w3.org/standards/techs/aria#w3c_all", "accessibility","pattern|ux",""));
 n5Contents.addContent( new n5Content("JS-RESOURCE",	"ARIA Techniques",	        "Widget roles, Composite roles and Document structure roles",	1,	"https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques", "accessibility","pattern|ux",""));
 n5Contents.addContent( new n5Content("JS-RESOURCE",	"Zurb on Accessibility",    "Foundation for Sites is a fully-accessible framework. Here are some general guidelines to keep in mind as you make your pages accessible.",	1,	"http://foundation.zurb.com/sites/docs/accessibility.html", "accessibility","pattern|ux",""));
 n5Contents.addContent( new n5Content("JS-TOOL",     "ALT Audit LTD (Stage)",    "LTD Stage ALT Audit. This is an inference audit that captures the state of ALT attributes on the pages that are likely to change over time, due to user contributed content.",	6,	"cmdMissingAltTagsLTDStage", "accessibility","content|process|testing",""));
@@ -50,6 +50,9 @@ n5Contents.addContent( new n5Content("PATTERN",     "Primary Banner",	        "A
 n5Contents.addContent( new n5Content("PATTERN",     "Tab Report Viewer",	    "Review the your last Tab Tool report.",	6,	"tab-report.html",	                                                  "accessibility","component|pattern|testing",""));
 n5Contents.addContent( new n5Content("PATTERN",     "Tabs and Accordions",	    "A custom bridge implementation of the Foundation 4 Accordion (AKA Sections) that works without F4",	2,	"pattern-custom-accordion-component.html",				"component","accessibility|content|pattern",""));
 n5Contents.addContent( new n5Content("JS-RESOURCE", "Responsive Breakpoints Generator",	    "Images for all the different devices and in various resolutions, pixel densities and orientations",	5,	"http://www.responsivebreakpoints.com/", "imagery","content|testing",""));
+n5Contents.addContent( new n5Content("JS-RESOURCE", "JS Perf",	    "create and share test cases, comparing the performance of different JavaScript snippets by running benchmarks",	5,	"https://jsperf.com/", "performance","testing|ux",""));
+n5Contents.addContent( new n5Content("JS-RESOURCE", "Typography Supply",	    "An inventory of typographic tools",	2,	"http://typography.supply/", "typography","testing|ux",""));
+n5Contents.addContent( new n5Content("JS-RESOURCE", "Mobile Input Types",	    "Test onscreen keyboards, input types, patterns and attributes",	3,	"http://inputtypes.com/", "form","browser|testing|ux",""));
 
 
 function n5Tags(){
