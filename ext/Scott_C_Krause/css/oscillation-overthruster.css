@@ -306,6 +306,10 @@ summary {
 
 .n5-card .label {cursor: pointer;}
 
+.status-table--td__warn:hover .status-table--td__warn:active    {background-color: #EDBA08 !important;}
+.status-table--td__miss:hover .status-table--td__miss:active    {background-color: #EDBA08 !important;}
+.status-table--td__info:hover .status-table--td__info:active    {background-color: #EDBA08 !important;}
+
 .status-table--td__warn    {color: #38141B;border-left: #FFC04C 4px solid;background-color: #FFE26E;}
 .status-table--td__miss    {color: #38141B;border-left: #FF0000 4px solid;background-color: #FF9999;}
 .status-table--td__info    {color: #38141B;border-left: #00FF00 4px solid;background-color: #99FF99;}

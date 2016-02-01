@@ -1,6 +1,7 @@
 //    An endeavor by Scott C. Krause
 
 //    Background Reference
+'use strict';
 try {
 var oBackGroundEvent = chrome.extension.getBackgroundPage();  
 //    Repo base URL /wo ending slash
@@ -8,8 +9,8 @@ var sRepo_url = "";
 //    Repo Demo base URL /wo ending slash
 var sRepo_url_demo = "http://neodigm.github.io/ever-present-living-style-guide-site";
 
-var n5Tags = new n5Tags();
-var n5Contents = new n5Contents();
+var n5Tags = new N5Tags();
+var n5Contents = new N5Contents();
 
 n5Tags.addTag( new n5Tag("accessibility"  ,"accessibility"  ,"296661",	"Allow people with disabilities to perceive, understand, navigate, and interact with the Web"));
 n5Tags.addTag( new n5Tag("browser"        ,"browsers"       ,"4D2850",	"User Agents, Android, Blink, Chrome, Edge, Explorer, Firefox, Opera, Safari, Webkit"));
@@ -32,7 +33,7 @@ n5Tags.addTag( new n5Tag("typography"     ,"typography"     ,"256069",	"Text lay
 n5Tags.addTag( new n5Tag("utility"        ,"utilities"      ,"E80C7A",	"Diagnostic tools, scripts, snippets, audits, generators and templates"));
 n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Experience, Computer Human Interaction and User Interface design"));
 n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
-
+/*
 n5Contents.addContent( new n5Content("JS-RESOURCE",	"A11y patterns",	        "An accessible widget and pattern library",	1,	"http://a11yproject.com/patterns/", "accessibility","content|pattern|ux",""));
 n5Contents.addContent( new n5Content("JS-RESOURCE",	"ARIA Standards",	        "Accessible Rich Internet Applications WAI-ARIA",	1,	"https://www.w3.org/standards/techs/aria#w3c_all", "accessibility","pattern|ux",""));
 n5Contents.addContent( new n5Content("JS-RESOURCE",	"ARIA Techniques",	        "Widget roles, Composite roles and Document structure roles",	1,	"https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques", "accessibility","pattern|ux",""));
@@ -53,9 +54,9 @@ n5Contents.addContent( new n5Content("JS-RESOURCE", "Responsive Breakpoints Gene
 n5Contents.addContent( new n5Content("JS-RESOURCE", "JS Perf",	    "create and share test cases, comparing the performance of different JavaScript snippets by running benchmarks",	5,	"https://jsperf.com/", "performance","testing|ux",""));
 n5Contents.addContent( new n5Content("JS-RESOURCE", "Typography Supply",	    "An inventory of typographic tools",	2,	"http://typography.supply/", "typography","testing|ux",""));
 n5Contents.addContent( new n5Content("JS-RESOURCE", "Mobile Input Types",	    "Test onscreen keyboards, input types, patterns and attributes",	3,	"http://inputtypes.com/", "form","browser|testing|ux",""));
+*/
 
-
-function n5Tags(){
+function N5Tags(){
 	this.an5Tags = [];
 	this.addTag = function( oTag ){
 		this.an5Tags.push( oTag );
@@ -132,7 +133,7 @@ function n5Tag(name_short,plural,color,summary){
 	this.cardSubTotal = "";
 }
 
-function n5Contents(){
+function N5Contents(){
 	this.an5Contents = [];
 	this.addContent = function( oContent ){
 		this.an5Contents.push( oContent );
@@ -297,6 +298,10 @@ function popuTemplate(sTemplate_id, aContents){
 function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
 	switch ( sPanel ){
+		case "templ_contents" :
+//TODO: Load this stuff Async ....?
+			$(".templ_contents").load( sRepo_url + "/templ_contents.html");
+		break;
 		case "oc_nav_content_right" :
 			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html");
 		break;
@@ -331,6 +336,18 @@ $( document ).ready(function(){
 
 	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random()*2)) === 0) ? 6 : 4 ); //  Random Intro sound
 
+$(".n5c-ugc-source").each(function(){
+	var data_content_type = $(this).attr("data-content_type");
+	var data_name_short = $(this).attr("data-name_short");
+	var data_name_long = $(this).attr("data-name_long");
+	var data_sound = $(this).attr("data-sound");
+	var data_file_name = $(this).attr("data-file_name");
+	var data_tag = $(this).attr("data-tag");
+	var data_tags = $(this).attr("data-tags");
+	var data_notification = $(this).attr("data-notification");
+	n5Contents.addContent( new n5Content(data_content_type,data_name_short,data_name_long,data_sound,data_file_name,data_tag,data_tags,data_notification));
+});
+
 	//    Lets init the n5 Cards
 	$(".n5-card").each(function(){
 		var sTagToken = $( this ).attr("data-n5c-token");  //  attrib on the card
@@ -342,7 +359,7 @@ $( document ).ready(function(){
 
 		//    Render tag labels /w count into card container
 		//    Primary Tag
-		$oCardContainer = $( this ).find(".n5-card--img-1");
+		var $oCardContainer = $( this ).find(".n5-card--img-1");
 		$oCardContainer.html( popuTemplate("templ_tag_label_count_primary",
 			n5Contents.getTags( sTagToken ) ));
 		//    Associated TagS
