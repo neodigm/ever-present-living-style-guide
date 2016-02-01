@@ -344,7 +344,7 @@ summary {
 .tag-label--pattern       {background-color: #968851; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--process       {background-color: #4CA192; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--performance   {background-color: #DC8C3D; margin: 2px; font-family: "Roboto Condensed";}
-.tag-label--resource      {background-color: #9B3C25; margin: 2px; font-family: "Roboto Condensed";}
+.tag-label--research      {background-color: #9B3C25; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--seo           {background-color: #748C7A; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--social        {background-color: #9E9E4D; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--testing       {background-color: #E5809C; margin: 2px; font-family: "Roboto Condensed";}
@@ -366,7 +366,7 @@ summary {
 .tag-label--pattern::after       {content: " Pattern"; }
 .tag-label--process::after       {content: " Process"; }
 .tag-label--performance::after   {content: " Performance"; }
-.tag-label--resource::after      {content: " Resource"; }
+.tag-label--research::after      {content: " Research"; }
 .tag-label--seo::after           {content: " SEO"; }
 .tag-label--social::after        {content: " Social"; }
 .tag-label--testing::after       {content: " Testing"; }

@@ -25,7 +25,7 @@ n5Tags.addTag( new n5Tag("mobile"         ,"mobile"         ,"BF5B21",	"Hybrid a
 n5Tags.addTag( new n5Tag("pattern"        ,"patterns"       ,"968851",	"Common reusable design patterns"));
 n5Tags.addTag( new n5Tag("process"        ,"processes"      ,"4CA192",	"Business, Creative and Technical workflow"));
 n5Tags.addTag( new n5Tag("performance"    ,"performance"    ,"DC8C3D",	"Web performance optimization tuning"));
-n5Tags.addTag( new n5Tag("resource"       ,"resources"      ,"9B3C25",	"Curated UX Blogs, Knowledge base, articles, links and online tools"));
+n5Tags.addTag( new n5Tag("research"       ,"research"       ,"9B3C25",	"Insight through on-site observation and discovering usability issues through user testing"));
 n5Tags.addTag( new n5Tag("seo"            ,"SEO"            ,"748C7A",	"Search engine optimization and Marketing"));
 n5Tags.addTag( new n5Tag("social"         ,"social"         ,"9E9E4D",	"Social Media Platforms and Networks"));
 n5Tags.addTag( new n5Tag("testing"        ,"testing"        ,"E5809C",	"QA testing, user acceptance, security, defect, integration, and regression"));
