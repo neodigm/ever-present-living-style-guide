@@ -179,15 +179,15 @@ summary {
 	color: #E2D0D4;
 }
 
-.fa-tag, .fa-clipboard {
+.fa-tag, .fa-bars {
 	color: #FFFFFF;
 }
 
-.fa-cog, .fa-clipboard {
+.fa-cog, .fa-bars {
 	color: #E2D0D4;
 }
 
-.fa-cog:hover, .fa-clipboard:hover {
+.fa-cog:hover, .fa-bars:hover {
 	color: #FFFFFF;
 }
 .menu > li > a {
