@@ -299,11 +299,14 @@ function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
 	switch ( sPanel ){
 		case "templ_contents" :
-//TODO: Load this stuff Async ....?
+//TODO: Not being called yet, Load this stuff Async ....?
 			$(".templ_contents").load( sRepo_url + "/templ_contents.html");
 		break;
 		case "oc_nav_content_right" :
-			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html");
+			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html", function(){
+//TODO: This is a temp test to see when to process the dyn content markup
+
+			});
 		break;
 		case "ql_nav_dropdown" :
 			$(".ql_nav_dropdown").load( sRepo_url + "/ql_nav_dropdown.html");
@@ -336,7 +339,29 @@ $( document ).ready(function(){
 
 	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random()*2)) === 0) ? 6 : 4 ); //  Random Intro sound
 
+	//    Startup Application Init Logic
+
+	if( localStorage.getItem("repo_name") === null ){
+		sRepo_url = sRepo_url_demo;
+		$("#modGetGitRepo").foundation("open");
+		$("#txtRepo_name").focus();
+	}else{
+		//    A repo URL exists in local storage, so let's use it
+		sRepo_url = localStorage.getItem("repo_name");
+	}
+	if( localStorage.getItem("sound_switch") !== "false" ){
+		$(".store-sound-switch--a > i").removeClass("fa-volume-off fa-volume-up").addClass("fa-volume-up");
+	}else{
+		$(".store-sound-switch--a > i").removeClass("fa-volume-off fa-volume-up").addClass("fa-volume-off");
+	}
+
+
+	loadDynRepo(); //    Fetch Content
+
+	
+
 $(".n5c-ugc-source").each(function(){
+	//    Objectify the content markup
 	var data_content_type = $(this).attr("data-content_type");
 	var data_name_short = $(this).attr("data-name_short");
 	var data_name_long = $(this).attr("data-name_long");
@@ -347,7 +372,6 @@ $(".n5c-ugc-source").each(function(){
 	var data_notification = $(this).attr("data-notification");
 	n5Contents.addContent( new n5Content(data_content_type,data_name_short,data_name_long,data_sound,data_file_name,data_tag,data_tags,data_notification));
 });
-
 	//    Lets init the n5 Cards
 	$(".n5-card").each(function(){
 		var sTagToken = $( this ).attr("data-n5c-token");  //  attrib on the card
@@ -388,7 +412,7 @@ $(".n5c-ugc-source").each(function(){
 		$("#"+ sTagName_short+"_JS-RESOURCE").html(popuTemplate("templ_n5-card-mod-details_tr_JS-RESOURCE", n5Contents.getContentButtonsByType("JS-RESOURCE",sTagToken) ));
 
 	});
-
+/*
 	$('.owl-carousel').owlCarousel({
 	    loop:true,
 	    margin:10,
@@ -408,7 +432,7 @@ $(".n5c-ugc-source").each(function(){
 	        }
 	    }
 	});
-
+*/
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function () {
 		//    The config modal was closed
 		if( $("#txtRepo_name").val() == ""){
@@ -452,24 +476,6 @@ $(".n5c-ugc-source").each(function(){
 		$("#modGetGitRepo").foundation("open");
 		e.preventDefault();
 	});
-
-	//    Startup Application Logic
-
-	if( localStorage.getItem("repo_name") === null ){
-		sRepo_url = sRepo_url_demo;
-		$("#modGetGitRepo").foundation("open");
-		$("#txtRepo_name").focus();
-	}else{
-		//    A repo URL exists in local storage, so let's use it
-		sRepo_url = localStorage.getItem("repo_name");
-	}
-	if( localStorage.getItem("sound_switch") !== "false" ){
-		$(".store-sound-switch--a > i").removeClass("fa-volume-off fa-volume-up").addClass("fa-volume-up");
-	}else{
-		$(".store-sound-switch--a > i").removeClass("fa-volume-off fa-volume-up").addClass("fa-volume-off");
-	}
-	loadDynRepo(); //    Fetch Content
-
 
 	//    Temp dev events - DELETE later
 	$(".store-repo-set--a").on("click", function(e){
