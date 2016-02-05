@@ -353,7 +353,7 @@ $(".n5c-ugc-source").each(function(){
 	//    Lets init the n5 Cards
 	var iCnt=0;
 	$("[data-n5c-token]").each(function(){
-		//    templ_n5c
+		//    Poplate templ_n5c
 		iCnt++;
 		var aCard =[];
 			var oTok = new Object();
