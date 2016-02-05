@@ -6,9 +6,9 @@ var oBackGroundEvent = chrome.extension.getBackgroundPage();
 $( document ).ready(function(){
 	//    Fetch abs url from local storage and populate declaritive template element
 	//    via ajax
-
-	$(".eplsg-template--all_tags").html( localStorage.getItem("eplsg-template--all_tags") );
-
+	if(localStorage.getItem("eplsg-template--all_tags") !== "undefined"){
+		$(".eplsg-template--all_tags").html( localStorage.getItem("eplsg-template--all_tags") );
+	}
 	$(".eplsg-template--article").load( localStorage.getItem("eplsg-template--article"), function(){
 		//    Fire up the Zurb Foundation 6 RWD framework
 
