@@ -331,6 +331,17 @@ summary {
 
 .tab-label--primary {margin-left: -24px !important;}
 
+.ucol-hex--aside {
+	width: 112px;
+	border: #AAAAAA solid 1px;
+	margin-bottom: 14px;
+}
+.ucol-hex--p {
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 16px;
+}
+
 .tag-label--accessibility {background-color: #296661; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--browser       {background-color: #4D2850; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--color         {background-color: #EC3A40; margin: 2px; font-family: "Roboto Condensed";}
