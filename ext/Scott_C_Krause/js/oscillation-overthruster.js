@@ -33,28 +33,6 @@ n5Tags.addTag( new n5Tag("typography"     ,"typography"     ,"256069",	"Text lay
 n5Tags.addTag( new n5Tag("utility"        ,"utilities"      ,"E80C7A",	"Diagnostic tools, scripts, snippets, audits, generators and templates"));
 n5Tags.addTag( new n5Tag("ux"             ,"UX"             ,"DCA907",	"User Experience, Computer Human Interaction and User Interface design"));
 n5Tags.addTag( new n5Tag("video"          ,"videos"         ,"F24444",	"HTML5 Video Player"));
-/*
-n5Contents.addContent( new n5Content("JS-RESOURCE",	"A11y patterns",	        "An accessible widget and pattern library",	1,	"http://a11yproject.com/patterns/", "accessibility","content|pattern|ux",""));
-n5Contents.addContent( new n5Content("JS-RESOURCE",	"ARIA Standards",	        "Accessible Rich Internet Applications WAI-ARIA",	1,	"https://www.w3.org/standards/techs/aria#w3c_all", "accessibility","pattern|ux",""));
-n5Contents.addContent( new n5Content("JS-RESOURCE",	"ARIA Techniques",	        "Widget roles, Composite roles and Document structure roles",	1,	"https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques", "accessibility","pattern|ux",""));
-n5Contents.addContent( new n5Content("JS-RESOURCE",	"Zurb on Accessibility",    "Foundation for Sites is a fully-accessible framework. Here are some general guidelines to keep in mind as you make your pages accessible.",	1,	"http://foundation.zurb.com/sites/docs/accessibility.html", "accessibility","pattern|ux",""));
-n5Contents.addContent( new n5Content("JS-TOOL",     "ALT Audit LTD (Stage)",    "LTD Stage ALT Audit. This is an inference audit that captures the state of ALT attributes on the pages that are likely to change over time, due to user contributed content.",	6,	"cmdMissingAltTagsLTDStage", "accessibility","content|process|testing",""));
-n5Contents.addContent( new n5Content("JS-TOOL",     "ALT Audit LTD",	        "LTD Production ALT Audit. This is an inference audit that captures the state of ALT attributes on the pages that are likely to change over time, due to user contributed content.",	7,	"cmdMissingAltTagsLTD", "accessibility","content|process|testing",""));
-n5Contents.addContent( new n5Content("JS-TOOL",     "ALT Audit Lakeside",	    "Lakeside Production ALT Audit. This is an inference audit that captures the state of ALT attributes on the pages that are likely to change over time, due to user contributed content.",	7,	"cmdMissingAltTagsLSC", "accessibility","content|process|testing",""));
-n5Contents.addContent( new n5Content("JS-TOOL",     "Gray Scale",	            "Remove Color Saturation. Understand the contrast between content and the background for anyone with low vision impairments and color deficiencies.",	6,	"cmdGrayScale", "accessibility","color|testing",""));
-n5Contents.addContent( new n5Content("JS-TOOL",     "Inject Photo Cust",	    "Inject Photo Customization iFrame to test the responsive layout. Must be on the PDP.",	6,	"cmdInjectPhotoCust", "component","content|pattern|testing",""));
-n5Contents.addContent( new n5Content("JS-TOOL",     "Inject Prime Banner",	    "Inject a sample primary banner image using the Primary Banner pattern.",	6,	"cmdInjectPrimeBanner", "testing","process|content",""));
-n5Contents.addContent( new n5Content("PATTERN",     "A11y Skip Navigation",	    "The skip navigation idea was invented to give screen reader and keyboard users the same capability of going directly to the main content that sighted mouse users take for granted.",	6,	"pattern-a11y-skip-nav.html", "accessibility","component|ux",""));
-n5Contents.addContent( new n5Content("PATTERN",     "Carousel",	                "Pattern: Carousel Component",	3,	"pattern-carousel.html",	                                                "component","content|pattern|ux",""));
-n5Contents.addContent( new n5Content("PATTERN",     "JavaScript Media Queries",	"jsMQ can tell you what the current state of the browser is (Small, Medium or Large) and notify you if there is a change",	4,	"pattern-javascript-media-queries.html",	"component","browser|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",     "Primary Banner",	        "A standard, reusable and consistent component for rendering the primary banner",	1,	"pattern-primary-banner-component.html",					"component","accessibility|content|pattern",""));
-n5Contents.addContent( new n5Content("PATTERN",     "Tab Report Viewer",	    "Review the your last Tab Tool report.",	6,	"tab-report.html",	                                                  "accessibility","component|pattern|testing",""));
-n5Contents.addContent( new n5Content("PATTERN",     "Tabs and Accordions",	    "A custom bridge implementation of the Foundation 4 Accordion (AKA Sections) that works without F4",	2,	"pattern-custom-accordion-component.html",				"component","accessibility|content|pattern",""));
-n5Contents.addContent( new n5Content("JS-RESOURCE", "Responsive Breakpoints Generator",	    "Images for all the different devices and in various resolutions, pixel densities and orientations",	5,	"http://www.responsivebreakpoints.com/", "imagery","content|testing",""));
-n5Contents.addContent( new n5Content("JS-RESOURCE", "JS Perf",	    "create and share test cases, comparing the performance of different JavaScript snippets by running benchmarks",	5,	"https://jsperf.com/", "performance","testing|ux",""));
-n5Contents.addContent( new n5Content("JS-RESOURCE", "Typography Supply",	    "An inventory of typographic tools",	2,	"http://typography.supply/", "typography","testing|ux",""));
-n5Contents.addContent( new n5Content("JS-RESOURCE", "Mobile Input Types",	    "Test onscreen keyboards, input types, patterns and attributes",	3,	"http://inputtypes.com/", "form","browser|testing|ux",""));
-*/
 
 function N5Tags(){
 	this.an5Tags = [];
@@ -373,6 +351,24 @@ $(".n5c-ugc-source").each(function(){
 	n5Contents.addContent( new n5Content(data_content_type,data_name_short,data_name_long,data_sound,data_file_name,data_tag,data_tags,data_notification));
 });
 	//    Lets init the n5 Cards
+	var iCnt=0;
+	$("[data-n5c-token]").each(function(){
+		//    templ_n5c
+		iCnt++;
+		var aCard =[];
+			var oTok = new Object();
+			oTok.target = "token";
+			oTok.source = $(this).attr("data-n5c-token");
+			aCard.push( oTok );
+			var oTok = new Object();
+			oTok.target = "count";
+			oTok.source = iCnt;
+			aCard.push( oTok );
+			aCard.push( oTok );
+			aCard.push( oTok );
+		$(this).html( popuTemplate("templ_n5c", aCard) );
+	});
+	
 	$(".n5-card").each(function(){
 		var sTagToken = $( this ).attr("data-n5c-token");  //  attrib on the card
 		var sTagName_short = n5Tags.getTag( sTagToken ).name_short;
@@ -412,6 +408,7 @@ $(".n5c-ugc-source").each(function(){
 		$("#"+ sTagName_short+"_JS-RESOURCE").html(popuTemplate("templ_n5-card-mod-details_tr_JS-RESOURCE", n5Contents.getContentButtonsByType("JS-RESOURCE",sTagToken) ));
 
 	});
+
 /*
 	$('.owl-carousel').owlCarousel({
 	    loop:true,
@@ -593,12 +590,14 @@ $( document ).bind("ajaxComplete", function(){
 
 	$(".n5-card").unbind().on("click", function( e ){
 		//  Pop into modal - open by naming convention
+console.log("n5c 1| "+$(this).attr("id") );
 		var sTagToken = $( this ).attr("data-n5c-token");
 		if( n5Contents.hasContent( $( this ).attr("data-n5c-token") )){
+console.log("n5c 2| "+$("#"+ $(this).attr("id")+"--mod").html() );
 			$("#"+ $(this).attr("id")+"--mod").foundation("open");
 			oBackGroundEvent.playAudioFile( 3 );    //    wind whizz
 			// Generate content for MyClip
-			$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( "Open "+sTagToken ) );
+			//$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( "Open "+sTagToken ) );
 		}else{
 			oBackGroundEvent.playAudioFile( 10 );    //    beep errorish
 		}
