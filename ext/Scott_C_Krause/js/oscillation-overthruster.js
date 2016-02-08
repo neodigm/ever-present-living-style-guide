@@ -3,7 +3,7 @@
 //    Background Reference
 'use strict';
 try {
-var oBackGroundEvent = chrome.extension.getBackgroundPage();  
+var oBackGroundEvent = chrome.extension.getBackgroundPage();
 //    Repo base URL /wo ending slash
 var sRepo_url = "";
 //    Repo Demo base URL /wo ending slash
@@ -18,7 +18,7 @@ n5Tags.addTag( new n5Tag("color"          ,"colors"         ,"EC3A40",	"Branded 
 n5Tags.addTag( new n5Tag("component"      ,"components"     ,"506F8D",	"Bundle markup and styles into encapsulated custom HTML elements"));
 n5Tags.addTag( new n5Tag("content"        ,"content"        ,"E80C7A",	"Creating and distributing valuable, relevant, and consistent content"));
 n5Tags.addTag( new n5Tag("crm"            ,"CRM"            ,"EEBD00",	"Customer Relationship Management"));
-n5Tags.addTag( new n5Tag("form"           ,"forms"          ,"A49060",	"Data input, validation and file upload"));
+n5Tags.addTag( new n5Tag("forms"          ,"forms"          ,"A49060",	"Data input, validation and file upload"));
 n5Tags.addTag( new n5Tag("imagery"        ,"images"         ,"2C6418",	"Image presentation formatting and optimization"));
 n5Tags.addTag( new n5Tag("media"          ,"media"          ,"4B3B32",	"Video and Audio presentation and capture"));
 n5Tags.addTag( new n5Tag("mobile"         ,"mobile"         ,"BF5B21",	"Hybrid and Native Mobile Apps"));
@@ -277,20 +277,28 @@ function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
 	switch ( sPanel ){
 		case "templ_contents" :
-//TODO: Not being called yet, Load this stuff Async ....?
-			$(".templ_contents").load( sRepo_url + "/templ_contents.html");
+			$(".templ_contents").load( sRepo_url + "/templ_contents.html", function(){
+				afterContentLoad();
+			});
 		break;
 		case "oc_nav_content_right" :
-			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html", function(){
-//TODO: This is a temp test to see when to process the dyn content markup
-
-			});
+			$(".oc_nav_content_right").load( sRepo_url + "/right_nav.html");
 		break;
 		case "ql_nav_dropdown" :
 			$(".ql_nav_dropdown").load( sRepo_url + "/ql_nav_dropdown.html");
 		break;
 		case "modAboutThisGuide" :
 			$("#modAboutThisGuide_ugc").load( sRepo_url + "/modAboutThisGuide.html");
+		break;
+		case "templ_footer" :
+			$("#templ_footer").load( sRepo_url + "/templ_footer.html", function(){
+				$("aside > button").unbind().on("click",function( e ) {
+					//    Fade Alert (UGC not modal)
+					e.preventDefault();
+					oBackGroundEvent.audioTick_1();	
+					$(this).closest(".callout").fadeOut("slow");
+				});
+			});
 		break;
 	}
 }
@@ -304,11 +312,73 @@ function aJTab( sPanel, sData_all_tags ){
 	oBackGroundEvent.aJTab( sPanel, popuTemplate("templ_n5-card-tag", n5Tags.getArrayDTO( sData_all_tags.split("#").join("|") ) ) );
 }
 
-function loadDynRepo(){
-	//    Content Template Driver
-	aJLoad("oc_nav_content_right");
-	aJLoad("ql_nav_dropdown");
-	aJLoad("modAboutThisGuide");
+function afterContentLoad(){
+    //    Document ready has fired and the content template is loaded | Init the n5 Cards 
+	$(".n5c-ugc-source").each(function(){
+		//    Objectify the content markup
+		var data_content_type = $(this).attr("data-content_type");
+		var data_name_short = $(this).attr("data-name_short");
+		var data_name_long = $(this).attr("data-name_long");
+		var data_sound = $(this).attr("data-sound");
+		var data_file_name = $(this).attr("data-file_name");
+		var data_tag = $(this).attr("data-tag");
+		var data_tags = $(this).attr("data-tags");
+		var data_notification = $(this).attr("data-notification");
+		n5Contents.addContent( new n5Content(data_content_type,data_name_short,data_name_long,data_sound,data_file_name,data_tag,data_tags,data_notification));
+	});
+
+	var iCnt=0;
+	$("[data-n5c-token]").each(function(){
+		//    Poplate templ_n5c
+		iCnt++;
+		var aCard =[];
+			var oTok = new Object();
+			oTok.target = "token";
+			oTok.source = $(this).attr("data-n5c-token");
+			aCard.push( oTok );
+			var oTok = new Object();
+			oTok.target = "count";
+			oTok.source = iCnt;
+			aCard.push( oTok );
+			aCard.push( oTok );
+			aCard.push( oTok );
+		$(this).html( popuTemplate("templ_n5c", aCard) );
+	});
+	
+	$(".n5-card").each(function(){
+		var sTagToken = $( this ).attr("data-n5c-token");  //  attrib on the card	
+		var sTagName_short = n5Tags.getTag( sTagToken ).name_short;
+		var sTagSummary    = n5Tags.getTag( sTagToken ).summary;
+		//    Populate the cards caption and summary
+		$( this ).find(".n5-card--caption-1-h3").html(  sTagName_short );
+		$( this ).find(".n5-card--summary-1 > p").html( sTagSummary );
+		//    Render tag labels /w count into card container
+		//    Primary Tag
+		var $oCardContainer = $( this ).find(".n5-card--img-1");
+		$oCardContainer.html( popuTemplate("templ_tag_label_count_primary",
+			n5Contents.getTags( sTagToken ) ));
+		//    Associated TagS
+		if( n5Contents.countContentByTags( sTagToken ) > 0 ){
+			var aTags = n5Contents.getContentByTags( sTagToken );
+			for(var iC=0; iC < aTags.length; iC++){
+				n5Tags.addCardSub( sTagToken, aTags[iC].tag ); // Increment counters
+			}
+			$oCardContainer.html( $oCardContainer.html() + popuTemplate("templ_tag_label_count",
+			n5Tags.getCardSubAll( sTagToken )) );
+		}
+		//    Populate Reveal Modal Dialogs (ugc) via template (zoomed nav n5c state)
+		//    Populate the templates name_short and summary tokens and id the 3 tables
+		var aToken =[{source: sTagName_short , target: "name_short"},
+		{source: sTagSummary , target: "summary"},
+		{source: sTagName_short+"_PATTERN" , target: "name_short_PATTERN"},
+		{source: sTagName_short+"_JS-TOOL" , target: "name_short_JS-TOOL"},
+		{source: sTagName_short+"_JS-RESOURCE" , target: "name_short_JS-RESOURCE"}];
+		$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details", aToken ));
+
+		$("#"+ sTagName_short+"_PATTERN").html(popuTemplate("templ_n5-card-mod-details_tr_PATTERN", n5Contents.getContentButtonsByType("PATTERN",sTagToken) ));
+		$("#"+ sTagName_short+"_JS-TOOL").html(popuTemplate("templ_n5-card-mod-details_tr_JS-TOOL", n5Contents.getContentButtonsByType("JS-TOOL",sTagToken) ));
+		$("#"+ sTagName_short+"_JS-RESOURCE").html(popuTemplate("templ_n5-card-mod-details_tr_JS-RESOURCE", n5Contents.getContentButtonsByType("JS-RESOURCE",sTagToken) ));
+	});
 }
 
 $( document ).ready(function(){
@@ -333,81 +403,11 @@ $( document ).ready(function(){
 		$(".store-sound-switch--a > i").removeClass("fa-volume-off fa-volume-up").addClass("fa-volume-off");
 	}
 
-
-	loadDynRepo(); //    Fetch Content
-
-	
-
-$(".n5c-ugc-source").each(function(){
-	//    Objectify the content markup
-	var data_content_type = $(this).attr("data-content_type");
-	var data_name_short = $(this).attr("data-name_short");
-	var data_name_long = $(this).attr("data-name_long");
-	var data_sound = $(this).attr("data-sound");
-	var data_file_name = $(this).attr("data-file_name");
-	var data_tag = $(this).attr("data-tag");
-	var data_tags = $(this).attr("data-tags");
-	var data_notification = $(this).attr("data-notification");
-	n5Contents.addContent( new n5Content(data_content_type,data_name_short,data_name_long,data_sound,data_file_name,data_tag,data_tags,data_notification));
-});
-	//    Lets init the n5 Cards
-	var iCnt=0;
-	$("[data-n5c-token]").each(function(){
-		//    Poplate templ_n5c
-		iCnt++;
-		var aCard =[];
-			var oTok = new Object();
-			oTok.target = "token";
-			oTok.source = $(this).attr("data-n5c-token");
-			aCard.push( oTok );
-			var oTok = new Object();
-			oTok.target = "count";
-			oTok.source = iCnt;
-			aCard.push( oTok );
-			aCard.push( oTok );
-			aCard.push( oTok );
-		$(this).html( popuTemplate("templ_n5c", aCard) );
-	});
-	
-	$(".n5-card").each(function(){
-		var sTagToken = $( this ).attr("data-n5c-token");  //  attrib on the card
-		var sTagName_short = n5Tags.getTag( sTagToken ).name_short;
-		var sTagSummary    = n5Tags.getTag( sTagToken ).summary;
-		//    Populate the cards caption and summary
-		$( this ).find(".n5-card--caption-1-h3").html(  sTagName_short );
-		$( this ).find(".n5-card--summary-1 > p").html( sTagSummary );
-
-		//    Render tag labels /w count into card container
-		//    Primary Tag
-		var $oCardContainer = $( this ).find(".n5-card--img-1");
-		$oCardContainer.html( popuTemplate("templ_tag_label_count_primary",
-			n5Contents.getTags( sTagToken ) ));
-		//    Associated TagS
-		if( n5Contents.countContentByTags( sTagToken ) > 0 ){
-			var aTags = n5Contents.getContentByTags( sTagToken );
-			for(var iC=0; iC < aTags.length; iC++){
-				n5Tags.addCardSub( sTagToken, aTags[iC].tag ); // Increment counters
-			}
-
-			$oCardContainer.html( $oCardContainer.html() + popuTemplate("templ_tag_label_count",
-			n5Tags.getCardSubAll( sTagToken )) );
-		}
-		//    Populate Reveal Modal Dialogs (ugc) via template (zoomed nav n5c state)
-		//    Template within a Template
-
-		//    Populate the templates name_short and summary tokens and id the 3 tables
-		var aToken =[{source: sTagName_short , target: "name_short"},
-		{source: sTagSummary , target: "summary"},
-		{source: sTagName_short+"_PATTERN" , target: "name_short_PATTERN"},
-		{source: sTagName_short+"_JS-TOOL" , target: "name_short_JS-TOOL"},
-		{source: sTagName_short+"_JS-RESOURCE" , target: "name_short_JS-RESOURCE"}];
-		$("#"+ $(this).attr("id")+"--mod__ugc").html(popuTemplate("templ_n5-card-mod-details", aToken ));
-
-		$("#"+ sTagName_short+"_PATTERN").html(popuTemplate("templ_n5-card-mod-details_tr_PATTERN", n5Contents.getContentButtonsByType("PATTERN",sTagToken) ));
-		$("#"+ sTagName_short+"_JS-TOOL").html(popuTemplate("templ_n5-card-mod-details_tr_JS-TOOL", n5Contents.getContentButtonsByType("JS-TOOL",sTagToken) ));
-		$("#"+ sTagName_short+"_JS-RESOURCE").html(popuTemplate("templ_n5-card-mod-details_tr_JS-RESOURCE", n5Contents.getContentButtonsByType("JS-RESOURCE",sTagToken) ));
-
-	});
+	aJLoad("templ_contents");
+	aJLoad("oc_nav_content_right");
+	aJLoad("ql_nav_dropdown");
+	aJLoad("modAboutThisGuide");
+	aJLoad("templ_footer");
 
 /*
 	$('.owl-carousel').owlCarousel({
@@ -538,7 +538,7 @@ $(".n5c-ugc-source").each(function(){
 });
 
 function isValidRepo( sURL ){
-	//    
+	//    Ping the repo
 	return true;
 }
 
@@ -550,14 +550,14 @@ $('.close-button:not(.callout)').click(function( e ) {
 	//    Sound | Audio ping close
 	oBackGroundEvent.audioTick_1();	
 });
-
+/*
 $('.callout > .close-button').click(function( e ) {
 	//    Fade Alert (not modal)
 	e.preventDefault();
 	oBackGroundEvent.audioTick_1();	
 	$(this).closest('.callout').fadeOut();
 });
-
+*/
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
@@ -590,14 +590,10 @@ $( document ).bind("ajaxComplete", function(){
 
 	$(".n5-card").unbind().on("click", function( e ){
 		//  Pop into modal - open by naming convention
-console.log("n5c 1| "+$(this).attr("id") );
 		var sTagToken = $( this ).attr("data-n5c-token");
 		if( n5Contents.hasContent( $( this ).attr("data-n5c-token") )){
-console.log("n5c 2| "+$("#"+ $(this).attr("id")+"--mod").html() );
 			$("#"+ $(this).attr("id")+"--mod").foundation("open");
-			oBackGroundEvent.playAudioFile( 3 );    //    wind whizz
-			// Generate content for MyClip
-			//$("#p_MyClipboard").html( oBackGroundEvent.appendMyClipboard( "Open "+sTagToken ) );
+			oBackGroundEvent.playAudioFile( 3 );     //    wind whiz
 		}else{
 			oBackGroundEvent.playAudioFile( 10 );    //    beep errorish
 		}

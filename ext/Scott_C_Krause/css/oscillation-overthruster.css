@@ -30,6 +30,9 @@ body {
 	font-weight: 200; outline: none !important; 
 }
 
+#logo {width: 76%;}
+#qr {margin-left: 20%;}
+
 a, ul, li, a:hover, ul:hover, li:hover, a:focus, ul:focus, li:focus  { outline: none !important; }
 
 hr {
@@ -348,7 +351,7 @@ summary {
 .tag-label--component     {background-color: #506F8D; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--content       {background-color: #E80C7A; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--crm           {background-color: #EEBD00; margin: 2px; font-family: "Roboto Condensed";}
-.tag-label--form          {background-color: #A49060; margin: 2px; font-family: "Roboto Condensed";}
+.tag-label--forms         {background-color: #A49060; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--imagery       {background-color: #2C6418; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--media         {background-color: #4B3B32; margin: 2px; font-family: "Roboto Condensed";}
 .tag-label--mobile        {background-color: #BF5B21; margin: 2px; font-family: "Roboto Condensed";}
@@ -370,7 +373,7 @@ summary {
 .tag-label--component::after     {content: " Component"; }
 .tag-label--content::after       {content: " Content"; }
 .tag-label--crm::after           {content: " CRM"; }
-.tag-label--form::after          {content: " Form"; }
+.tag-label--forms::after         {content: " Forms"; }
 .tag-label--imagery::after       {content: " Imagery"; }
 .tag-label--media::after         {content: " Media"; }
 .tag-label--mobile::after        {content: " Mobile"; }
