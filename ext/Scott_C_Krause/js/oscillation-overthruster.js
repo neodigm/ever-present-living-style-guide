@@ -379,6 +379,18 @@ function afterContentLoad(){
 		$("#"+ sTagName_short+"_JS-TOOL").html(popuTemplate("templ_n5-card-mod-details_tr_JS-TOOL", n5Contents.getContentButtonsByType("JS-TOOL",sTagToken) ));
 		$("#"+ sTagName_short+"_JS-RESOURCE").html(popuTemplate("templ_n5-card-mod-details_tr_JS-RESOURCE", n5Contents.getContentButtonsByType("JS-RESOURCE",sTagToken) ));
 	});
+	$(".tool-cmd--a").on("click", function( e ){
+		//    Tool Buttons Wire Up
+		var sSoundCode = $(this).attr("data-sound");
+		oBackGroundEvent.playAudioFile( sSoundCode );    //    From sound attr on anchor
+		//$(".rev-modal").foundation("close");
+		$("#modLoading").foundation("open");				
+		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
+		setTimeout( function( ){
+			$("#modLoading").foundation("close");
+		}, 640);
+		e.preventDefault();
+	});
 }
 
 $( document ).ready(function(){
@@ -437,19 +449,6 @@ $( document ).ready(function(){
 			localStorage.setItem("repo_name", sRepo_url);
 			oBackGroundEvent.displayMsg(  "No Style Guide connected\nLoading Demo" );
 		}
-	});
-	
-	$(".tool-cmd--a").on("click", function( e ){
-		//    Tool Buttons Wire Up
-		var sSoundCode = $(this).attr("data-sound");
-		oBackGroundEvent.playAudioFile( sSoundCode );    //    From sound attr on anchor
-		//$(".rev-modal").foundation("close");
-		$("#modLoading").foundation("open");				
-		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
-		setTimeout( function( ){
-			$("#modLoading").foundation("close");
-		}, 640);
-		e.preventDefault();
 	});
 
 	$("#cmdRepo-new").on("click", function(e){
@@ -562,8 +561,8 @@ $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
 	//    Init Expand all cards
-	TweenLite.to( $(".n5-card:even"), 1.8, {height: "256px"});
-	TweenLite.to( $(".n5-card:odd"),  1.0, {height: "256px"});
+	//TweenLite.to( $(".n5-card:even"), 1.8, {height: "256px"});
+	//TweenLite.to( $(".n5-card:odd"),  1.0, {height: "256px"});
 
 	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
 		//    Left Nav Menu Click OR any in-doc click

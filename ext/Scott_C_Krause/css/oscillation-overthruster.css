@@ -59,10 +59,15 @@ details summary::-webkit-details-marker {
 	padding: 0;
 }
 
+.top--buttons {
+	height: 42px;
+}
+
 .cmd--dropdown {
-	min-height: 52px;
+	min-height: 41px;
     min-width: 238px;
-	padding-top: 16px !important;
+	padding-top: 12px !important;
+	padding-bottom: 8px !important;
 }
 
 .rev-modal {
@@ -192,6 +197,9 @@ summary {
 
 .fa-cog:hover, .fa-bars:hover {
 	color: #FFFFFF;
+}
+.fa-paper-plane:hover {
+	color: #EDBA08;
 }
 .menu > li > a {
     padding: 0.6rem 0.4rem;
