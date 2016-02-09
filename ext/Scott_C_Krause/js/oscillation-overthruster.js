@@ -397,7 +397,7 @@ $( document ).ready(function(){
 	//    Fire up the Zurb Foundation 6 RWD framework
 	$( document ).foundation();
 
-	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random()*2)) === 0) ? 6 : 4 ); //  Random Intro sound
+	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random()*2) ) === 0) ? 6 : 4 ); //  Random Intro sound
 
 	//    Startup Application Init Logic
 
@@ -414,7 +414,7 @@ $( document ).ready(function(){
 	}else{
 		$(".store-sound-switch--a > i").removeClass("fa-volume-off fa-volume-up").addClass("fa-volume-off");
 	}
-
+	//   ugc driver
 	aJLoad("templ_contents");
 	aJLoad("oc_nav_content_right");
 	aJLoad("ql_nav_dropdown");
@@ -473,8 +473,9 @@ $( document ).ready(function(){
 		e.preventDefault();
 	});
 
-	//    Temp dev events - DELETE later
+	
 	$(".store-repo-set--a").on("click", function(e){
+		//    Temp dev events - DELETE later
 		localStorage.setItem("repo_name", "ltdc_ux_cookbook");
 		e.preventDefault();
 	});
@@ -511,6 +512,7 @@ $( document ).ready(function(){
 		e.preventDefault();
 	});
 	$(".store-repo-clear--a").on("click", function(e){
+		//    Temp dev events - DELETE later
 		localStorage.removeItem("repo_name");
 		localStorage.removeItem("sound_switch");
 		chrome.storage.local.clear(function() {
@@ -549,24 +551,25 @@ $('.close-button:not(.callout)').click(function( e ) {
 	//    Sound | Audio ping close
 	oBackGroundEvent.audioTick_1();	
 });
-/*
-$('.callout > .close-button').click(function( e ) {
-	//    Fade Alert (not modal)
-	e.preventDefault();
-	oBackGroundEvent.audioTick_1();	
-	$(this).closest('.callout').fadeOut();
-});
-*/
+
 $( document ).bind("ajaxComplete", function(){
 	$( document ).foundation();
 
 	//    Init Expand all cards
 	//TweenLite.to( $(".n5-card:even"), 1.8, {height: "256px"});
 	//TweenLite.to( $(".n5-card:odd"),  1.0, {height: "256px"});
+	$(".n5-card").each(function(){
+		var wasOpened = localStorage.getItem( $(this).attr("data-n5c-token") );
+		if( typeof wasOpened !== typeof null ){
+			var nTime = ( Math.floor((Math.random()*2) ) === 0) ? 1.0 : 2.0;
+			TweenLite.to( $(this),  nTime, {height: "256px"});
+			$( this ).children("i").toggleClass("fa-chevron-down").toggleClass("fa-chevron-up");
+console.log( $( this ).children("i").html() );
+		}
+	});
 
 	$(".href-loc-stor-wrap-templ").unbind().on("click",function( e ){
 		//    Left Nav Menu Click OR any in-doc click
-
 		e.preventDefault();
 		oBackGroundEvent.audioAlert();
 		
@@ -577,7 +580,7 @@ $( document ).bind("ajaxComplete", function(){
 			//  Open the reveal by attr naming convention
 			//  May need to wait for the off canvas to close
 			var sSoundCode = $(this).attr("data-sound");
-			if( typeof sSoundCode === typeof undefined){ sSoundCode = 1; }
+			if( typeof sSoundCode === typeof undefined ){ sSoundCode = 1; }
 			setTimeout( function( ){
 				$("[data-content-link=" + sFilNam + "]").foundation("open");
 				oBackGroundEvent.playAudioFile( sSoundCode );    //    From sound attr on anchor
@@ -618,17 +621,20 @@ $( document ).bind("ajaxComplete", function(){
 
 		if( $( n5c_i ).hasClass("fa-chevron-down") ){
 			//    open
-			//oBackGroundEvent.playAudioFile( 5 );    //    slap echo
 			oBackGroundEvent.playAudioFile( 18 );    //    mechanical whirl
 			$( n5c_i ).removeClass("fa-chevron-down").addClass("fa-chevron-up");
 			TweenLite.to( n5c, 1, {ease: Expo.easeOut, height: "256px"});
 			TweenLite.to( n5c_sumr, 1.2, {ease: Expo.easeOut, delay:0.4, height: "64px"});
+    		//  Persist open state
+		    localStorage.setItem( $(this).children("h3").html() , "1");
 		}else{
 			//    close
 			oBackGroundEvent.playAudioFile( 8 );    //    alien whirl
 			$( n5c_i ).removeClass("fa-chevron-up").addClass("fa-chevron-down");
 			TweenLite.to( n5c_sumr, .8, {ease: Expo.easeOut, height: "0px"});
 			TweenLite.to( n5c, 1, {ease: Expo.easeOut, height: "48px"});
+    		//  Remove open state
+		    localStorage.removeItem( $(this).children("h3").html() );
 		}
 		e.preventDefault();
 		e.stopPropagation();

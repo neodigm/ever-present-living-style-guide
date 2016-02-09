@@ -310,30 +310,6 @@ function displayMsg( sMsg ){
     }
 }
 
-function zzzzzzappendMyClipboard( sClip ){
-    //    Timestamp and append to existing loc str then
-    //    return entire persisted value
-
-    //console.clear();
-    //console.groupCollapsed("appendMyClipboard IN");
-        //console.log( sClip );
-    //console.groupEnd();
-
-    //var sPre = "<br>---- " + Nowish() + " ----<br>";
-    //var sPost = "";
-    //if( localStorage.getItem("MyClipboard") !== null ){
-        //sPost = localStorage.getItem("MyClipboard");
-        //if(sPost.indexOf( sPre ) >= 0){
-            //sPost = "";
-        //}
-    //}
-
-    //sClip = sPre + sClip +  "<hr>" + sPost;
-    //localStorage.removeItem("MyClipboard");
-    //localStorage.setItem("MyClipboard", sClip);
-    //return localStorage.getItem("MyClipboard");
-}
-
 function Nowish(){
     //    A readable Client-side time/date stamp
     var dNow = new Date();
