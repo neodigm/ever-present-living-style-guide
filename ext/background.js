@@ -57,21 +57,16 @@ function fetchSoundonload() {
 };
 
 function playAudioFile( nSound ) {
-    //    
-
+    //    Play MP3 if sound toggle is true
     if( localStorage.getItem("sound_switch") !== "false" ){
         var oSrc = oAudContx.createBufferSource();
         var volume = oAudContx.createGain();
-
-        //volume.gain.setValueAtTime(0.00, startTime + duration - 0.04);
         oSrc.buffer = aAudioBuffer[nSound];
-        volume.gain.value = 0.16;
+        volume.gain.value = 0.0;
         oSrc.connect(volume);  
         volume.connect(oAudContx.destination);
-
         oSrc.connect(oAudContx.destination);
-
-        volume.gain.value = 0.16;
+        volume.gain.value = 0.0;
         oSrc.start(oAudContx.currentTime);
     }    
 };
@@ -138,7 +133,6 @@ function playNote(frequency, startTime, duration) {
 
 function aJTab( sPanel, sData_all_tags ){
     //    Create or reuse a tab and make its location that had from an href
-
     localStorage.setItem("eplsg-template--article", sPanel);
     localStorage.setItem("eplsg-template--all_tags", sData_all_tags);
 
@@ -154,7 +148,6 @@ function aJTab( sPanel, sData_all_tags ){
 
 function runTool( sTool ){
     //    Inject CSS or JS into a tab
-
     switch ( sTool ) {
         case "cmdGrayScale":
             //
@@ -283,9 +276,10 @@ function clearChromeStorage(){
 }
 
 function sleep(ms) {
-  var start = new Date().getTime(), expire = start + ms;
-  while (new Date().getTime() < expire) { }
-  return;
+    //  Synce Sleep
+    var start = new Date().getTime(), expire = start + ms;
+    while (new Date().getTime() < expire) { }
+    return;
 }
 
 function displayMsg( sMsg ){

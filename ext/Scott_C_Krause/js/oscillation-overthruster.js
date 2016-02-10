@@ -91,7 +91,6 @@ function N5Tags(){
 	this.getArrayDTO = function( sAll_tags ){
 		//    Given a pipe delim string return an array of DTO
 		//    Source and Target for templ consumption
-
 		var aAll_tags = [];
 		var aAll_tags_out = [];
 		aAll_tags = sAll_tags.split("|");
@@ -120,7 +119,6 @@ function N5Contents(){
 		//    Given a content_type (PATTERN  TOOL-CSS  TOOL-JS  RESOURCE  DIALOG)
 		//    and a tag (i.e. form) return a tokenized assc array for template consumption
 		//  This may be tricky because the template might need to repeat itself....
-
 		var aToken =[];
 		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
 			if( (this.an5Contents[iCnt].content_type === sContent_type) && (this.an5Contents[iCnt].tag === sTag) ){
@@ -183,7 +181,6 @@ function N5Contents(){
 	}
 	this.getContentByTags = function( sTags ){
 		//    Iterate, fetch and return an array of objs given a tag fragment
-
 		var aContainedInTags = [];
 		for(var iCnt=0; iCnt < this.an5Contents.length; iCnt++){
 			if( this.an5Contents[iCnt].tags.indexOf( sTags ) > 0 ){
@@ -442,6 +439,14 @@ $( document ).ready(function(){
 	    }
 	});
 */
+	$("#cmdOffCanvMyClip").on("click", "*", function ( e ) {
+		//    Off Canvas
+		oBackGroundEvent.playAudioFile( 17 );    //    ?
+	});
+	$("#cmdSubmitAnArticle--form").on("click", function ( e ) {
+		//    Any modal was closed
+		oBackGroundEvent.playAudioFile( 17 );    //    ?
+	});
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function () {
 		//    The config modal was closed
 		if( $("#txtRepo_name").val() == ""){
@@ -451,7 +456,7 @@ $( document ).ready(function(){
 		}
 	});
 
-	$("#cmdRepo-new").on("click", function(e){
+	$("#cmdRepo-new").on("click", function( e ){
 		//    The [Custom Repo] button on the Config Modal
 		//    was explicitly clicked
 		var sURL = $("#txtRepo_name").val();
@@ -557,14 +562,15 @@ $( document ).bind("ajaxComplete", function(){
 
 	//    Init Expand all cards
 	//TweenLite.to( $(".n5-card:even"), 1.8, {height: "256px"});
-	//TweenLite.to( $(".n5-card:odd"),  1.0, {height: "256px"});
+	//TweenLite.to( $(".n5-card:odd"),  1.0, {heimght: "256px"});
 	$(".n5-card").each(function(){
 		var wasOpened = localStorage.getItem( $(this).attr("data-n5c-token") );
 		if( typeof wasOpened !== typeof null ){
 			var nTime = ( Math.floor((Math.random()*2) ) === 0) ? 1.0 : 2.0;
 			TweenLite.to( $(this),  nTime, {height: "256px"});
-			$( this ).children("i").toggleClass("fa-chevron-down").toggleClass("fa-chevron-up");
-console.log( $( this ).children("i").html() );
+			$( this ).find(".fa").toggleClass("fa-chevron-down").toggleClass("fa-chevron-up");
+console.log( $( this ).html() );
+console.log( $( this ).find(".fa").html() );
 		}
 	});
 
