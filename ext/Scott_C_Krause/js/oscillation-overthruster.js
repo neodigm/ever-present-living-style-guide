@@ -444,7 +444,7 @@ $( document ).ready(function(){
 		oBackGroundEvent.playAudioFile( 17 );    //    ?
 	});
 	$("#cmdSubmitAnArticle--form").on("click", function ( e ) {
-		//    Any modal was closed
+		//    Submit an Article was well, submitted
 		oBackGroundEvent.playAudioFile( 17 );    //    ?
 	});
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function () {

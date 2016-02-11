@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
 		<script src="js/modernizr-custom.js"></script>
 	</head>
 <!--
@@ -225,50 +226,22 @@
 								</button>
 								<aside class="callout">
 									<article id="modSubmitAnArticle_ugc">
-
-									<!--    Dynamic HTML Content -->
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
-<!--  If necessary, please modify the charset parameter to specify the        -->
-<!--  character set of your HTML page.                                        -->
-<!--  ----------------------------------------------------------------------  -->
-
-<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: Please add the following <FORM> element to your page.             -->
-<!--  ----------------------------------------------------------------------  -->
-
-<form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
-
-<input type=hidden name="oid" value="00D15000000EiXX">
-<input type=hidden name="retURL" value="chrome-extension://debjnogdanoohplcaalaelafkimclkio/Scott_C_Krause/article_submitted.html">
-
-<!--  ----------------------------------------------------------------------  -->
-<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-<!--  these lines if you wish to test in debug mode.                          -->
-<!--  <input type="hidden" name="debug" value=1>                              -->
-<!--  <input type="hidden" name="debugEmail"                                  -->
-<!--  value="neostudios.com@gmail.com">                                       -->
-<!--  ----------------------------------------------------------------------  -->
-
-<label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
-
-<label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
-
-eplsg email:<input  id="00N1500000G2oUn" maxlength="80" name="00N1500000G2oUn" size="20" type="text" /><br>
-
-eplsg name short:<input  id="00N1500000G2oUs" maxlength="64" name="00N1500000G2oUs" size="20" type="text" /><br>
-
-eplsg name long:<textarea  id="00N1500000G2oV2" name="00N1500000G2oV2" type="text" wrap="soft"></textarea><br>
-
-eplsg file name:<input  id="00N1500000G2oV7" maxlength="255" name="00N1500000G2oV7" size="20" type="text" /><br>
-	<section class="row">
-		<div class="column small-12">
-			<input id="cmdSubmitAnArticle--form" class="button extended radius" type="submit" name="submit">
-		</div>
-	</section>
-</form>
+										<form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+											<input type=hidden name="oid" value="00D15000000EiXX">
+											<input type=hidden name="retURL" value="http://neodigm.github.io/ever-present-living-style-guide-site/">
+											<input  id="first_name" maxlength="40" name="first_name" size="20" type="text" placeholder="First Name"/>
+											<input  id="last_name" maxlength="80" name="last_name" size="20" type="text" placeholder="Last Name"/>
+											<input  id="00N1500000G2oUn" maxlength="80" name="00N1500000G2oUn" size="20" type="text" placeholder="Email"/>
+											<input  id="00N1500000G2oUs" maxlength="64" name="00N1500000G2oUs" size="20" type="text" placeholder="Article Title"/>
+											<textarea  id="00N1500000G2oV2" name="00N1500000G2oV2" type="text" wrap="soft"placeholder="Article Description"></textarea>
+											<input  id="00N1500000G2oV7" maxlength="255" name="00N1500000G2oV7" size="20" type="text" placeholder="Article Link"/>
+											<input  id="00N1500000GHBbf" maxlength="255" name="00N1500000GHBbf" size="20" type="text" placeholder="repo" value="http://neodigm.github.io/ever-present-living-style-guide-site"/>
+											<section class="row">
+												<div class="column small-12">
+													<input id="cmdSubmitAnArticle--form" class="button extended radius" type="submit" name="submit">
+												</div>
+											</section>											
+										</form>
 									</article>
 								</aside>
 
