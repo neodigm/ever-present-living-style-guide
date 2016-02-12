@@ -3,6 +3,8 @@
 	border-color: #DDDDDD;
 }
 
+input, textarea {border-left: 3px solid #991111 !important;}
+
 .close-button { right: 10px !important;}
 
 .off-canvas-content{ min-width: 764px;}

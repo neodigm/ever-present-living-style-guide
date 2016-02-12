@@ -385,7 +385,7 @@ function afterContentLoad(){
 		oBackGroundEvent.runTool( $( this ).attr("data-tool-cmd-action") );
 		setTimeout( function( ){
 			$("#modLoading").foundation("close");
-		}, 640);
+		}, 800);
 		e.preventDefault();
 	});
 }
@@ -393,6 +393,27 @@ function afterContentLoad(){
 $( document ).ready(function(){
 	//    Fire up the Zurb Foundation 6 RWD framework
 	$( document ).foundation();
+		$("#cmdSubmitAnArticle--form").on("click", function ( e ) {
+			//    Submit an Article was well, submitted
+
+			var bOk = true;
+			e.preventDefault();
+			$("#sfdc-w2l--form input, textarea").each(function(){
+				if( $(this).val().length === 0 ) bOk = false;
+			});
+			if( bOk ){
+				oBackGroundEvent.playAudioFile( 17 );    //    zipper
+				oBackGroundEvent.displayMsg("Submitting Your Article");
+				$("#modLoading").foundation("open");				
+				setTimeout( function( ){
+					$("#modLoading").foundation("close");
+					$("#sfdc-w2l--form").submit();
+				}, 800);
+			}else{
+				oBackGroundEvent.playAudioFile( 10 );    //    beep errorish
+				oBackGroundEvent.displayMsg("Please fill out Entire Form");
+			}
+		});
 
 	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random()*2) ) === 0) ? 6 : 4 ); //  Random Intro sound
 
@@ -443,10 +464,7 @@ $( document ).ready(function(){
 		//    Off Canvas
 		oBackGroundEvent.playAudioFile( 17 );    //    ?
 	});
-	$("#cmdSubmitAnArticle--form").on("click", function ( e ) {
-		//    Submit an Article was well, submitted
-		oBackGroundEvent.playAudioFile( 17 );    //    ?
-	});
+
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function () {
 		//    The config modal was closed
 		if( $("#txtRepo_name").val() == ""){
@@ -569,8 +587,6 @@ $( document ).bind("ajaxComplete", function(){
 			var nTime = ( Math.floor((Math.random()*2) ) === 0) ? 1.0 : 2.0;
 			TweenLite.to( $(this),  nTime, {height: "256px"});
 			$( this ).find(".fa").toggleClass("fa-chevron-down").toggleClass("fa-chevron-up");
-console.log( $( this ).html() );
-console.log( $( this ).find(".fa").html() );
 		}
 	});
 
