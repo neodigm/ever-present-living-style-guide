@@ -402,3 +402,42 @@ summary {
 .tag-label--utility::after       {content: " Utility"; }
 .tag-label--ux::after            {content: " UX"; }
 .tag-label--video::after         {content: " Video"; }
+
+
+
+
+.smi--svg {
+  fill: #2BA6CB; /*branded*/
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.smi--svg:hover {fill: #297FB8;/*branded*/}
+
+.smi--fig {
+  float: left;
+  margin: 6px 10px 0 6px;
+}
+
+.smi--fig .smi--use__default {
+  display: block;
+}
+.smi--fig .smi--use__hover {
+  display: none;
+}
+.smi--fig:hover .smi--use__default {
+  display: none;
+}
+.smi--fig:hover .smi--use__hover {
+  display: block;
+}
+
+.resp_cf{
+	line-height: 0.2em;
+}
+.resp_cf:before,
+.resp_cf:after {
+	clear: both;
+    content: " ";
+    display: table;
+}
