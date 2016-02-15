@@ -45,6 +45,10 @@ details summary::-webkit-details-marker {
 	display: none;
 }
 
+details {
+	-webkit-user-select: none;  /* Stop text selection */
+}
+
 .off-canvas {
 	background-color: #FFFFFF;
 }
@@ -200,6 +204,7 @@ summary {
 }
 .fa-paper-plane:hover {
 	color: #EDBA08;
+	cursor: pointer;
 }
 .menu > li > a {
     padding: 0.6rem 0.4rem;
@@ -223,6 +228,7 @@ summary {
 
 	overflow: hidden;
 	cursor: pointer;
+	-webkit-user-select: none;  /* Stop text selection */	
 }
 .n5-card:hover {
 	-webkit-filter: grayscale(0);

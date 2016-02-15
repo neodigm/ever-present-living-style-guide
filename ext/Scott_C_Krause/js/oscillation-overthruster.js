@@ -1,8 +1,8 @@
 //    An endeavor by Scott C. Krause
 
-//    Background Reference
 'use strict';
 try {
+//    Background Reference	
 var oBackGroundEvent = chrome.extension.getBackgroundPage();
 //    Repo base URL /wo ending slash
 var sRepo_url = "";
@@ -284,7 +284,7 @@ function aJLoad( sPanel ){
 		case "ql_nav_dropdown" :
 			$(".ql_nav_dropdown").load( sRepo_url + "/ql_nav_dropdown.html");
 		break;
-		case "modAboutThisGuide" :
+		case "modAboutThisGuide_ugc" :
 			$("#modAboutThisGuide_ugc").load( sRepo_url + "/modAboutThisGuide.html");
 		break;
 		case "templ_footer" :
@@ -294,6 +294,32 @@ function aJLoad( sPanel ){
 					e.preventDefault();
 					oBackGroundEvent.audioTick_1();	
 					$(this).closest(".callout").fadeOut("slow");
+				});
+			});
+		break;
+		case "modSubmitAnArticle_ugc" :
+			$("#modSubmitAnArticle_ugc").load( sRepo_url + "/sfdc-w2l-article.html", function(){
+				$("#cmdSubmitAnArticle--form").on("click", function ( e ) {
+					//    Submit an Article was well, submitted
+					var bOk = true;
+					e.preventDefault();
+					$("#sfdc-w2l--form input, textarea").each(function(){
+						if( $(this).val().length === 0 ) bOk = false;
+					});
+					if( bOk ){
+						oBackGroundEvent.playAudioFile( 17 );    //    zipper
+						oBackGroundEvent.displayMsg("Submitting Your Article");
+						$("#modLoading").foundation("open");				
+						setTimeout( function( ){
+							//    Populate repo
+							$(".sfdc-w2l--input__repo").val( sRepo_url );
+							$("#modLoading").foundation("close");
+							$("#sfdc-w2l--form").submit();
+						}, 800);
+					}else{
+						oBackGroundEvent.playAudioFile( 10 );    //    beep errorish
+						oBackGroundEvent.displayMsg("Please fill out Entire Form");
+					}
 				});
 			});
 		break;
@@ -375,6 +401,16 @@ function afterContentLoad(){
 		$("#"+ sTagName_short+"_PATTERN").html(popuTemplate("templ_n5-card-mod-details_tr_PATTERN", n5Contents.getContentButtonsByType("PATTERN",sTagToken) ));
 		$("#"+ sTagName_short+"_JS-TOOL").html(popuTemplate("templ_n5-card-mod-details_tr_JS-TOOL", n5Contents.getContentButtonsByType("JS-TOOL",sTagToken) ));
 		$("#"+ sTagName_short+"_JS-RESOURCE").html(popuTemplate("templ_n5-card-mod-details_tr_JS-RESOURCE", n5Contents.getContentButtonsByType("JS-RESOURCE",sTagToken) ));
+		//  Hide Details Element if empty
+		if( $("#"+ sTagName_short+"_PATTERN").html() === "" ){
+			$("#"+ sTagName_short+"_PATTERN").closest("details").addClass("hide");
+		}
+		if( $("#"+ sTagName_short+"_JS-TOOL").html() === "" ){
+			$("#"+ sTagName_short+"_JS-TOOL").closest("details").addClass("hide");
+		}
+		if( $("#"+ sTagName_short+"_JS-RESOURCE").html() === "" ){
+			$("#"+ sTagName_short+"_JS-RESOURCE").closest("details").addClass("hide");
+		}
 	});
 	$(".tool-cmd--a").on("click", function( e ){
 		//    Tool Buttons Wire Up
@@ -393,27 +429,6 @@ function afterContentLoad(){
 $( document ).ready(function(){
 	//    Fire up the Zurb Foundation 6 RWD framework
 	$( document ).foundation();
-		$("#cmdSubmitAnArticle--form").on("click", function ( e ) {
-			//    Submit an Article was well, submitted
-
-			var bOk = true;
-			e.preventDefault();
-			$("#sfdc-w2l--form input, textarea").each(function(){
-				if( $(this).val().length === 0 ) bOk = false;
-			});
-			if( bOk ){
-				oBackGroundEvent.playAudioFile( 17 );    //    zipper
-				oBackGroundEvent.displayMsg("Submitting Your Article");
-				$("#modLoading").foundation("open");				
-				setTimeout( function( ){
-					$("#modLoading").foundation("close");
-					$("#sfdc-w2l--form").submit();
-				}, 800);
-			}else{
-				oBackGroundEvent.playAudioFile( 10 );    //    beep errorish
-				oBackGroundEvent.displayMsg("Please fill out Entire Form");
-			}
-		});
 
 	oBackGroundEvent.playAudioFile( ( Math.floor((Math.random()*2) ) === 0) ? 6 : 4 ); //  Random Intro sound
 
@@ -436,8 +451,9 @@ $( document ).ready(function(){
 	aJLoad("templ_contents");
 	aJLoad("oc_nav_content_right");
 	aJLoad("ql_nav_dropdown");
-	aJLoad("modAboutThisGuide");
+	aJLoad("modAboutThisGuide_ugc");
 	aJLoad("templ_footer");
+	aJLoad("modSubmitAnArticle_ugc");
 
 /*
 	$('.owl-carousel').owlCarousel({
@@ -460,12 +476,16 @@ $( document ).ready(function(){
 	    }
 	});
 */
-	$("#cmdOffCanvMyClip").on("click", "*", function ( e ) {
+	$("#cmdOffCanvMyClip").on("click", "*", function( e ) {
 		//    Off Canvas
 		oBackGroundEvent.playAudioFile( 17 );    //    ?
 	});
+	$(".fa-paper-plane").on("click", function( e ){
+		$("#cmdOffCanvMyClip").click();
+		e.preventDefault();
+	});
 
-	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function () {
+	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function() {
 		//    The config modal was closed
 		if( $("#txtRepo_name").val() == ""){
 			sRepo_url = sRepo_url_demo;
@@ -688,5 +708,5 @@ $( document ).bind("ajaxComplete", function(){
 	}
 }
 catch( e ){
-	//console.log("Error | " + e.message);
+	console.log("Error | " + e.message);
 }
