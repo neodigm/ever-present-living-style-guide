@@ -487,7 +487,7 @@ $( document ).ready(function(){
 
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function() {
 		//    The config modal was closed
-		if( $("#txtRepo_name").val() == ""){
+		if( $("#txtRepo_name").val() === ""){
 			sRepo_url = sRepo_url_demo;
 			localStorage.setItem("repo_name", sRepo_url);
 			oBackGroundEvent.displayMsg(  "No Style Guide connected\nLoading Demo" );
@@ -606,7 +606,7 @@ $( document ).bind("ajaxComplete", function(){
 		if( typeof wasOpened !== typeof null ){
 			var nTime = ( Math.floor((Math.random()*2) ) === 0) ? 1.0 : 2.0;
 			TweenLite.to( $(this),  nTime, {height: "256px"});
-			$( this ).find(".fa").toggleClass("fa-chevron-down").toggleClass("fa-chevron-up");
+			$( this ).find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-up");
 		}
 	});
 
