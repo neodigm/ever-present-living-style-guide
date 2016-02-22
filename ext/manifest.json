@@ -1,8 +1,9 @@
 {
 	"manifest_version": 2,
 	"name": "Ever Present Living Style Guide",
-	"version": "0.1.0",
-	"description": "Putting your Living Style Guide in the browser makes it easily available to the whole team. A Living Style Guide saves time, facilitates communication and documents the visual language for both designers and developers.",
+	"short_name": "Style Guide",
+	"version": "0.1.2",
+	"description": "Putting your Living Style Guide in the browser makes it easily available to the whole team.",
 	"author": "Scott C. Krause",
 	"browser_action": {
 		"default_icon": "scott_c_krause/img/eplsg_paper_plane.png",

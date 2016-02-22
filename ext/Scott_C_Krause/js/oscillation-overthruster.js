@@ -1,6 +1,5 @@
 //    An endeavor by Scott C. Krause
 
-'use strict';
 try {
 //    Background Reference	
 var oBackGroundEvent = chrome.extension.getBackgroundPage();
