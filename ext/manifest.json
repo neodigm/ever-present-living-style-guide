@@ -5,6 +5,9 @@
 	"version": "0.1.2",
 	"description": "Putting your Living Style Guide in the browser makes it easily available to the whole team.",
 	"author": "Scott C. Krause",
+	"icons": { "16":  "scott_c_krause/img/eplsg_paper_plane16.png",
+               "48":  "scott_c_krause/img/eplsg_paper_plane48.png",
+               "128": "scott_c_krause/img/eplsg_paper_plane128.png" },
 	"browser_action": {
 		"default_icon": "scott_c_krause/img/eplsg_paper_plane.png",
 		"default_title": "Ever Present Living Style Guide",
