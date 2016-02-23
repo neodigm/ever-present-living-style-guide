@@ -35,6 +35,10 @@ body {
 
 a, ul, li, a:hover, ul:hover, li:hover, a:focus, ul:focus, li:focus  { outline: none !important; }
 
+:focus {
+    outline: 0;
+}
+
 hr {
     border: 0;
     height: 1px;
