@@ -37,7 +37,7 @@ fetchSound();
 
 function fetchSound(){
     //    AJAX a single sound binary
-    oAJAXReq.open("GET", "Scott_C_Krause/au/s" + fetchSoundConfig.sound_current + ".mp3", true);
+    oAJAXReq.open("GET", "scott_c_krause/au/s" + fetchSoundConfig.sound_current + ".mp3", true);
     oAJAXReq.responseType = "arraybuffer";
     oAJAXReq.send();
     oAJAXReq.onload = fetchSoundonload;
@@ -137,11 +137,11 @@ function aJTab( sPanel, sData_all_tags ){
     localStorage.setItem("eplsg-template--all_tags", sData_all_tags);
 
     if( oTabContent === undefined ){
-        chrome.tabs.create({url: "Scott_C_Krause/ever_present_living_style_guide.html", index: 0}, function(tab) {
+        chrome.tabs.create({url: "scott_c_krause/ever_present_living_style_guide.html", index: 0}, function(tab) {
             oTabContent = tab;
          });    
     }else{
-        chrome.tabs.update(oTabContent.Id, {url: "Scott_C_Krause/ever_present_living_style_guide.html"}, function(tab) {
+        chrome.tabs.update(oTabContent.Id, {url: "scott_c_krause/ever_present_living_style_guide.html"}, function(tab) {
         });
     }
 }
@@ -173,7 +173,7 @@ function runTool( sTool ){
                 for(var iCnt=0;iCnt < aURL.length;iCnt++){
                     chrome.tabs.update(tab.id, {url: aURL[iCnt]});
                     sleep(2800);
-                    chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                    chrome.tabs.executeScript({file: "scott_c_krause/js/tool_missing_alt_tags.js"});
                     sleep(800);
                 }
                 aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");                
@@ -200,7 +200,7 @@ function runTool( sTool ){
                 for(var iCnt=0;iCnt < aURL.length;iCnt++){
                     chrome.tabs.update(tab.id, {url: aURL[iCnt]});
                     sleep(2800);
-                    chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                    chrome.tabs.executeScript({file: "scott_c_krause/js/tool_missing_alt_tags.js"});
                     sleep(800);
                 }
                 aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");                
@@ -227,7 +227,7 @@ function runTool( sTool ){
                 for(var iCnt=0;iCnt < aURL.length;iCnt++){
                     chrome.tabs.update(tab.id, {url: aURL[iCnt]});
                     sleep(2800);
-                    chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_missing_alt_tags.js"});
+                    chrome.tabs.executeScript({file: "scott_c_krause/js/tool_missing_alt_tags.js"});
                     sleep(800);
                 }
                 aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");                
@@ -236,15 +236,19 @@ function runTool( sTool ){
             break;
         case "cmdInjectPrimeBanner":
             //
-            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_inject_prime_banner.js"});
+            chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_prime_banner.js"});
             break;
         case "cmdInjectPhotoCust":
             //
-            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tool_inject_photo_cust.js"});
+            chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_photo_cust.js"});
             break;
         case "cmdTabReport":
             //
-            chrome.tabs.executeScript({file: "Scott_C_Krause/js/tab-report.js"});            
+            chrome.tabs.executeScript({file: "scott_c_krause/js/tab-report.js"});            
+            break;
+        case "cmdTestInstance":
+            //    Cookies
+            chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});            
             break;
     } 
     //

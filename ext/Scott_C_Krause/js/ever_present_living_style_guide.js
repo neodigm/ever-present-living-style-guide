@@ -77,7 +77,12 @@ $( document ).bind("ajaxComplete", function(){
 			$("."+$(this).attr("data-toggle-target")).toggleClass("hide");
 		});		
 	}, 6800);
-
+	$(".js-cookie__set").on("click", function( e ){
+		//    Bind Cookie logic
+		e.preventDefault();
+		oBackGroundEvent.createCookie( $(this).attr("href"), $(this).attr("data-value") );
+		oBackGroundEvent.runTool( "cmdTestInstance" );
+	});
 });
 
 }
