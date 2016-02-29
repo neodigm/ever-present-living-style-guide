@@ -248,7 +248,12 @@ function runTool( sTool ){
             break;
         case "cmdTestInstance":
             //    Cookies
-            chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});            
+            var sURL = "http://www.LTDCommodities.com/";
+            chrome.tabs.getSelected(null, function(tab){
+                chrome.tabs.update(tab.id, {url: sURL});
+                sleep(2800);
+                chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});
+            });            
             break;
     } 
     //
@@ -256,7 +261,7 @@ function runTool( sTool ){
         displayMsg( "Tab Tool Complete" );
     }, 1840);
 }
-
+/*
 function navToThenExec(aURL, sScript){
     //    
     chrome.tabs.getSelected(null, function(tab){
@@ -268,7 +273,7 @@ function navToThenExec(aURL, sScript){
         }
     });
 }
-
+*/
 function clearChromeStorage(){
     //    Clear All Chrome Storage
     chrome.storage.local.clear(function() {
@@ -326,8 +331,10 @@ function addBreaks(s,c) {
 }
 
 function createCookie(name, value, days) {
+    //    Lets also create a chrome store assoc array
     var expires;
-
+    chrome.storage.local.set({cookie_name:  name});
+    chrome.storage.local.set({cookie_value: value});
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));

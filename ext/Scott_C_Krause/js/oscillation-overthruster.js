@@ -515,7 +515,6 @@ $( document ).ready(function(){
 		e.preventDefault();
 	});
 
-	
 	$(".store-repo-set--a").on("click", function(e){
 		//    Temp dev events - DELETE later
 		localStorage.setItem("repo_name", "ltdc_ux_cookbook");
