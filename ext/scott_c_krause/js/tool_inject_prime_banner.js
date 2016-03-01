@@ -1,0 +1,1 @@
+$(".prime-banner--figure").html('<img class="prime-banner--img" src="http://placeholdit.imgix.net/~text?txtsize=33&txt=prime-banner-990-80&w=990&h=80">');
