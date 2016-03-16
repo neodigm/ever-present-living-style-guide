@@ -271,6 +271,7 @@ function popuTemplate(sTemplate_id, aContents){
 
 function aJLoad( sPanel ){
 	//    Load HTML content into dialog from the configured repo
+
 	switch ( sPanel ){
 		case "templ_contents" :
 			$(".templ_contents").load( sRepo_url + "/templ_contents.html", function(){
@@ -333,9 +334,26 @@ function aJTab( sPanel, sData_all_tags ){
 
 	oBackGroundEvent.aJTab( sPanel, popuTemplate("templ_n5-card-tag", n5Tags.getArrayDTO( sData_all_tags.split("#").join("|") ) ) );
 }
+function hashThis(sIn){
+	var shaObj = new jsSHA("SHA-256", "TEXT");
+	shaObj.setHMACKey("eplsg", "TEXT");
+	shaObj.update( sIn );
+	return shaObj.getHMAC("HEX");
+}
 
 function afterContentLoad(){
     //    Document ready has fired and the content template is loaded | Init the n5 Cards 
+
+//console.log( hashThis("kdaigel@ltdcommodities.com") );
+//console.log( hashThis("lleibowitz@ltdcommodities.com") );
+//console.log( hashThis("lradunsky@ltdcommodities.com") );
+//console.log( hashThis("mjoshi@ltdcommodities.com") );
+//console.log( hashThis("nparakkunnath@ltdcommodities.com") );
+//console.log( hashThis("ganbazhagan@ltdcommodities.com") );
+//console.log( hashThis("skrause1@ltdcommodities.com") );
+//console.log( hashThis("skulkarni@ltdcommodities.com") );
+console.log( hashThis("http://neodigm.github.io/ever-present-living-style-guide-ltdc") );
+
 	$(".n5c-ugc-source").each(function(){
 		//    Objectify the content markup
 		var data_content_type = $(this).attr("data-content_type");
@@ -497,19 +515,45 @@ $( document ).ready(function(){
 		//    The [Custom Repo] button on the Config Modal
 		//    was explicitly clicked
 		var sURL = $("#txtRepo_name").val();
-		if( sURL != "" && isValidRepo( sURL ) ){
-			sRepo_url = sURL;
-			localStorage.setItem("repo_name", sRepo_url);
-			oBackGroundEvent.displayMsg(  "Connected to Style Guide\n" + sRepo_url );
+		if( sURL === "" ){
+			oBackGroundEvent.displayMsg(  "Invalid Style Guide\n" + sURL );
+		}else{
+			isValidRepo( sURL );
 		}
 		e.preventDefault();
 	});
+
+	function isValidRepo( sURL ){
+		//    Get json arr of hash - find url
+		if(sURL.indexOf( "github.io" ) <= 0 ){
+			$.getJSON( "http://neodigm.github.io/ever-present-living-style-guide-site/section9.json", function( json_sec9 ) {
+				var iCnt =0;
+			 	$.each( json_sec9, function( key, val ) {
+			 		if( val === sURL ){
+						sURL=json_sec9[(iCnt+1)];
+						connectRepoNew( sURL );
+						return false;
+			 		}
+			 		iCnt++;
+				});
+			});
+		}else{//    Entered a gh repo
+			connectRepoNew( sURL );
+		}
+	}
+
+	function connectRepoNew( sURL ){
+		//
+		sRepo_url = sURL;
+		localStorage.setItem("repo_name", sRepo_url);
+		oBackGroundEvent.displayMsg(  "Connected to Style Guide\n" + sRepo_url );
+	}
 
 	$(".store-repo-dialog--a").on("click", function(e){
 		//    Cog Clicked
 		oBackGroundEvent.playAudioFile( 7 );    //    ping
 		if( localStorage.getItem("repo_name") !== null ){
-			$("#txtRepo_name").val( localStorage.getItem("repo_name") );
+			//  Not doing this anymore ... $("#txtRepo_name").val( localStorage.getItem("repo_name") );
 		}
 		$("#modGetGitRepo").foundation("open");
 		e.preventDefault();
@@ -578,11 +622,6 @@ $( document ).ready(function(){
 		e.preventDefault();
 	});
 });
-
-function isValidRepo( sURL ){
-	//    Ping the repo
-	return true;
-}
 
 $( window ).load(function(){ 
 
