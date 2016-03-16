@@ -334,7 +334,7 @@ function aJTab( sPanel, sData_all_tags ){
 
 	oBackGroundEvent.aJTab( sPanel, popuTemplate("templ_n5-card-tag", n5Tags.getArrayDTO( sData_all_tags.split("#").join("|") ) ) );
 }
-function hashThis(sIn){
+function hashThis( sIn ){
 	var shaObj = new jsSHA("SHA-256", "TEXT");
 	shaObj.setHMACKey("eplsg", "TEXT");
 	shaObj.update( sIn );
@@ -531,16 +531,41 @@ $( document ).ready(function(){
 			 	$.each( json_sec9, function( key, val ) {
 			 		if( val === sURL ){
 						sURL=json_sec9[(iCnt+1)];
+						$("#txtElm_repo").val( sURL );
+						$("#modElm").foundation("open");
+						return false;
+			 		}
+			 		iCnt++;
+				});
+			});
+		}else{//    Entered a plain old gh repo
+			connectRepoNew( sURL );
+		}
+	}
+
+	$("#cmdElm-sub").on("click", function( e ){
+		//    The [Submit Email Address] button on the Config Modal
+		//    was explicitly clicked
+		var sURL = $("#txtElm_repo").val();
+		if( sURL === "" ){
+			oBackGroundEvent.displayMsg(  "Invalid Style Guide\n" + sURL );
+		}else{//    Is this a valid email?
+
+			$.getJSON( sURL+"/section9.json", function( json_sec9 ) {
+				var sElm = hashThis( $("#txtElm").val().toLowerCase() );
+				var iCnt =0;
+			 	$.each( json_sec9, function( key, val ) {
+			 		if( val === sElm ){
+						oBackGroundEvent.displayMsg(  "Email is Valid\n" + $("#txtElm").val() );
 						connectRepoNew( sURL );
 						return false;
 			 		}
 			 		iCnt++;
 				});
 			});
-		}else{//    Entered a gh repo
-			connectRepoNew( sURL );
 		}
-	}
+		e.preventDefault();
+	});
 
 	function connectRepoNew( sURL ){
 		//
