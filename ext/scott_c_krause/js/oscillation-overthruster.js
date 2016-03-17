@@ -342,17 +342,7 @@ function hashThis( sIn ){
 }
 
 function afterContentLoad(){
-    //    Document ready has fired and the content template is loaded | Init the n5 Cards 
-
-//console.log( hashThis("kdaigel@ltdcommodities.com") );
-//console.log( hashThis("lleibowitz@ltdcommodities.com") );
-//console.log( hashThis("lradunsky@ltdcommodities.com") );
-//console.log( hashThis("mjoshi@ltdcommodities.com") );
-//console.log( hashThis("nparakkunnath@ltdcommodities.com") );
-//console.log( hashThis("ganbazhagan@ltdcommodities.com") );
-//console.log( hashThis("skrause1@ltdcommodities.com") );
-//console.log( hashThis("skulkarni@ltdcommodities.com") );
-console.log( hashThis("http://neodigm.github.io/ever-present-living-style-guide-ltdc") );
+    //    Document ready has fired and the content template is loaded | Init the n5 Cards
 
 	$(".n5c-ugc-source").each(function(){
 		//    Objectify the content markup

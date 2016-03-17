@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Ever Present Living Style Guide",
 	"short_name": "Style Guide",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"description": "Putting your Living Style Guide in the browser makes it easily available to the whole team.",
 	"author": "Scott C. Krause",
 	"icons": { "16":  "scott_c_krause/img/eplsg_paper_plane16.png",
