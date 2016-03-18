@@ -255,6 +255,10 @@ function runTool( sTool ){
                 chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});
             });            
             break;
+        case "cmdImageAudit":
+            //
+            chrome.tabs.executeScript({file: "scott_c_krause/js/tool_img_perf_audit.js"});            
+            break;
     } 
     //
     setTimeout( function(){
