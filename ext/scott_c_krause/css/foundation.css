@@ -1367,7 +1367,8 @@ kbd {
 .button {
   display: inline-block;
   text-align: center;
-  line-height: 1;
+/* sck cust */
+  line-height: .88;
   cursor: pointer;
   -webkit-appearance: none;
   transition: all 0.25s ease-out;
@@ -2191,8 +2192,10 @@ select {
 .label {
   display: inline-block;
   padding: 0.33333rem 0.5rem;
+/* sck cust make label smaller */
   font-size: 0.8rem;
-  line-height: 1;
+/* sck cust make label smaller */
+  line-height: .8;
   white-space: nowrap;
   cursor: default;
   border-radius: 0;

@@ -549,10 +549,18 @@ $( document ).ready(function(){
 			 		if( val === sElm ){
 						oBackGroundEvent.displayMsg(  "Email is Valid\n" + $("#txtElm").val() );
 						connectRepoNew( sURL );
+						oBackGroundEvent.playAudioFile( 11 );    //    the living ...
+						window.close();
+						iCnt = -1;
 						return false;
 			 		}
 			 		iCnt++;
 				});
+				if(iCnt >= 0){
+					oBackGroundEvent.playAudioFile( 10 );    //    error
+					oBackGroundEvent.displayMsg(  "Invalid Email Address" );
+					window.close();
+				}
 			});
 		}
 		e.preventDefault();
@@ -562,7 +570,7 @@ $( document ).ready(function(){
 		//
 		sRepo_url = sURL;
 		localStorage.setItem("repo_name", sRepo_url);
-		oBackGroundEvent.displayMsg(  "Connected to Style Guide\n" + sRepo_url );
+		oBackGroundEvent.displayMsg(  "Connected to Style Guide" );
 	}
 
 	$(".store-repo-dialog--a").on("click", function(e){
