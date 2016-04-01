@@ -80,11 +80,9 @@ $( document ).bind("ajaxComplete", function(){
 	//  TODO we should only bind on the one page (pattern)
 	$(".js-cookie__set").on("click", function( e ){
 		//    Bind Cookie logic
-console.log("cookie 1| ");
 		e.preventDefault();
 		oBackGroundEvent.createCookie( $(this).attr("href"), $(this).attr("data-value") );
 		oBackGroundEvent.runTool( "cmdTestInstance" );
-console.log("cookie 10| ");
 	});
 });
 

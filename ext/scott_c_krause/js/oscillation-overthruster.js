@@ -341,7 +341,7 @@ function hashThis( sIn ){
 	return shaObj.getHMAC("HEX");
 }
 
-
+console.log(hashThis("ccifonie@ltdcommodities.com"));
 function afterContentLoad(){
     //    Document ready has fired and the content template is loaded | Init the n5 Cards
 

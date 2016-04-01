@@ -248,12 +248,20 @@ function runTool( sTool ){
             break;
         case "cmdTestInstance":
             //    Cookies
-            var sURL = "http://www.LTDCommodities.com/";
-            chrome.tabs.getSelected(null, function(tab){
-                chrome.tabs.update(tab.id, {url: sURL});
-                sleep(2800);
-                chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});
-            });            
+            var sURL = "http://www.LTDCommodities.com/"; // TODO | Really need to move to prop object
+            var cookie_name =""
+            chrome.storage.local.get("cookie_name" , function(fetchedData){
+                cookie_name = fetchedData["cookie_name"];
+                if( cookie_name.indexOf( "-lake-" ) > 0 ){
+                    sURL = "http://www.Lakeside.com/"; // TODO | Really need to move to prop 
+                }
+                chrome.tabs.getSelected(null, function(tab){
+                    chrome.tabs.update(tab.id, {url: sURL});
+                    sleep(2800);
+                    chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});
+                });                 
+            });
+           
             break;
         case "cmdImageAudit":
             //
