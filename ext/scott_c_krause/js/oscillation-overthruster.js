@@ -496,9 +496,13 @@ $( document ).ready(function(){
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function() {
 		//    The config modal was closed
 		if( $("#txtRepo_name").val() === ""){
-			sRepo_url = sRepo_url_demo;
-			localStorage.setItem("repo_name", sRepo_url);
-			oBackGroundEvent.displayMsg(  "No Style Guide connected\nLoading Demo" );
+			if( localStorage.getItem("repo_name") === null ){
+				sRepo_url = sRepo_url_demo;
+				localStorage.setItem("repo_name", sRepo_url);
+				oBackGroundEvent.displayMsg(  "No Style Guide connected\nLoading Demo" );
+			}else{
+				oBackGroundEvent.displayMsg(  "No Changes." );
+			}
 		}
 	});
 
