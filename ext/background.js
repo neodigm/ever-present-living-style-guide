@@ -261,11 +261,23 @@ function runTool( sTool ){
                     chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});
                 });                 
             });
-           
             break;
         case "cmdImageAudit":
-            //
+            //  Right now this is just the injected perf script
             chrome.tabs.executeScript({file: "scott_c_krause/js/tool_img_perf_audit.js"});            
+            break;
+        case "cmdResponsiveImages":
+            //
+            chrome.tabs.getSelected(null, function(tab){
+                chrome.tabs.update(tab.id, {url: localStorage.getItem("repo_name") + "/" + "pattern_resp_images.html"});
+                sleep(600);
+alert("stuff and stuff");
+                chrome.tabs.executeScript(tab.id, {file: "scott_c_krause/js/tool_resp_images.js"}, function(){
+                    if (chrome.runtime.lastError) {
+                    console.error(chrome.runtime.lastError.message);
+                    }                    
+                });
+            });
             break;
     } 
     //

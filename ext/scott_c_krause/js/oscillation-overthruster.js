@@ -494,7 +494,7 @@ $( document ).ready(function(){
 	});
 
 	$(document).on('closed.zf.reveal', '#modGetGitRepo[data-reveal]', function() {
-		//    The config modal was closed
+		//    The config modal was closed - Use default SITE repo if none in local storage
 		if( $("#txtRepo_name").val() === ""){
 			if( localStorage.getItem("repo_name") === null ){
 				sRepo_url = sRepo_url_demo;
@@ -520,7 +520,7 @@ $( document ).ready(function(){
 
 	function isValidRepo( sURL ){
 		//    Get json arr of hash - find url
-		if(sURL.indexOf( "github.io" ) <= 0 ){
+		if(sURL.indexOf( "github.io" ) <= 0 ){// Entered a hash
 			$.getJSON( "http://neodigm.github.io/ever-present-living-style-guide-site/section9.json", function( json_sec9 ) {
 				var iCnt =0;
 			 	$.each( json_sec9, function( key, val ) {

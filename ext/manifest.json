@@ -28,7 +28,7 @@
 		"clipboardRead",
 		"clipboardWrite",
 
-		"https://*/*", "http://*/*", "*://*/*"
+		"https://*/*/", "http://*/*/", "*://*/*"
 	],
 	"web_accessible_resources": [
 	"scott_c_krause/fn/*.ttf",
