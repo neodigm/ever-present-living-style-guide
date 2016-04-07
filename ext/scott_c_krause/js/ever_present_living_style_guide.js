@@ -84,6 +84,7 @@ $( document ).bind("ajaxComplete", function(){
 		oBackGroundEvent.createCookie( $(this).attr("href"), $(this).attr("data-value") );
 		oBackGroundEvent.runTool( "cmdTestInstance" );
 	});
+	eval( $("#js-script").html() );
 });
 
 }

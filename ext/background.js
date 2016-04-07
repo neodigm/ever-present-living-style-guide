@@ -176,7 +176,7 @@ function runTool( sTool ){
                     chrome.tabs.executeScript({file: "scott_c_krause/js/tool_missing_alt_tags.js"});
                     sleep(800);
                 }
-                aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");                
+                aJTab( localStorage.getItem("repo_name") + "/" + "tab-report.html");
             });
 
             break;
@@ -268,13 +268,16 @@ function runTool( sTool ){
             break;
         case "cmdResponsiveImages":
             //
+aJTab( localStorage.getItem("repo_name") + "/" + "pattern_resp_images.html");
             chrome.tabs.getSelected(null, function(tab){
-                chrome.tabs.update(tab.id, {url: localStorage.getItem("repo_name") + "/" + "pattern_resp_images.html"});
-                sleep(600);
-alert("stuff and stuff");
-                chrome.tabs.executeScript(tab.id, {file: "scott_c_krause/js/tool_resp_images.js"}, function(){
+console.log("patn-resp | ")
+                sleep(6000);
+console.log("patn-resp | ")
+                chrome.tabs.executeScript(oTabContent.Id, {file: "scott_c_krause/js/tool_resp_images.js"}, function(){
+console.log("patn-resp | ")
                     if (chrome.runtime.lastError) {
-                    console.error(chrome.runtime.lastError.message);
+console.log("patn-resp | ")
+                    console.error("patn-resp | " + chrome.runtime.lastError.message);
                     }                    
                 });
             });
