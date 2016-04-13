@@ -268,19 +268,17 @@ function runTool( sTool ){
             break;
         case "cmdResponsiveImages":
             //
-aJTab( localStorage.getItem("repo_name") + "/" + "pattern_resp_images.html");
+            aJTab( localStorage.getItem("repo_name") + "/" + "pattern_resp_images.html");
+/*
             chrome.tabs.getSelected(null, function(tab){
-console.log("patn-resp | ")
-                sleep(6000);
-console.log("patn-resp | ")
+                sleep(1000);
                 chrome.tabs.executeScript(oTabContent.Id, {file: "scott_c_krause/js/tool_resp_images.js"}, function(){
-console.log("patn-resp | ")
                     if (chrome.runtime.lastError) {
-console.log("patn-resp | ")
                     console.error("patn-resp | " + chrome.runtime.lastError.message);
                     }                    
                 });
             });
+*/
             break;
     } 
     //
