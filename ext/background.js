@@ -255,11 +255,12 @@ function runTool( sTool ){
                 if( cookie_name.indexOf( "-lake-" ) > 0 ){
                     sURL = "http://www.Lakeside.com/"; // TODO | Really need to move to prop 
                 }
-                chrome.tabs.getSelected(null, function(tab){
-                    chrome.tabs.update(tab.id, {url: sURL});
-                    sleep(2800);
+                //chrome.tabs.getSelected(null, function(tab){
+                chrome.tabs.create({url: sURL, index: 0}, function(tab) {
+                    //chrome.tabs.update(tab.id, {url: sURL});
+                    sleep(1800);
                     chrome.tabs.executeScript({file: "scott_c_krause/js/tool_inject_test_instance.js"});
-                });                 
+                });
             });
             break;
         case "cmdImageAudit":
