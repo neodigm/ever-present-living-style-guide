@@ -284,16 +284,12 @@ function runTool( sTool ){
         case "cmdInputTypeSandbox":
             //
             aJTab( localStorage.getItem("repo_name") + "/" + "pattern_input_type_sandbox.html");
-/*
-            chrome.tabs.getSelected(null, function(tab){
-                sleep(1000);
-                chrome.tabs.executeScript(oTabContent.Id, {file: "scott_c_krause/js/tool_resp_images.js"}, function(){
-                    if (chrome.runtime.lastError) {
-                    console.error("patn-resp | " + chrome.runtime.lastError.message);
-                    }                    
-                });
-            });
-*/
+            break;
+        case "cmdTealiumIQBadges":
+            //
+            //aJTab( localStorage.getItem("repo_name") + "/" + "pattern_tealium_iq_badges.html"); // DELETE THIS FILE
+            //
+            chrome.tabs.executeScript({file: "scott_c_krause/js/pattern_tealium_iq_badges.js"});
             break;
     } 
     //
