@@ -249,6 +249,7 @@ function runTool( sTool ){
         case "cmdTestInstance":
             //    Cookies
             var sURL = "http://www.LTDCommodities.com/"; // TODO | Really need to move to prop object
+            //  This case is firing for both the test instance and the test aic patterns
             var cookie_name =""
             chrome.storage.local.get("cookie_name" , function(fetchedData){
                 cookie_name = fetchedData["cookie_name"];

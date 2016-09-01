@@ -79,8 +79,12 @@ $( document ).bind("ajaxComplete", function(){
 	}, 6800);
 	//  TODO we should only bind on the one page (pattern)
 	$(".js-cookie__set").on("click", function( e ){
-		//    Bind Cookie logic
+		//    Bind Cookie logic - might be pipe delim (both name and value)
 		e.preventDefault();
+
+		if( $("#js--input__rrt").length === 1 ){
+			$( this ).attr("data-value", $( this ).attr("data-value") + "|" + $("#js--input__rrt").val() );
+		}
 		oBackGroundEvent.createCookie( $(this).attr("href"), $(this).attr("data-value") );
 		oBackGroundEvent.runTool( "cmdTestInstance" );
 	});

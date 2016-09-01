@@ -561,7 +561,7 @@ $( document ).ready(function(){
 				});
 				if(iCnt >= 0){
 					oBackGroundEvent.playAudioFile( 10 );    //    error
-					oBackGroundEvent.displayMsg(  "Invalid Email Address" );
+					oBackGroundEvent.displayMsg(  "Invalid Email Address " + sElm );
 					window.close();
 				}
 			});
