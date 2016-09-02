@@ -372,6 +372,7 @@ function createCookie(name, value, days) {
     var expires;
     chrome.storage.local.set({cookie_name:  name});
     chrome.storage.local.set({cookie_value: value});
+    /* We do not need to create a cookie as the inserted js does that
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -380,6 +381,7 @@ function createCookie(name, value, days) {
         expires = "";
     }
     document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+    */
 }
 
 function readCookie(name) {
