@@ -337,8 +337,8 @@ function displayMsg( sMsg ){
     } else if (Notification.permission === "granted") {
         // If it's okay let's create a notification
         audioSuccessSound();
-                var notification = new Notification( sMsg );
-    } else if (Notification.permission !== 'denied') {
+                var notification = new Notification( Nowish(), {icon: "http://neodigm.github.io/ever-present-living-style-guide-site/img/ever-present-living-style-guide.png", body: sMsg} );
+    } else if (Notification.permission !== "denied") {
         // Otherwise, we need to ask the user for permission
 
         Notification.requestPermission(function (permission) {
