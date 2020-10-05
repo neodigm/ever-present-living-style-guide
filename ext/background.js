@@ -23,6 +23,7 @@
 :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!      !:!   :!:
  ::  :::  ::   :::  ::   :::  ::::: ::  :::: ::    :: ::::
  :   :::   :   : :   :   : :   : :  :   :: : :    : :: ::
+ 🚀 JavaScript && TypeScript && Go 🪐
 
 -->
 */
@@ -287,8 +288,6 @@ function runTool( sTool ){
             aJTab( localStorage.getItem("repo_name") + "/" + "pattern_input_type_sandbox.html");
             break;
         case "cmdTealiumIQBadges":
-            //
-            //aJTab( localStorage.getItem("repo_name") + "/" + "pattern_tealium_iq_badges.html"); // DELETE THIS FILE
             //
             chrome.tabs.executeScript({file: "scott_c_krause/js/pattern_tealium_iq_badges.js"});
             break;
