@@ -8,7 +8,7 @@ Putting your Living Style Guide in the browser makes it easily available to the 
 
 The living style guide is a collection of design patterns, components, and guidelines for creating a unified UX. It provides access to the core visual and interaction design patterns so that everyone can follow established best practices and build experiences that have a consistent look and feel.
 
-Visit: http://neodigm.github.io/ever-present-living-style-guide-site/ for more information.
+See: [Microsift](https://thescottkrause.com/utils/neodigm55-mobile-resizer/?vp=t&uri=http://neodigm.github.io/ever-present-living-style-guide-site/) for more information.
 
 #
 [Portfolio Blog](https://www.theScottKrause.com) |
