@@ -4,7 +4,7 @@
 
 Putting your Living Style Guide in the browser makes it easily available to the whole team. A Living Style Guide saves time, facilitates communication, documents the visual language for both designers and developers.
 
-## Instant clarity through curated [UX DNA](https://thescottkrause.com/categories/ux/) and interactive documentation
+## Instant clarity through curated [UX DNA](https://www.thescottkrause.com/categories/ux/) and interactive documentation
 
 The living style guide is a collection of design patterns, components, and guidelines for creating a unified UX. It provides access to the core visual and interaction design patterns so that everyone can follow established best practices and build experiences that have a consistent look and feel.
 
