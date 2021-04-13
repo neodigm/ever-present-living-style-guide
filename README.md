@@ -1,6 +1,6 @@
 [![License: BSD](https://badgen.net/badge/license/BSD/orange)](https://opensource.org/licenses/BSD-3-Clause)
 
-## Ever Present Living Style Guide and Pattern Library
+## Ever Present Living Style Guide and UX Pattern Library
 
 Putting your Living Style Guide in the browser makes it easily available to the whole team. A Living Style Guide saves time, facilitates communication, documents the visual language for both designers and developers.
 
