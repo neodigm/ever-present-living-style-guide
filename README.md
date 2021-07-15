@@ -38,7 +38,7 @@ See: [Microsite](https://www.thescottkrause.com/utils/neodigm55-mobile-resizer/?
 
 <p align="center">
 	<a target="_blank" href="https://www.thescottkrause.com">
-		<img src="https://neodigm.github.io/pan-fried-monkey-fisticuffs/thescottkrause_contact_card.png" title="Three.js 🚀 TypeScript 🍭 WASM ✨ Go">
+		<img src="https://neodigm.github.io/pan-fried-monkey-fisticuffs/thescottkrause_contact_card.png" title="Three.js 🚀 TypeScript 🍭 WASM">
 	</a>
 </p>
 
