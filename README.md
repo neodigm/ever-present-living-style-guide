@@ -1,4 +1,3 @@
-[![License: BSD](https://badgen.net/badge/license/BSD/orange)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Ever Present Living Style Guide and UX Pattern Library
 
@@ -12,7 +11,7 @@ See: [Microsite](https://www.thescottkrause.com/utils/neodigm55-mobile-resizer/?
 
 #
 [Portfolio Blog](https://www.theScottKrause.com) |
-[🚀 Résumé](https://www.theScottKrause.com/Arcanus_Scott_C_Krause_2021.pdf) |
+[🚀 Résumé](https://www.theScottKrause.com/Arcanus_Scott_C_Krause_2023.pdf) |
 [NPM](https://www.npmjs.com/~neodigm) |
 [Github](https://github.com/neodigm) |
 [LinkedIn](https://www.linkedin.com/in/neodigm55/) |
