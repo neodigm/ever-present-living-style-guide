@@ -31,7 +31,7 @@ See: [Microsite](https://www.thescottkrause.com/utils/neodigm55-mobile-resizer/?
 #
 
 <p align="center">
-  <a target="_blank" href="https://www.thescottkrause.com">
+  <a target="_blank" href="https://www.thescottkrause.com" title="Cloudflare UX PWA SolidJS Lit ThreeJS Vue ✨HTMX Rust WASM">
     <img src="https://neodigm.github.io/pan-fried-monkey-fisticuffs/thescottkrause_contact_card.png" title="UX PWA TypeScript ⚡ WASM ✨ Vue.js 🍭 ThreeJS 🌶️ HTMLX" alt="Interactive Infographic">
   </a>
 </p>
